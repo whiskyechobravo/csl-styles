@@ -5,7 +5,8 @@
     <title-short>Guide Lluelles v9</title-short>
     <id>https://github.com/whiskyechobravo/csl-styles/tree/lluelles-v9</id> <!-- TODO: Replace with official ID (below). -->
     <!-- <id>http://www.zotero.org/styles/lluelles</id> -->
-    <link href="http://www.zotero.org/styles/lluelles" rel="self"/>
+    <link href="https://raw.githubusercontent.com/whiskyechobravo/csl-styles/refs/heads/master/lluelles.csl" rel="self"/> <!-- TODO: Replace with official link (below). -->
+    <!-- <link href="http://www.zotero.org/styles/lluelles" rel="self"/> -->
     <link href="https://ssl.editionsthemis.com/livres/livre-4895-guide-des-references-pour-la-redaction-juridique-9e-ed-.html" rel="documentation"/>
     <link href="https://boite-outils.bib.umontreal.ca/droit/zotero-pour-droit" rel="documentation"/>
     <author>
