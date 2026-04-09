@@ -3,7 +3,8 @@
   <info>
     <title>Guide des références pour la rédaction juridique 9e édition (Guide Lluelles, Français - Canada)</title>
     <title-short>Guide Lluelles v9</title-short>
-    <id>http://www.zotero.org/styles/lluelles</id>
+    <id>https://github.com/whiskyechobravo/csl-styles/tree/lluelles-v9</id> <!-- TODO: Replace with official ID (below). -->
+    <!-- <id>http://www.zotero.org/styles/lluelles</id> -->
     <link href="http://www.zotero.org/styles/lluelles" rel="self"/>
     <link href="https://ssl.editionsthemis.com/livres/livre-4895-guide-des-references-pour-la-redaction-juridique-9e-ed-.html" rel="documentation"/>
     <link href="https://boite-outils.bib.umontreal.ca/droit/zotero-pour-droit" rel="documentation"/>
@@ -28,7 +29,7 @@
     <category field="law"/>
     <summary>This style may require use of specific fields in the reference manager. More infos: http://f-mb.github.io/cslegal/
       Ce style peut demander un usage particulier des champs du logiciel de gestion bibliographique. Plus d'infos: http://f-mb.github.io/cslegal/</summary>
-    <updated>2014-06-28T19:03:00+00:00</updated>
+    <updated>2026-04-09T19:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="fr">
@@ -764,7 +765,7 @@
       <if variable="locator" match="any">
         <choose>
           <if locator="page" type="chapter article-magazine article-newspaper" match="all">
-            <label variable="locator" prefix=" " suffix="&#160;" form="long"/>
+            <label variable="locator" prefix=", " suffix="&#160;" form="long"/>
             <text variable="locator"/>
           </if>
           <else-if locator="page" type="article-journal legal_case" match="all">
