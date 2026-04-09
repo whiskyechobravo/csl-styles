@@ -30,7 +30,7 @@
     <category field="law"/>
     <summary>This style may require use of specific fields in the reference manager. More infos: http://f-mb.github.io/cslegal/
       Ce style peut demander un usage particulier des champs du logiciel de gestion bibliographique. Plus d'infos: http://f-mb.github.io/cslegal/</summary>
-    <updated>2026-04-09T19:00:00+00:00</updated>
+    <updated>2026-04-09T20:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="fr">
@@ -549,7 +549,7 @@
             <text variable="section"/>
             <text variable="container-title"/>
             <text variable="page"/>
-            <text macro="issued-year" prefix=" (" suffix=")"/>
+            <text macro="issued-year" prefix="(" suffix=")"/>
           </group>
           <text variable="number"/>
         </if>
@@ -560,7 +560,7 @@
                 <text macro="issued"/>
               </if>
               <else>
-                <text macro="issued-year" prefix=" (" suffix=")"/>
+                <text macro="issued-year" prefix="(" suffix=")"/>
               </else>
             </choose>
             <text variable="container-title"/>
@@ -586,7 +586,7 @@
             <text variable="section"/>
             <text variable="container-title"/>
             <text variable="page"/>
-            <text macro="issued-year" prefix=" (" suffix=")"/>
+            <text macro="issued-year" prefix="(" suffix=")"/>
           </group>
           <text variable="number"/>
         </if>
@@ -597,7 +597,7 @@
                 <text macro="issued"/>
               </if>
               <else>
-                <text macro="issued-year" prefix=" (" suffix=")"/>
+                <text macro="issued-year" prefix="(" suffix=")"/>
               </else>
             </choose>
             <text variable="container-title"/>
