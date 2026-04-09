@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" default-locale="fr-CA">
   <info>
-    <title>Guide des références pour la rédaction juridique 7e édition (Guide Lluelles, Français - Canada)</title>
-    <title-short>Guide Lluelles v7</title-short>
+    <title>Guide des références pour la rédaction juridique 9e édition (Guide Lluelles, Français - Canada)</title>
+    <title-short>Guide Lluelles v9</title-short>
     <id>http://www.zotero.org/styles/lluelles</id>
     <link href="http://www.zotero.org/styles/lluelles" rel="self"/>
-    <link href="http://f-mb.github.io/cslegal/" rel="documentation"/>
-    <link href="http://www.editionsthemis.com/livres/livre-3844-guide-des-references-pour-la-redaction-juridique.html" rel="documentation"/>
+    <link href="https://ssl.editionsthemis.com/livres/livre-4895-guide-des-references-pour-la-redaction-juridique-9e-ed-.html" rel="documentation"/>
+    <link href="https://boite-outils.bib.umontreal.ca/droit/zotero-pour-droit" rel="documentation"/>
     <author>
       <name>Florian Martin-Bariteau</name>
       <email>f.martin-bariteau@umontreal.ca</email>
@@ -14,6 +14,15 @@
     </author>
     <contributor>
       <name>Jean-Sebastien Sauve</name>
+    </contributor>
+    <contributor>
+      <name>David Lesieur</name>
+      <email>david@whiskyechobravo.com</email>
+      <uri>https://whiskyechobravo.com</uri>
+    </contributor>
+    <contributor>
+      <name>Université de Montréal</name>
+      <uri>https://www.umontreal.ca/</uri>
     </contributor>
     <category citation-format="note"/>
     <category field="law"/>
@@ -938,7 +947,7 @@
       <key variable="issued"/>
       <key variable="title"/>
     </sort>
-    <layout suffix=".">
+    <layout>
       <choose>
         <if type="legislation">
           <text macro="legislation-bib"/>
