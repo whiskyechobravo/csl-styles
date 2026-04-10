@@ -3,9 +3,11 @@
   <info>
     <title>Guide des références pour la rédaction juridique 9e édition (Guide Lluelles, Français - Canada)</title>
     <title-short>Guide Lluelles v9</title-short>
-    <id>https://github.com/whiskyechobravo/csl-styles/tree/lluelles-v9</id> <!-- TODO: Replace with official ID (below). -->
+    <!-- TODO: Replace with official ID (below). -->
+    <id>https://github.com/whiskyechobravo/csl-styles/tree/lluelles-v9</id>
     <!-- <id>http://www.zotero.org/styles/lluelles</id> -->
-    <link href="https://raw.githubusercontent.com/whiskyechobravo/csl-styles/refs/heads/master/lluelles.csl" rel="self"/> <!-- TODO: Replace with official link (below). -->
+    <!-- TODO: Replace with official link (below). -->
+    <link href="https://raw.githubusercontent.com/whiskyechobravo/csl-styles/refs/heads/master/lluelles.csl" rel="self"/>
     <!-- <link href="http://www.zotero.org/styles/lluelles" rel="self"/> -->
     <link href="https://ssl.editionsthemis.com/livres/livre-4895-guide-des-references-pour-la-redaction-juridique-9e-ed-.html" rel="documentation"/>
     <link href="https://boite-outils.bib.umontreal.ca/droit/zotero-pour-droit" rel="documentation"/>
@@ -125,7 +127,7 @@
   <macro name="collection-number">
     <choose>
       <if is-numeric="collection-number">
-        <text variable="collection-number" prefix="n°"/>
+        <text variable="collection-number" prefix="n°&#160;"/>
       </if>
       <else>
         <text variable="collection-number"/>
@@ -616,7 +618,7 @@
       <group>
         <choose>
           <if variable="volume chapter-number" match="any">
-            <text variable="number" prefix="projet de loi n°"/>
+            <text variable="number" prefix="projet de loi n°&#160;"/>
           </if>
           <else>
             <text variable="number"/>
@@ -931,7 +933,7 @@
             <text variable="publisher-place"/>
             <text variable="publisher"/>
             <text variable="event"/>
-            <text variable="issue" prefix="n°"/>
+            <text variable="issue" prefix="n°&#160;"/>
             <text variable="volume"/>
             <text macro="issued"/>
             <text variable="page" prefix="p.&#160;"/>
@@ -997,7 +999,7 @@
             <text variable="publisher-place"/>
             <text variable="publisher"/>
             <text variable="event"/>
-            <text variable="issue" prefix="n°"/>
+            <text variable="issue" prefix="n°&#160;"/>
             <text variable="volume"/>
             <text macro="issued"/>
             <text variable="page" prefix="p.&#160;"/>
