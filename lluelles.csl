@@ -58,7 +58,7 @@
       </substitute>
     </names>
   </macro>
-  <macro name="contributors">
+  <macro name="contributors-bib">
     <names variable="author">
       <name initialize-with=". " name-as-sort-order="first" and="text" sort-separator=", " delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
@@ -188,7 +188,7 @@
   </macro>
   <macro name="book-bib">
     <group delimiter=", ">
-      <text macro="contributors"/>
+      <text macro="contributors-bib"/>
       <text variable="title" font-style="italic"/>
       <text macro="edition"/>
       <text macro="translator"/>
@@ -228,7 +228,7 @@
   </macro>
   <macro name="chapter-bib">
     <group delimiter=", ">
-      <text macro="contributors"/>
+      <text macro="contributors-bib"/>
       <group>
         <text macro="title-chapter-special"/>
         <group delimiter=", ">
@@ -264,7 +264,7 @@
   </macro>
   <macro name="thesis-bib">
     <group delimiter=", ">
-      <text macro="contributors"/>
+      <text macro="contributors-bib"/>
       <text variable="title" font-style="italic"/>
       <text variable="genre"/>
       <text variable="publisher-place"/>
@@ -303,7 +303,7 @@
   </macro>
   <macro name="article-journal-bib">
     <group delimiter=" ">
-      <text macro="contributors" suffix=","/>
+      <text macro="contributors-bib" suffix=","/>
       <text variable="title" quotes="true" suffix=","/>
       <choose>
         <if variable="volume">
@@ -354,7 +354,7 @@
   </macro>
   <macro name="article-magazine-bib">
     <group delimiter=" ">
-      <text macro="contributors" suffix=","/>
+      <text macro="contributors-bib" suffix=","/>
       <text variable="title" quotes="true" suffix=","/>
       <text variable="container-title" font-style="italic"/>
       <choose>
@@ -397,7 +397,7 @@
   </macro>
   <macro name="article-newspaper-bib">
     <group delimiter=", ">
-      <text macro="contributors"/>
+      <text macro="contributors-bib"/>
       <text variable="title" quotes="true"/>
       <text variable="container-title" font-style="italic"/>
       <group>
@@ -578,7 +578,7 @@
   </macro>
   <macro name="legislation-bib">
     <group delimiter=", ">
-      <text macro="contributors"/>
+      <text macro="contributors-bib"/>
       <text variable="title" font-style="italic"/>
       <choose>
         <if variable="page">
@@ -713,7 +713,7 @@
   </macro>
   <macro name="entrydic-bib">
     <group delimiter=", ">
-      <text macro="contributors"/>
+      <text macro="contributors-bib"/>
       <text variable="container-title" font-style="italic"/>
       <text macro="edition"/>
       <text macro="translator"/>
@@ -746,7 +746,7 @@
   </macro>
   <macro name="entryencyclo-bib">
     <group delimiter=", ">
-      <text macro="contributors"/>
+      <text macro="contributors-bib"/>
       <group>
         <text macro="title-chapter-special"/>
         <text variable="container-title"/>
@@ -985,7 +985,7 @@
           <text macro="entryencyclo-bib"/>
         </else-if>
         <else>
-          <text macro="contributors" suffix=". "/>
+          <text macro="contributors-bib" suffix=". "/>
           <group delimiter=", ">
             <text variable="title" font-style="italic"/>
             <text macro="editor"/>
