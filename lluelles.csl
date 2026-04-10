@@ -706,7 +706,7 @@
       <text variable="publisher"/>
       <text macro="issued-year"/>
       <group delimiter=" ">
-        <text value="v°"/>
+        <text value="v°&#160;"/>
         <text variable="title" quotes="true"/>
       </group>
     </group>
@@ -765,7 +765,7 @@
   </macro>
   <macro name="point-locators">
     <choose>
-      <if variable="locator" match="any">
+      <if variable="locator">
         <choose>
           <if locator="page" type="chapter article-magazine article-newspaper" match="all">
             <label variable="locator" prefix=", " suffix="&#160;" form="long"/>
@@ -775,7 +775,7 @@
             <text variable="locator" prefix=", "/>
           </else-if>
           <else-if locator="sub-verbo">
-            <text variable="locator" quotes="true" prefix=", v° "/>
+            <text variable="locator" quotes="true" prefix=", v°&#160;"/>
           </else-if>
           <else-if type="legislation bill" locator="section" match="all">
             <text variable="locator" prefix=", art.&#160;"/>
