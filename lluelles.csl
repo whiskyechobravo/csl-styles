@@ -831,11 +831,6 @@
       <else-if variable="URL">
         <text value=", en ligne&#160;:"/>
         <text variable="URL" prefix=" &lt;" suffix="&gt;"/>
-        <date variable="accessed" prefix=" (consulté le " suffix=")">
-          <date-part name="day" suffix=" "/>
-          <date-part name="month" suffix=" "/>
-          <date-part name="year"/>
-        </date>
       </else-if>
     </choose>
   </macro>
