@@ -260,7 +260,6 @@
       <text variable="publisher"/>
       <text macro="issued-year"/>
     </group>
-    <text variable="note" prefix=" "/>
     <text macro="citation-locators"/>
     <text macro="URL"/>
   </macro>
@@ -273,7 +272,6 @@
       <text variable="publisher"/>
       <text macro="issued-year"/>
     </group>
-    <text variable="note" prefix=" "/>
     <text macro="URL"/>
   </macro>
   <macro name="article-journal-note">
@@ -571,7 +569,6 @@
           <text variable="number"/>
         </else>
       </choose>
-      <text variable="note"/>
     </group>
     <text macro="citation-locators"/>
     <text variable="references" prefix=" (" suffix=")"/>
