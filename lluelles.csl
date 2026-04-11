@@ -101,6 +101,11 @@
       <et-al font-style="italic"/>
     </names>
   </macro>
+  <macro name="contributors-legal">
+    <names variable="contributor">
+      <name form="long" and="text" delimiter=", " delimiter-precedes-last="never"/>
+    </names>
+  </macro>
   <macro name="editor">
     <names variable="editor">
       <name and="text" delimiter=", " delimiter-precedes-last="never">
@@ -691,20 +696,39 @@
     </group>
     <text macro="URL"/>
   </macro>
+  <!--
+      Le type `hearing` est utilisé pour:
+
+      - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux), Guide Lluelles v9, p. 16-18.
+   -->
   <macro name="hearing-note">
     <group delimiter=", ">
       <text macro="contributors-note"/>
       <text variable="title" font-style="italic"/>
+      <!-- `section` est la commission ou le comité. -->
       <text variable="section"/>
+      <!-- `chapter-number` est la session codée au long, e.g., `2e sess., 31e légis.`. -->
       <text variable="chapter-number"/>
+      <!-- `number` est le numéro de document. -->
       <text variable="number" prefix="fascicule n°&#160;"/>
       <text macro="issued"/>
+      <!-- `volume` est codé au long, e.g., `tome 12` -->
       <text variable="volume"/>
       <!-- TODO: citation-locators? -->
+      <!-- `event-title` est le sujet. -->
       <text variable="event-title" quotes="true"/>
       <group delimiter=" ">
-        <text variable="page" prefix="p.&#160;"/>
-        <text variable="part-title"/>
+        <choose>
+          <if variable="page">
+            <text variable="page" prefix="p.&#160;"/>
+          </if>
+          <else>
+            <!-- `part-title` est l'heure -->
+            <text variable="part-title"/>
+          </else>
+        </choose>
+        <!-- Le collaborateur est le nom de l'orateur. -->
+        <text macro="contributors-legal" prefix="(" suffix=")" />
       </group>
     </group>
     <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
@@ -714,15 +738,28 @@
     <group delimiter=", ">
       <text macro="contributors-note"/>
       <text variable="title" font-style="italic"/>
+      <!-- `section` est la commission ou le comité. -->
       <text variable="section"/>
+      <!-- `chapter-number` est la session codée au long, e.g., `2e sess., 31e légis.`. -->
       <text variable="chapter-number"/>
+      <!-- `number` est le numéro de document. -->
       <text variable="number" prefix="fascicule n°&#160;"/>
       <text macro="issued"/>
       <text variable="volume"/>
+      <!-- `event-title` est le sujet. -->
       <text variable="event-title" quotes="true"/>
       <group delimiter=" ">
-        <text variable="page" prefix="p.&#160;"/>
-        <text variable="part-title"/>
+        <choose>
+          <if variable="page">
+            <text variable="page" prefix="p.&#160;"/>
+          </if>
+          <else>
+            <!-- `part-title` est l'heure -->
+            <text variable="part-title"/>
+          </else>
+        </choose>
+        <!-- Le collaborateur est le nom de l'orateur. -->
+        <text macro="contributors-legal" prefix="(" suffix=")" />
       </group>
     </group>
     <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
