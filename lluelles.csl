@@ -981,7 +981,7 @@
       </choose>
     </layout>
   </citation>
-  <bibliography hanging-indent="true" subsequent-author-substitute="&#8212;&#8212;&#8212;" entry-spacing="0.5">
+  <bibliography hanging-indent="true" entry-spacing="0.5">
     <sort>
       <key macro="sort-by-type"/>
       <key macro="sort-by-contributors"/>
