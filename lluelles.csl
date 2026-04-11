@@ -854,7 +854,7 @@
       <else-if type="legal_case">
         <text value="2"/>
       </else-if>
-      <else-if type="book thesis entry-dictionary" match="any"> <!-- TODO: This condition and the ones below break the sort by author -->
+      <else-if type="book thesis entry-dictionary" match="any">
         <text value="3" font-weight="normal"/>
       </else-if>
       <else-if type="chapter article-journal entry-encyclopedia" match="any">
@@ -981,7 +981,6 @@
     <sort>
       <key macro="sort-by-type"/>
       <key macro="sort-by-contributors"/>
-      <key variable="issued"/>
       <key variable="title"/>
     </sort>
     <layout>
