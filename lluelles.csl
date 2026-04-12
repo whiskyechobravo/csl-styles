@@ -846,15 +846,21 @@
     </choose>
   </macro>
   <macro name="sort-by-contributors">
-    <names variable="author">
-      <name name-as-sort-order="all" and="text" sort-separator=", " delimiter=", " delimiter-precedes-last="never">
-        <name-part name="family" font-variant="small-caps"/>
-      </name>
-      <substitute>
-        <names variable="editor"/>
-        <names variable="container-author"/>
-      </substitute>
-    </names>
+    <choose>
+      <!-- L'ordre des lois est alphabétique (Guide Lluelles v9, p. 250), il convient donc d'ignorer le champ auteur s'il est renseigné. -->
+      <if match="any" type="bill legal_case legislation regulation treaty">
+        <text variable="title"/>
+      </if>
+      <else>
+        <names variable="author">
+          <name name-as-sort-order="all" and="text" delimiter-precedes-last="never"/>
+          <substitute>
+            <names variable="editor"/>
+            <names variable="container-author"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
   </macro>
   <macro name="sort-by-type">
     <choose>
