@@ -551,6 +551,7 @@
       - Les lois au fédéral et au Québec (Guide Lluelles v9, p. 5).
       - Les lois des autres provinces et des territoires fédéraux (Id., p. 12).
       - Les lois constitutionnelles et quasi constitutionnelles (Id., p. 13).
+      - ...
 
       La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
@@ -558,6 +559,7 @@
     <group delimiter=", ">
       <text variable="title" font-style="italic"/>
       <choose>
+        <!-- Un champ `page` renseigné signale une citation alternative, p.ex.: législation américaine codifiée. -->
         <if variable="page">
           <group delimiter=" ">
             <text variable="section"/>
@@ -567,9 +569,11 @@
           </group>
           <text variable="number"/>
         </if>
+        <!-- Mode de citation par défaut. -->
         <else>
           <group delimiter=" ">
             <choose>
+              <!-- TODO: Ça semble servir à distinguer les règlements; pourquoi ne pas remonter la condition sous celle qui vérifie la page? -->
               <if variable="container-title number" match="none">
                 <text macro="issued"/>
               </if>
@@ -577,6 +581,7 @@
                 <text macro="issued-year" prefix="(" suffix=")"/>
               </else>
             </choose>
+            <!-- `container-title` est le champ Code, codé avec recueil et chapitre, p.ex.: `RLRQ, c. P-40.1`. -->
             <text variable="container-title"/>
           </group>
           <text variable="section"/>
@@ -696,12 +701,12 @@
       <text variable="title" font-style="italic"/>
       <!-- `section` est la commission ou le comité. -->
       <text variable="section"/>
-      <!-- `chapter-number` est la session codée au long, e.g., `2e sess., 31e légis.`. -->
+      <!-- `chapter-number` est la session codée au long, p.ex.: `2e sess., 31e légis.`. -->
       <text variable="chapter-number"/>
       <!-- `number` est le numéro de document. -->
       <text variable="number" prefix="fascicule n°&#160;"/>
       <text macro="issued"/>
-      <!-- `volume` est codé au long, e.g., `tome 12` -->
+      <!-- `volume` est codé au long, p.ex.: `tome 12` -->
       <text variable="volume"/>
       <!-- `event-title` est le sujet. -->
       <text variable="event-title" quotes="true"/>
