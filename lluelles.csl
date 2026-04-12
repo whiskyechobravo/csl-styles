@@ -717,20 +717,18 @@
       <!-- TODO: citation-locators? -->
       <!-- `event-title` est le sujet. -->
       <text variable="event-title" quotes="true"/>
-      <group delimiter=" ">
-        <choose>
-          <if variable="page">
-            <text variable="page" prefix="p.&#160;"/>
-          </if>
-          <else>
-            <!-- `part-title` est l'heure -->
-            <text variable="part-title"/>
-          </else>
-        </choose>
-        <!-- Le collaborateur est le nom de l'orateur. -->
-        <text macro="contributors-legal" prefix="(" suffix=")" />
-      </group>
+      <choose>
+        <if variable="page">
+          <text variable="page" prefix="p.&#160;"/>
+        </if>
+        <else>
+          <!-- `part-title` est l'heure -->
+          <text variable="part-title"/>
+        </else>
+      </choose>
     </group>
+    <!-- Le collaborateur est le nom de l'orateur. -->
+    <text macro="contributors-legal" prefix=" (" suffix=")" />
     <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
     <text macro="URL"/>
   </macro>
@@ -745,23 +743,22 @@
       <!-- `number` est le numéro de document. -->
       <text variable="number" prefix="fascicule n°&#160;"/>
       <text macro="issued"/>
+      <!-- `volume` est codé au long, e.g., `tome 12` -->
       <text variable="volume"/>
       <!-- `event-title` est le sujet. -->
       <text variable="event-title" quotes="true"/>
-      <group delimiter=" ">
-        <choose>
-          <if variable="page">
-            <text variable="page" prefix="p.&#160;"/>
-          </if>
-          <else>
-            <!-- `part-title` est l'heure -->
-            <text variable="part-title"/>
-          </else>
-        </choose>
-        <!-- Le collaborateur est le nom de l'orateur. -->
-        <text macro="contributors-legal" prefix="(" suffix=")" />
-      </group>
+      <choose>
+        <if variable="page">
+          <text variable="page" prefix="p.&#160;"/>
+        </if>
+        <else>
+          <!-- `part-title` est l'heure -->
+          <text variable="part-title"/>
+        </else>
+      </choose>
     </group>
+    <!-- Le collaborateur est le nom de l'orateur. -->
+    <text macro="contributors-legal" prefix=" (" suffix=")" />
     <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
     <text macro="URL"/>
   </macro>
