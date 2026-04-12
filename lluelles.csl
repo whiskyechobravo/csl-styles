@@ -545,9 +545,17 @@
     </choose>
     <text macro="URL"/>
   </macro>
-  <macro name="legislation-note">
+  <!--
+      Les macros `legislation-core`, `legislation-note` et `legislation-bib` sont utilisées pour:
+
+      - Les lois au fédéral et au Québec (Guide Lluelles v9, p. 5).
+      - Les lois des autres provinces et des territoires fédéraux (Id., p. 12).
+      - Les lois constitutionnelles et quasi constitutionnelles (Id., p. 13).
+
+      La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
+  -->
+  <macro name="legislation-core">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
       <text variable="title" font-style="italic"/>
       <choose>
         <if variable="page">
@@ -576,6 +584,12 @@
         </else>
       </choose>
     </group>
+  </macro>
+  <macro name="legislation-note">
+    <group delimiter=", ">
+      <text macro="contributors-note"/>
+      <text macro="legislation-core"/>
+    </group>
     <text macro="citation-locators"/>
     <text variable="references" prefix=" (" suffix=")"/>
     <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
@@ -584,33 +598,7 @@
   <macro name="legislation-bib">
     <group delimiter=", ">
       <text macro="contributors-bib"/>
-      <text variable="title" font-style="italic"/>
-      <choose>
-        <if variable="page">
-          <group delimiter=" ">
-            <text variable="section"/>
-            <text variable="container-title"/>
-            <text variable="page"/>
-            <text macro="issued-year" prefix="(" suffix=")"/>
-          </group>
-          <text variable="number"/>
-        </if>
-        <else>
-          <group delimiter=" ">
-            <choose>
-              <if variable="container-title number" match="none">
-                <text macro="issued"/>
-              </if>
-              <else>
-                <text macro="issued-year" prefix="(" suffix=")"/>
-              </else>
-            </choose>
-            <text variable="container-title"/>
-          </group>
-          <text variable="section"/>
-          <text variable="number"/>
-        </else>
-      </choose>
+      <text macro="legislation-core"/>
     </group>
     <text macro="URL"/>
   </macro>
@@ -697,11 +685,11 @@
     <text macro="URL"/>
   </macro>
   <!--
-      Le type `hearing` est utilisé pour:
+      Les macros `hearing-core`, `hearing-note` et `hearing-bib` sont utilisées pour:
 
-      - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux) (Guide Lluelles v9, p. 16-18).
+      - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux) (Guide Lluelles v9, p. 16).
 
-      La morphologie des références bibliographiques est la même que pour les notes (Guide Lluelles v9, p. 250).
+      La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
    -->
   <macro name="hearing-core">
     <group delimiter=", ">
