@@ -80,7 +80,11 @@
       </substitute>
     </names>
   </macro>
-  <macro name="contributors-short">
+  <!--
+      La macro `contributors-subsequent` est utlisée en note de bas de page pour écourter la liste
+      des auteurs lorsque la référence a déjà été citée une première fois.
+  -->
+  <macro name="contributors-subsequent">
     <names variable="author">
       <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
@@ -101,6 +105,10 @@
       <et-al font-style="italic"/>
     </names>
   </macro>
+  <!--
+      La macro `contributors-legal` donne les noms d'orateurs ou témoins d'audiences, donnés dans la
+      la référence mais pas dans la position d'auteur et sans mise en forme en petites capitales.
+  -->
   <macro name="contributors-legal">
     <names variable="contributor">
       <name form="long" and="text" delimiter=", " delimiter-precedes-last="never"/>
@@ -911,7 +919,7 @@
                 </choose>
               </if>
               <else>
-                <text macro="contributors-short"/>
+                <text macro="contributors-subsequent"/>
               </else>
             </choose>
             <text value="préc." suffix=", "/>
