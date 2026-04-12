@@ -607,9 +607,16 @@
     </group>
     <text macro="URL"/>
   </macro>
-  <macro name="bill-note">
+  <!--
+      Les macros `bill-core`, `bill-note` et `bill-bib` sont utilisées pour:
+
+      - Projets de lois (Guide Lluelles v9, p. 15).
+      - Projets de règlements (Id., p. 29).
+
+      La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
+   -->
+  <macro name="bill-core">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
       <text variable="title" font-style="italic"/>
       <group>
         <choose>
@@ -645,47 +652,20 @@
         </else>
       </choose>
     </group>
+  </macro>
+  <macro name="bill-note">
+    <group delimiter=", ">
+      <text macro="contributors-note"/>
+      <text macro="bill-core"/>
+    </group>
     <text macro="citation-locators"/>
     <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
     <text macro="URL"/>
   </macro>
   <macro name="bill-bib">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
-      <text variable="title" font-style="italic"/>
-      <group>
-        <choose>
-          <if variable="volume chapter-number" match="any">
-            <text variable="number" prefix="projet de loi n°&#160;"/>
-          </if>
-          <else>
-            <text variable="number"/>
-          </else>
-        </choose>
-        <group prefix=" (" suffix=")" delimiter=" - ">
-          <text variable="references"/>
-          <text macro="issued"/>
-        </group>
-      </group>
-      <choose>
-        <if variable="chapter-number">
-          <group delimiter=" ">
-            <text variable="chapter-number"/>
-            <text variable="authority" prefix="(" suffix=")"/>
-          </group>
-        </if>
-        <else-if variable="volume">
-          <group delimiter=" ">
-            <text variable="volume"/>
-            <text variable="container-title" prefix="(" suffix=")"/>
-          </group>
-        </else-if>
-        <else>
-          <text variable="authority"/>
-          <text variable="container-title"/>
-          <text variable="section"/>
-        </else>
-      </choose>
+      <text macro="contributors-bib"/>
+      <text macro="bill-core"/>
     </group>
     <text macro="URL"/>
   </macro>
