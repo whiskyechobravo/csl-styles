@@ -699,11 +699,10 @@
   <!--
       Le type `hearing` est utilisé pour:
 
-      - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux), Guide Lluelles v9, p. 16-18.
+      - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux) (Guide Lluelles v9, p. 16-18).
    -->
-  <macro name="hearing-note">
+  <macro name="hearing-core">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
       <text variable="title" font-style="italic"/>
       <!-- `section` est la commission ou le comité. -->
       <text variable="section"/>
@@ -714,7 +713,6 @@
       <text macro="issued"/>
       <!-- `volume` est codé au long, e.g., `tome 12` -->
       <text variable="volume"/>
-      <!-- TODO: citation-locators? -->
       <!-- `event-title` est le sujet. -->
       <text variable="event-title" quotes="true"/>
       <choose>
@@ -729,37 +727,20 @@
     </group>
     <!-- Le collaborateur est le nom de l'orateur. -->
     <text macro="contributors-legal" prefix=" (" suffix=")" />
+  </macro>
+  <macro name="hearing-note">
+    <group delimiter=", ">
+      <text macro="contributors-note"/>
+      <text macro="hearing-core"/>
+    </group>
     <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
     <text macro="URL"/>
   </macro>
   <macro name="hearing-bib">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
-      <text variable="title" font-style="italic"/>
-      <!-- `section` est la commission ou le comité. -->
-      <text variable="section"/>
-      <!-- `chapter-number` est la session codée au long, e.g., `2e sess., 31e légis.`. -->
-      <text variable="chapter-number"/>
-      <!-- `number` est le numéro de document. -->
-      <text variable="number" prefix="fascicule n°&#160;"/>
-      <text macro="issued"/>
-      <!-- `volume` est codé au long, e.g., `tome 12` -->
-      <text variable="volume"/>
-      <!-- `event-title` est le sujet. -->
-      <text variable="event-title" quotes="true"/>
-      <choose>
-        <if variable="page">
-          <text variable="page" prefix="p.&#160;"/>
-        </if>
-        <else>
-          <!-- `part-title` est l'heure -->
-          <text variable="part-title"/>
-        </else>
-      </choose>
+      <text macro="contributors-bib"/>
+      <text macro="hearing-core"/>
     </group>
-    <!-- Le collaborateur est le nom de l'orateur. -->
-    <text macro="contributors-legal" prefix=" (" suffix=")" />
-    <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
     <text macro="URL"/>
   </macro>
   <macro name="entrydic-note">
