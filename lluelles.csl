@@ -546,12 +546,19 @@
     <text macro="URL"/>
   </macro>
   <!--
-      Les macros `legislation-core`, `legislation-note` et `legislation-bib` sont utilisées pour:
+      Les macros `legislation-core`, `legislation-note` et `legislation-bib` sont utilisées avec le
+      type CSL `legislation` pour:
 
       - Les lois au fédéral et au Québec (Guide Lluelles v9, p. 5).
       - Les lois des autres provinces et des territoires fédéraux (Id., p. 12).
       - Les lois constitutionnelles et quasi constitutionnelles (Id., p. 13).
-      - ...
+      - L'entrée en vigueur d'une loi (Id., p. 21).
+      - Les modifications à une loi (Id., p. 23).
+      - Les règlements au fédéral et au Québec (Id., p. 24).
+      - L'entrée en vigueur d'un règlement au fédéral et au Québec (Id., p. 28).
+      - Les règlements des autres provinces et des territoires fédéraux (Id., p. 30).
+      - Les règlements municipaux et autres règlements (Id., p. 31).
+      - Les décrets administratifs, décisions et avis divers publiés dans une gazette (Id., p. 33).
 
       La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
@@ -608,7 +615,8 @@
     <text macro="URL"/>
   </macro>
   <!--
-      Les macros `bill-core`, `bill-note` et `bill-bib` sont utilisées pour:
+      Les macros `bill-core`, `bill-note` et `bill-bib` sont utilisées avec le
+      type CSL `bill` pour:
 
       - Projets de lois (Guide Lluelles v9, p. 15).
       - Projets de règlements (Id., p. 29).
@@ -670,7 +678,8 @@
     <text macro="URL"/>
   </macro>
   <!--
-      Les macros `hearing-core`, `hearing-note` et `hearing-bib` sont utilisées pour:
+      Les macros `hearing-core`, `hearing-note` et `hearing-bib` sont utilisées avec le
+      type CSL `hearing` pour:
 
       - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux) (Guide Lluelles v9, p. 16).
 
