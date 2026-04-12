@@ -700,6 +700,8 @@
       Le type `hearing` est utilisé pour:
 
       - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux) (Guide Lluelles v9, p. 16-18).
+
+      La morphologie des références bibliographiques est la même que pour les notes (Guide Lluelles v9, p. 250).
    -->
   <macro name="hearing-core">
     <group delimiter=", ">
