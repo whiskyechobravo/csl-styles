@@ -184,38 +184,49 @@
       </else>
     </choose>
   </macro>
-  <macro name="book-note">
+  <!--
+      Les macros `monograph-core`, `monograph-note` et `monograph-bib` sont utilisées avec les
+      types CSL `book` et `report` pour:
+
+      - Les monographies (Guide Lluelles v9, p. 92).
+      - Les rapports parlementaires (Id., p. 19).
+   -->
+  <macro name="monograph-core">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
       <text variable="title" font-style="italic"/>
       <text macro="edition"/>
       <text macro="translator"/>
+      <!-- `genre` est le type de rapport. -->
       <text variable="genre"/>
+      <!-- `number` est le numéro de rapport. -->
       <text variable="number"/>
       <text variable="volume"/>
       <text macro="collection-title"/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
-      <text macro="issued-year"/>
+      <choose>
+        <if type="report">
+          <text macro="issued" text-case="lowercase"/>
+        </if>
+        <else>
+          <text macro="issued-year"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
+  <macro name="monograph-note">
+    <group delimiter=", ">
+      <text macro="contributors-note"/>
+      <text macro="monograph-core"/>
     </group>
     <text macro="citation-locators"/>
     <text macro="URL"/>
   </macro>
-  <macro name="book-bib">
+  <macro name="monograph-bib">
     <group delimiter=", ">
       <text macro="contributors-bib"/>
-      <text variable="title" font-style="italic"/>
-      <text macro="edition"/>
-      <text macro="translator"/>
-      <text variable="genre"/>
-      <text variable="number"/>
-      <text variable="volume"/>
-      <text macro="collection-title"/>
-      <text macro="collection-number"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <text macro="issued-year"/>
+      <text macro="monograph-core"/>
     </group>
     <text macro="URL"/>
   </macro>
@@ -644,7 +655,7 @@
               </group>
               <group delimiter=" — " prefix=" (" suffix=")">
                 <!-- `references` est l'étape franchie du processus d'adoption, p.ex.: `Dépôt et 2e lecture`. -->
-                <text variable="references"  text-case="lowercase"/>
+                <text variable="references" text-case="lowercase"/>
                 <text macro="issued"/>
               </group>
             </group>
@@ -973,7 +984,7 @@
           <text macro="chapter-note"/>
         </else-if>
         <else-if type="book report" match="any">
-          <text macro="book-note"/>
+          <text macro="monograph-note"/>
         </else-if>
         <else-if type="article-newspaper webpage post post-weblog" match="any">
           <text macro="article-newspaper-note"/>
@@ -1041,7 +1052,7 @@
           <text macro="chapter-bib"/>
         </else-if>
         <else-if type="book report" match="any">
-          <text macro="book-bib"/>
+          <text macro="monograph-bib"/>
         </else-if>
         <else-if type="article-newspaper webpage post post-weblog" match="any">
           <text macro="article-newspaper-bib"/>
