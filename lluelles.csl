@@ -200,7 +200,10 @@
       <text variable="genre"/>
       <!-- `number` est le numéro de rapport. -->
       <text variable="number"/>
-      <text variable="volume"/>
+      <group delimiter=" ">
+        <text variable="volume"/>
+        <text variable="volume-title" quotes="true"/>
+      </group>
       <text macro="collection-title"/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
@@ -213,6 +216,7 @@
           <text macro="issued-year"/>
         </else>
       </choose>
+      <text variable="medium" text-case="lowercase"/>
     </group>
   </macro>
   <macro name="monograph-note">
@@ -667,7 +671,7 @@
             </group>
           </group>
         </if>
-        <!-- `volume` est le volume de code, `container-title` le code; l'un ou l'autre signale un projet de règlement. -->
+        <!-- `volume` est le volume de code, `container-title` le code; si l'un ou l'autre est renseigné, on le traite comme un projet de règlement. -->
         <else-if variable="volume container-title" match="any">
           <group delimiter=", ">
             <group delimiter=" ">
