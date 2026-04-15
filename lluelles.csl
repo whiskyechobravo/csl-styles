@@ -168,6 +168,10 @@
       </else>
     </choose>
   </macro>
+  <!--
+    La macro `edition` affiche l'édition en nombre ordinal et avec le suffixe `éd.` uniquement
+    lorsque la valeur est numérique.
+  -->
   <macro name="edition">
     <choose>
       <if is-numeric="edition">
@@ -182,6 +186,7 @@
       </else>
     </choose>
   </macro>
+  <!-- La macro `volume` affiche le préfixe `vol.` uniquement lorsque la valeur est numérique. -->
   <macro name="volume">
     <choose>
       <if is-numeric="volume">
@@ -192,6 +197,20 @@
       </if>
       <else>
         <text variable="volume"/>
+      </else>
+    </choose>
+  </macro>
+  <!--
+    La macro `number-fascicule` affiche le préfixe `fascicule n°` uniquement lorsque la valeur est
+    numérique.
+  -->
+  <macro name="number-fascicule">
+    <choose>
+      <if is-numeric="number">
+        <text variable="number" prefix="fascicule n°&#160;"/>
+      </if>
+      <else>
+        <text variable="number"/>
       </else>
     </choose>
   </macro>
@@ -806,7 +825,7 @@
       <!-- `chapter-number` est la session codée au long, p.ex.: `2e sess., 31e légis.`. -->
       <text variable="chapter-number"/>
       <!-- `number` est le numéro de document. -->
-      <text variable="number" prefix="fascicule n°&#160;"/>
+      <text macro="number-fascicule"/>
       <text macro="issued"/>
       <!-- `volume` est codé au long, p.ex.: `tome 12` -->
       <text variable="volume"/>
