@@ -299,9 +299,9 @@
         </if>
       </choose>
       <text macro="monograph-core"/>
-    </group>
     <text macro="citation-locators"/>
     <text macro="URL"/>
+    </group>
   </macro>
   <macro name="monograph-bib">
     <group delimiter=", ">
@@ -848,8 +848,7 @@
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text macro="hearing-core"/>
-    </group>
-    <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
+      <text macro="citation-locators"/>
     <text macro="URL"/>
   </macro>
   <macro name="hearing-bib">
