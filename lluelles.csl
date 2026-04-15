@@ -245,6 +245,7 @@
             <if variable="volume contributor" match="all">
               <group delimiter=" ">
                 <text term="by"/>
+                <!-- TODO: monograph-bib would need this to call contributors-bib... thus we must kill macro monograph-core -->
                 <text macro="contributors-note"/>
               </group>
             </if>
