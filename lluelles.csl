@@ -157,7 +157,21 @@
         </group>
       </if>
       <else>
+        <!-- TODO: Vérifier si le capitalize-first est pertinent. -->
         <text variable="edition" text-case="capitalize-first"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="volume">
+    <choose>
+      <if is-numeric="volume">
+        <group delimiter="&#160;">
+          <text term="volume" form="short"/>
+          <number variable="volume"/>
+        </group>
+      </if>
+      <else>
+        <text variable="volume"/>
       </else>
     </choose>
   </macro>
@@ -201,7 +215,7 @@
       <!-- `number` est le numéro de rapport. -->
       <text variable="number"/>
       <group delimiter=" ">
-        <text variable="volume"/>
+        <text macro="volume"/>
         <text variable="volume-title" quotes="true"/>
       </group>
       <text macro="collection-title"/>
@@ -246,7 +260,7 @@
       </group>
       <text macro="edition"/>
       <text macro="translator"/>
-      <text variable="volume"/>
+      <text macro="volume"/>
       <text macro="collection-title"/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
@@ -269,7 +283,7 @@
       </group>
       <text macro="edition"/>
       <text macro="translator"/>
-      <text variable="volume"/>
+      <text macro="volume"/>
       <text macro="collection-title"/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
