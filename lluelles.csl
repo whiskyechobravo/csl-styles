@@ -299,8 +299,8 @@
         </if>
       </choose>
       <text macro="monograph-core"/>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
   </macro>
   <macro name="monograph-bib">
@@ -316,8 +316,8 @@
         </if>
       </choose>
       <text macro="monograph-core"/>
+      <text macro="URL"/>
     </group>
-    <text macro="URL"/>
   </macro>
   <macro name="chapter-note">
     <group delimiter=", ">
@@ -338,9 +338,9 @@
       <text variable="publisher"/>
       <text macro="issued-year"/>
       <text variable="page" prefix="p.&#160;"/>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
   </macro>
   <macro name="chapter-bib">
     <group delimiter=", ">
@@ -361,9 +361,9 @@
       <text variable="publisher"/>
       <text macro="issued-year"/>
       <text variable="page" prefix="p.&#160;"/>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
   </macro>
   <macro name="thesis-note">
     <group delimiter=", ">
@@ -373,9 +373,9 @@
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
   </macro>
   <macro name="thesis-bib">
     <group delimiter=", ">
@@ -385,129 +385,141 @@
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
+      <text macro="URL"/>
     </group>
-    <text macro="URL"/>
   </macro>
   <macro name="article-journal-note">
-    <group delimiter=" ">
-      <text macro="authors-note" suffix=","/>
-      <text variable="title" quotes="true" suffix=","/>
-      <choose>
-        <if variable="volume">
-          <text macro="issued-year" prefix="(" suffix=")"/>
-          <group delimiter="-">
-            <text variable="volume"/>
-            <number variable="issue"/>
-          </group>
-          <text variable="container-title" form="short" font-style="italic"/>
-          <text variable="page"/>
-        </if>
-        <else>
-          <text variable="container-title" form="short" font-style="italic"/>
-          <group delimiter=".">
-            <text macro="issued-year"/>
-            <number variable="issue"/>
+    <group delimiter=", ">
+      <group delimiter=" ">
+        <text macro="authors-note" suffix=","/>
+        <text variable="title" quotes="true" suffix=","/>
+        <choose>
+          <if variable="volume">
+            <text macro="issued-year" prefix="(" suffix=")"/>
+            <group delimiter="-">
+              <text variable="volume"/>
+              <number variable="issue"/>
+            </group>
+            <text variable="container-title" form="short" font-style="italic"/>
             <text variable="page"/>
-          </group>
-        </else>
-      </choose>
+          </if>
+          <else>
+            <text variable="container-title" form="short" font-style="italic"/>
+            <group delimiter=".">
+              <text macro="issued-year"/>
+              <number variable="issue"/>
+              <text variable="page"/>
+            </group>
+          </else>
+        </choose>
+      </group>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
   </macro>
   <macro name="article-journal-bib">
-    <group delimiter=" ">
-      <text macro="authors-bib" suffix=","/>
-      <text variable="title" quotes="true" suffix=","/>
-      <choose>
-        <if variable="volume">
-          <text macro="issued-year" prefix="(" suffix=")"/>
-          <group delimiter="-">
-            <text variable="volume"/>
-            <number variable="issue"/>
-          </group>
-          <text variable="container-title" form="short" font-style="italic"/>
-          <text variable="page"/>
-        </if>
-        <else>
-          <text variable="container-title" form="short" font-style="italic"/>
-          <group delimiter=".">
-            <text macro="issued-year"/>
-            <number variable="issue"/>
+    <group delimiter=", ">
+      <group delimiter=" ">
+        <text macro="authors-bib" suffix=","/>
+        <text variable="title" quotes="true" suffix=","/>
+        <choose>
+          <if variable="volume">
+            <text macro="issued-year" prefix="(" suffix=")"/>
+            <group delimiter="-">
+              <text variable="volume"/>
+              <number variable="issue"/>
+            </group>
+            <text variable="container-title" form="short" font-style="italic"/>
             <text variable="page"/>
-          </group>
-        </else>
-      </choose>
+          </if>
+          <else>
+            <text variable="container-title" form="short" font-style="italic"/>
+            <group delimiter=".">
+              <text macro="issued-year"/>
+              <number variable="issue"/>
+              <text variable="page"/>
+            </group>
+          </else>
+        </choose>
+      </group>
+      <text macro="URL"/>
     </group>
-    <text macro="URL"/>
   </macro>
   <macro name="article-magazine-note">
-    <group delimiter=" ">
-      <text macro="authors-note" suffix=","/>
-      <text variable="title" quotes="true" suffix=","/>
-      <text variable="container-title" font-style="italic"/>
-      <choose>
-        <if variable="volume" match="any">
-          <group delimiter="-">
-            <text variable="volume"/>
-            <number variable="issue"/>
-          </group>
-        </if>
-        <else>
-          <group>
-            <text term="issue" form="short"/>
-            <number variable="issue"/>
-          </group>
-        </else>
-      </choose>
-      <text macro="issued" prefix="(" suffix=")"/>
+    <group delimiter=", ">
+      <group delimiter=" ">
+        <text macro="authors-note" suffix=","/>
+        <text variable="title" quotes="true" suffix=","/>
+        <text variable="container-title" font-style="italic"/>
+        <choose>
+          <if variable="volume" match="any">
+            <group delimiter="-">
+              <text variable="volume"/>
+              <number variable="issue"/>
+            </group>
+          </if>
+          <else>
+            <group>
+              <text term="issue" form="short"/>
+              <number variable="issue"/>
+            </group>
+          </else>
+        </choose>
+        <text macro="issued" prefix="(" suffix=")"/>
+      </group>
+      <text variable="page" prefix="p.&#160;"/>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
-    <text variable="page" prefix=", p.&#160;"/>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
   </macro>
   <macro name="article-magazine-bib">
-    <group delimiter=" ">
-      <text macro="authors-bib" suffix=","/>
-      <text variable="title" quotes="true" suffix=","/>
-      <text variable="container-title" font-style="italic"/>
-      <choose>
-        <if variable="volume" match="any">
-          <group delimiter="-">
-            <text variable="volume"/>
-            <number variable="issue"/>
-          </group>
-        </if>
-        <else>
-          <group>
-            <text term="issue" form="short"/>
-            <number variable="issue"/>
-          </group>
-        </else>
-      </choose>
-      <text macro="issued" prefix="(" suffix=")"/>
+    <group delimiter=", ">
+      <group delimiter=" ">
+        <text macro="authors-bib" suffix=","/>
+        <text variable="title" quotes="true" suffix=","/>
+        <text variable="container-title" font-style="italic"/>
+        <choose>
+          <if variable="volume" match="any">
+            <group delimiter="-">
+              <text variable="volume"/>
+              <number variable="issue"/>
+            </group>
+          </if>
+          <else>
+            <group>
+              <text term="issue" form="short"/>
+              <number variable="issue"/>
+            </group>
+          </else>
+        </choose>
+        <text macro="issued" prefix="(" suffix=")"/>
+        <text variable="page" prefix="p.&#160;"/>
+      </group>
+      <text macro="URL"/>
     </group>
-    <text variable="page" prefix=", p.&#160;"/>
-    <text macro="URL"/>
   </macro>
   <macro name="article-newspaper-note">
     <group delimiter=", ">
-      <text macro="authors-note"/>
-      <text variable="title" quotes="true"/>
-      <text variable="container-title" font-style="italic"/>
-      <group>
-        <text term="edition" form="short" suffix=" "/>
-        <text variable="edition"/>
+      <group delimiter=" ">
+        <group delimiter=", ">
+          <text macro="authors-note"/>
+          <text variable="title" quotes="true"/>
+          <text variable="container-title" font-style="italic"/>
+          <group delimiter=" ">
+            <text term="edition" form="short"/>
+            <text variable="edition"/>
+          </group>
+          <group delimiter=" ">
+            <text term="section" form="short"/>
+            <text variable="section"/>
+          </group>
+        </group>
+        <text macro="issued" prefix="(" suffix=")"/>
       </group>
-      <group>
-        <text term="section" form="short" suffix=" "/>
-        <text variable="section"/>
-      </group>
+      <text variable="page" prefix="p.&#160;"/>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
-    <text macro="issued" prefix=" (" suffix=")"/>
-    <text variable="page" prefix=", p.&#160;"/>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
   </macro>
   <macro name="article-newspaper-bib">
     <group delimiter=", ">
@@ -528,130 +540,140 @@
     <text macro="URL"/>
   </macro>
   <macro name="case-note">
-    <choose>
-      <if variable="author">
-        <group delimiter=", ">
-          <text variable="authority"/>
-          <text macro="issued"/>
-          <text variable="number"/>
-          <group delimiter=" ">
-            <text variable="title" font-style="italic"/>
-            <text variable="references" prefix="(" suffix=")"/>
-          </group>
-          <group delimiter=" ">
-            <text variable="container-title" font-style="italic"/>
-            <group delimiter=".">
-              <text variable="volume"/>
-              <text variable="page"/>
-            </group>
-          </group>
-        </group>
-        <text macro="citation-locators"/>
-        <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
-      </if>
-      <else-if variable="title" match="none">
-        <group delimiter=", ">
-          <text variable="authority"/>
-          <text macro="issued"/>
-          <text variable="number"/>
-          <group delimiter=" ">
-            <text variable="title" form="short" font-style="italic"/>
-            <text variable="references" prefix="(" suffix=")"/>
-          </group>
-          <group delimiter=" ">
-            <text variable="container-title" font-style="italic"/>
-            <group delimiter=".">
-              <text variable="volume"/>
-              <text variable="page"/>
-            </group>
-          </group>
-        </group>
-        <text macro="citation-locators"/>
-      </else-if>
-      <else>
-        <text variable="title" font-style="italic" suffix=", "/>
-        <choose>
-          <if variable="container-title" match="none">
+    <group delimiter=", ">
+      <choose>
+        <if variable="author">
+          <group delimiter=", ">
+            <text variable="authority"/>
+            <text macro="issued"/>
+            <text variable="number"/>
             <group delimiter=" ">
-              <text macro="issued-year"/>
-              <text variable="authority"/>
-              <text variable="page"/>
+              <text variable="title" font-style="italic"/>
+              <text variable="references" prefix="(" suffix=")"/>
+            </group>
+            <group delimiter=" ">
+              <text variable="container-title" font-style="italic"/>
+              <group delimiter=".">
+                <text variable="volume"/>
+                <text variable="page"/>
+              </group>
             </group>
             <text macro="citation-locators"/>
-          </if>
-          <else>
-            <text macro="issued-year" prefix=" [" suffix="] "/>
-            <text variable="volume" suffix=" "/>
-            <text variable="container-title"/>
-            <text variable="page" prefix=" "/>
+          </group>
+          <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
+        </if>
+        <else-if variable="title" match="none">
+          <group delimiter=", ">
+            <text variable="authority"/>
+            <text macro="issued"/>
+            <text variable="number"/>
+            <group delimiter=" ">
+              <text variable="title" form="short" font-style="italic"/>
+              <text variable="references" prefix="(" suffix=")"/>
+            </group>
+            <group delimiter=" ">
+              <text variable="container-title" font-style="italic"/>
+              <group delimiter=".">
+                <text variable="volume"/>
+                <text variable="page"/>
+              </group>
+            </group>
             <text macro="citation-locators"/>
-            <text variable="authority" prefix=" (" suffix=")"/>
-          </else>
-        </choose>
-        <text variable="references" prefix=" (" suffix=")"/>
-        <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
-      </else>
-    </choose>
-    <text macro="URL"/>
+          </group>
+        </else-if>
+        <else>
+          <text variable="title" font-style="italic" suffix=", "/>
+          <choose>
+            <if variable="container-title" match="none">
+              <group delimiter=", ">
+                <group delimiter=" ">
+                  <text macro="issued-year"/>
+                  <text variable="authority"/>
+                  <text variable="page"/>
+                </group>
+                <text macro="citation-locators"/>
+              </group>
+            </if>
+            <else>
+              <group delimiter=", ">
+                <group delimiter=" ">
+                  <text macro="issued-year" prefix="[" suffix="] "/>
+                  <text variable="volume"/>
+                  <text variable="container-title"/>
+                  <text variable="page"/>
+                </group>
+                <text macro="citation-locators"/>
+              </group>
+              <text variable="authority" prefix=" (" suffix=")"/>
+            </else>
+          </choose>
+          <text variable="references" prefix=" (" suffix=")"/>
+          <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
+        </else>
+      </choose>
+      <text macro="URL"/>
+    </group>
   </macro>
   <macro name="case-bib">
-    <choose>
-      <if variable="author">
-        <group delimiter=", ">
-          <text variable="authority"/>
-          <text macro="issued"/>
-          <text variable="number"/>
-          <group delimiter=" ">
-            <text variable="title" font-style="italic"/>
-            <text variable="references" prefix="(" suffix=")"/>
-          </group>
-          <group delimiter=" ">
-            <text variable="container-title" font-style="italic"/>
-            <group delimiter=".">
-              <text variable="volume"/>
-              <text variable="page"/>
+    <group delimiter=", ">
+      <choose>
+        <if variable="author">
+          <group delimiter=", ">
+            <text variable="authority"/>
+            <text macro="issued"/>
+            <text variable="number"/>
+            <group delimiter=" ">
+              <text variable="title" font-style="italic"/>
+              <text variable="references" prefix="(" suffix=")"/>
+            </group>
+            <group delimiter=" ">
+              <text variable="container-title" font-style="italic"/>
+              <group delimiter=".">
+                <text variable="volume"/>
+                <text variable="page"/>
+              </group>
             </group>
           </group>
-        </group>
-      </if>
-      <else-if variable="title" match="none">
-        <group delimiter=", ">
-          <text variable="authority"/>
-          <text macro="issued"/>
-          <text variable="number"/>
-          <group delimiter=" ">
-            <text variable="title" form="short" font-style="italic"/>
-            <text variable="references" prefix="(" suffix=")"/>
-          </group>
-          <group delimiter=" ">
-            <text variable="container-title" font-style="italic"/>
-            <group delimiter=".">
-              <text variable="volume"/>
-              <text variable="page"/>
+        </if>
+        <else-if variable="title" match="none">
+          <group delimiter=", ">
+            <text variable="authority"/>
+            <text macro="issued"/>
+            <text variable="number"/>
+            <group delimiter=" ">
+              <text variable="title" form="short" font-style="italic"/>
+              <text variable="references" prefix="(" suffix=")"/>
+            </group>
+            <group delimiter=" ">
+              <text variable="container-title" font-style="italic"/>
+              <group delimiter=".">
+                <text variable="volume"/>
+                <text variable="page"/>
+              </group>
             </group>
           </group>
-        </group>
-      </else-if>
-      <else>
-        <text variable="title" font-style="italic" suffix=", "/>
-        <choose>
-          <if variable="container-title" match="none">
-            <text macro="issued-year" suffix=" "/>
-            <text variable="authority" suffix=" "/>
-            <text variable="page"/>
-          </if>
-          <else>
-            <text macro="issued-year" prefix=" [" suffix="] "/>
-            <text variable="volume" suffix=" "/>
-            <text variable="container-title" suffix=" "/>
-            <text variable="page"/>
-            <text variable="authority" prefix=" (" suffix=")"/>
-          </else>
-        </choose>
-        <text variable="references" prefix=" (" suffix=")"/>
-      </else>
-    </choose>
-    <text macro="URL"/>
+        </else-if>
+        <else>
+          <text variable="title" font-style="italic" suffix=", "/>
+          <choose>
+            <if variable="container-title" match="none">
+              <text macro="issued-year" suffix=" "/>
+              <text variable="authority" suffix=" "/>
+              <text variable="page"/>
+            </if>
+            <else>
+              <text macro="issued-year" prefix=" [" suffix="] "/>
+              <text variable="volume" suffix=" "/>
+              <text variable="container-title" suffix=" "/>
+              <text variable="page"/>
+              <text variable="authority" prefix=" (" suffix=")"/>
+            </else>
+          </choose>
+          <text variable="references" prefix=" (" suffix=")"/>
+        </else>
+      </choose>
+      <text macro="URL"/>
+    </group>
   </macro>
   <!--
       Les macros `legislation-core`, `legislation-note` et `legislation-bib` sont utilisées avec le
@@ -707,20 +729,25 @@
   </macro>
   <macro name="legislation-note">
     <group delimiter=", ">
-      <text macro="authors-note"/>
-      <text macro="legislation-core"/>
+      <group delimiter=" ">
+        <group delimiter=", ">
+          <text macro="authors-note"/>
+          <text macro="legislation-core"/>
+          <text macro="citation-locators"/>
+        </group>
+        <text variable="references" prefix="(" suffix=")"/>
+        <!-- TODO: Vérifier si title-short est pertinent. -->
+        <text variable="title-short" prefix="[" suffix="]" font-style="italic"/>
+      </group>
+      <text macro="URL"/>
     </group>
-    <text macro="citation-locators"/>
-    <text variable="references" prefix=" (" suffix=")"/>
-    <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
-    <text macro="URL"/>
   </macro>
   <macro name="legislation-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="legislation-core"/>
+      <text macro="URL"/>
     </group>
-    <text macro="URL"/>
   </macro>
   <!--
       Les macros `bill-core`, `bill-note` et `bill-bib` sont utilisées avec le
@@ -795,19 +822,23 @@
   </macro>
   <macro name="bill-note">
     <group delimiter=", ">
-      <text macro="authors-note"/>
-      <text macro="bill-core"/>
+      <group delimiter=" ">
+        <group delimiter=", ">
+          <text macro="authors-note"/>
+          <text macro="bill-core"/>
+          <text macro="citation-locators"/>
+        </group>
+        <text variable="title-short" prefix="[" suffix="]" font-style="italic"/>
+      </group>
+      <text macro="URL"/>
     </group>
-    <text macro="citation-locators"/>
-    <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
-    <text macro="URL"/>
   </macro>
   <macro name="bill-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="bill-core"/>
+      <text macro="URL"/>
     </group>
-    <text macro="URL"/>
   </macro>
   <!--
       Les macros `hearing-core`, `hearing-note` et `hearing-bib` sont utilisées avec le
@@ -849,14 +880,15 @@
       <text macro="authors-note"/>
       <text macro="hearing-core"/>
       <text macro="citation-locators"/>
-    <text macro="URL"/>
+      <text macro="URL"/>
+    </group>
   </macro>
   <macro name="hearing-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="hearing-core"/>
+      <text macro="URL"/>
     </group>
-    <text macro="URL"/>
   </macro>
   <macro name="entrydic-note">
     <group delimiter=", ">
@@ -874,9 +906,9 @@
         <text value="v°&#160;"/>
         <text variable="title" quotes="true"/>
       </group>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
   </macro>
   <macro name="entrydic-bib">
     <group delimiter=", ">
@@ -890,8 +922,8 @@
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
+      <text macro="URL"/>
     </group>
-    <text macro="URL"/>
   </macro>
   <macro name="entryencyclo-note">
     <group delimiter=", ">
@@ -907,9 +939,9 @@
       <text variable="page"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
+      <text macro="citation-locators"/>
+      <text macro="URL"/>
     </group>
-    <text macro="citation-locators"/>
-    <text macro="URL"/>
   </macro>
   <macro name="entryencyclo-bib">
     <group delimiter=", ">
@@ -925,28 +957,44 @@
       <text variable="page"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
+      <text macro="URL"/>
     </group>
-    <text macro="URL"/>
   </macro>
   <macro name="citation-locators">
     <choose>
       <if variable="locator">
         <choose>
-          <if locator="page" type="chapter article-magazine article-newspaper" match="all">
-            <label variable="locator" prefix=", " suffix="&#160;" form="long"/>
-            <text variable="locator"/>
+          <if locator="page">
+            <choose>
+              <if type="chapter article-magazine article-newspaper" match="any">
+                <label variable="locator" form="long"/>
+                <text variable="locator"/>
+              </if>
+              <else-if type="article-journal legal_case" match="any">
+                <text variable="locator"/>
+              </else-if>
+              <else>
+                <label variable="locator" form="short"/>
+                <text variable="locator" prefix="&#160;"/>
+              </else>
+            </choose>
           </if>
-          <else-if locator="page" type="article-journal legal_case" match="all">
-            <text variable="locator" prefix=", "/>
+          <else-if locator="section">
+            <choose>
+              <if type="legislation bill" match="any">
+                <text variable="locator" prefix="art.&#160;"/>
+              </if>
+              <else>
+                <label variable="locator" form="short"/>
+                <text variable="locator"/>
+              </else>
+            </choose>
           </else-if>
           <else-if locator="sub-verbo">
-            <text variable="locator" quotes="true" prefix=", v°&#160;"/>
-          </else-if>
-          <else-if type="legislation bill" locator="section" match="all">
-            <text variable="locator" prefix=", art.&#160;"/>
+            <text variable="locator" quotes="true" prefix="v°&#160;"/>
           </else-if>
           <else>
-            <label variable="locator" prefix=", " suffix="&#160;" form="short"/>
+            <label variable="locator" form="short"/>
             <text variable="locator"/>
           </else>
         </choose>
@@ -956,12 +1004,12 @@
   <macro name="URL">
     <choose>
       <if variable="DOI">
-        <text value=", doi&#160;: " font-variant="small-caps"/>
+        <text value="doi&#160;: " font-variant="small-caps"/>
         <text variable="DOI"/>
       </if>
       <else-if variable="URL">
-        <text value=", en ligne&#160;:"/>
-        <text variable="URL" prefix=" &lt;" suffix="&gt;"/>
+        <text value="en ligne&#160;: "/>
+        <text variable="URL" prefix="&lt;" suffix="&gt;"/>
       </else-if>
     </choose>
   </macro>
@@ -1005,8 +1053,10 @@
     <layout suffix="." delimiter="; ">
       <choose>
         <if position="ibid-with-locator">
-          <text term="ibid" form="short" font-style="italic" text-case="capitalize-first"/>
-          <text macro="citation-locators"/>
+          <group delimiter=", ">
+            <text term="ibid" form="short" font-style="italic" text-case="capitalize-first"/>
+            <text macro="citation-locators"/>
+          </group>
         </if>
         <else-if position="ibid">
           <text term="ibid" form="short" font-style="italic" text-case="capitalize-first"/>
@@ -1051,7 +1101,7 @@
             <text value="note"/>
             <text variable="first-reference-note-number"/>
           </group>
-          <text macro="citation-locators"/>
+          <text macro="citation-locators" prefix=", "/>
         </else-if>
         <else-if type="legislation">
           <text macro="legislation-note"/>
@@ -1090,6 +1140,8 @@
           <text macro="entryencyclo-note"/>
         </else-if>
         <else>
+          <!-- TODO: Faire macro pour partie commune note/bib -->
+          <!-- TODO: Solution de repli mieux adaptée au Guide Lluelles. -->
           <group delimiter=", ">
             <text macro="authors-note"/>
             <text variable="title" font-style="italic"/>
@@ -1106,9 +1158,9 @@
             <text variable="volume"/>
             <text macro="issued"/>
             <text variable="page" prefix="p.&#160;"/>
+            <text macro="citation-locators"/>
+            <text macro="URL"/>
           </group>
-          <text macro="citation-locators"/>
-          <text macro="URL"/>
         </else>
       </choose>
     </layout>
@@ -1158,6 +1210,7 @@
           <text macro="entryencyclo-bib"/>
         </else-if>
         <else>
+          <!-- TODO: Faire macro pour partie commune note/bib -->
           <!-- TODO: Solution de repli mieux adaptée au Guide Lluelles. -->
           <text macro="authors-bib"/>
           <group delimiter=", ">
