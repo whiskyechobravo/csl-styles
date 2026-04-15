@@ -50,7 +50,7 @@
       <term name="in">dans</term>
     </terms>
   </locale>
-  <macro name="contributors-note">
+  <macro name="authors-note">
     <names variable="author">
       <name and="text" delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
@@ -60,7 +60,7 @@
       </substitute>
     </names>
   </macro>
-  <macro name="contributors-bib">
+  <macro name="authors-bib">
     <names variable="author">
       <name initialize-with=". " name-as-sort-order="first" and="text" sort-separator=", " delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
@@ -81,10 +81,10 @@
     </names>
   </macro>
   <!--
-      La macro `contributors-subsequent` est utlisée en note de bas de page pour écourter la liste
-      des auteurs lorsque la référence a déjà été citée une première fois.
+      La macro `authors-subsequent` écourte la liste des auteurs lorsque la référence a déjà été
+      citée une première fois.
   -->
-  <macro name="contributors-subsequent">
+  <macro name="authors-subsequent">
     <names variable="author">
       <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
@@ -106,12 +106,32 @@
     </names>
   </macro>
   <!--
-      La macro `contributors-legal` donne les noms d'orateurs ou témoins d'audiences, donnés dans la
-      la référence mais pas dans la position d'auteur et sans mise en forme en petites capitales.
+      La macro `contributors-plain` donne les noms de collaborateurs, sans mise en forme en
+      petites capitales.
   -->
-  <macro name="contributors-legal">
+  <macro name="contributors-plain">
     <names variable="contributor">
-      <name form="long" and="text" delimiter=", " delimiter-precedes-last="never"/>
+      <name and="text" delimiter=", " delimiter-precedes-last="never"/>
+    </names>
+  </macro>
+  <!--
+      La macro `contributors-note` donne les prénoms et noms des collaborateurs.
+  -->
+  <macro name="contributors-note">
+    <names variable="contributor">
+      <name and="text" delimiter=", " delimiter-precedes-last="never">
+        <name-part name="family" font-variant="small-caps"/>
+      </name>
+    </names>
+  </macro>
+  <!--
+      La macro `contributors-bib` donne les initiales des prénoms et les nom des collaborateurs.
+  -->
+  <macro name="contributors-bib">
+    <names variable="contributor">
+      <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
+        <name-part name="family" font-variant="small-caps"/>
+      </name>
     </names>
   </macro>
   <macro name="editor">
@@ -218,6 +238,19 @@
         <text macro="volume"/>
         <text variable="volume-title" quotes="true"/>
       </group>
+      <choose>
+        <!-- L'absence d'auteur combinée à la présence d'un volume et d'un collaborateur signalent un document dont les volumes (ou tomes) ont été rédigés par différents auteurs (Guide Lluelles v9, p. 95). -->
+        <if variable="author" match="none">
+          <choose>
+            <if variable="volume contributor" match="all">
+              <group delimiter=" ">
+                <text term="by"/>
+                <text macro="contributors-note"/>
+              </group>
+            </if>
+          </choose>
+        </if>
+      </choose>
       <text macro="collection-title"/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
@@ -235,7 +268,16 @@
   </macro>
   <macro name="monograph-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
+      <choose>
+        <!-- La présence à la fois d'un auteur et d'un collaborateur signalent une collaboration (Guide Lluelles v9, p. 96). -->
+        <if variable="author contributor" match="all">
+          <group delimiter=" ">
+            <text value="avec la collab. de"/>
+            <text macro="contributors-note"/>
+          </group>
+        </if>
+      </choose>
       <text macro="monograph-core"/>
     </group>
     <text macro="citation-locators"/>
@@ -243,14 +285,23 @@
   </macro>
   <macro name="monograph-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
+      <choose>
+        <!-- La présence à la fois d'un auteur et d'un collaborateur signalent une collaboration (Guide Lluelles v9, p. 96). -->
+        <if variable="author contributor" match="all">
+          <group delimiter=" ">
+            <text value="avec la collab. de"/>
+            <text macro="contributors-bib"/>
+          </group>
+        </if>
+      </choose>
       <text macro="monograph-core"/>
     </group>
     <text macro="URL"/>
   </macro>
   <macro name="chapter-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
       <group>
         <text macro="title-chapter-special"/>
         <group delimiter=", ">
@@ -273,7 +324,7 @@
   </macro>
   <macro name="chapter-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
       <group>
         <text macro="title-chapter-special"/>
         <group delimiter=", ">
@@ -296,7 +347,7 @@
   </macro>
   <macro name="thesis-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
       <text variable="title" font-style="italic"/>
       <text variable="genre"/>
       <text variable="publisher-place"/>
@@ -308,7 +359,7 @@
   </macro>
   <macro name="thesis-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
       <text variable="title" font-style="italic"/>
       <text variable="genre"/>
       <text variable="publisher-place"/>
@@ -319,7 +370,7 @@
   </macro>
   <macro name="article-journal-note">
     <group delimiter=" ">
-      <text macro="contributors-note" suffix=","/>
+      <text macro="authors-note" suffix=","/>
       <text variable="title" quotes="true" suffix=","/>
       <choose>
         <if variable="volume">
@@ -346,7 +397,7 @@
   </macro>
   <macro name="article-journal-bib">
     <group delimiter=" ">
-      <text macro="contributors-bib" suffix=","/>
+      <text macro="authors-bib" suffix=","/>
       <text variable="title" quotes="true" suffix=","/>
       <choose>
         <if variable="volume">
@@ -372,7 +423,7 @@
   </macro>
   <macro name="article-magazine-note">
     <group delimiter=" ">
-      <text macro="contributors-note" suffix=","/>
+      <text macro="authors-note" suffix=","/>
       <text variable="title" quotes="true" suffix=","/>
       <text variable="container-title" font-style="italic"/>
       <choose>
@@ -397,7 +448,7 @@
   </macro>
   <macro name="article-magazine-bib">
     <group delimiter=" ">
-      <text macro="contributors-bib" suffix=","/>
+      <text macro="authors-bib" suffix=","/>
       <text variable="title" quotes="true" suffix=","/>
       <text variable="container-title" font-style="italic"/>
       <choose>
@@ -421,7 +472,7 @@
   </macro>
   <macro name="article-newspaper-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
       <text variable="title" quotes="true"/>
       <text variable="container-title" font-style="italic"/>
       <group>
@@ -440,7 +491,7 @@
   </macro>
   <macro name="article-newspaper-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
       <text variable="title" quotes="true"/>
       <text variable="container-title" font-style="italic"/>
       <group>
@@ -636,7 +687,7 @@
   </macro>
   <macro name="legislation-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
       <text macro="legislation-core"/>
     </group>
     <text macro="citation-locators"/>
@@ -646,7 +697,7 @@
   </macro>
   <macro name="legislation-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
       <text macro="legislation-core"/>
     </group>
     <text macro="URL"/>
@@ -724,7 +775,7 @@
   </macro>
   <macro name="bill-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
       <text macro="bill-core"/>
     </group>
     <text macro="citation-locators"/>
@@ -733,7 +784,7 @@
   </macro>
   <macro name="bill-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
       <text macro="bill-core"/>
     </group>
     <text macro="URL"/>
@@ -771,11 +822,11 @@
       </choose>
     </group>
     <!-- Le collaborateur est le nom de l'orateur. -->
-    <text macro="contributors-legal" prefix=" (" suffix=")" />
+    <text macro="contributors-plain" prefix=" (" suffix=")" />
   </macro>
   <macro name="hearing-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
       <text macro="hearing-core"/>
     </group>
     <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
@@ -783,14 +834,14 @@
   </macro>
   <macro name="hearing-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
       <text macro="hearing-core"/>
     </group>
     <text macro="URL"/>
   </macro>
   <macro name="entrydic-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
       <text variable="container-title" font-style="italic"/>
       <text macro="edition"/>
       <text macro="translator"/>
@@ -810,7 +861,7 @@
   </macro>
   <macro name="entrydic-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
       <text variable="container-title" font-style="italic"/>
       <text macro="edition"/>
       <text macro="translator"/>
@@ -825,7 +876,7 @@
   </macro>
   <macro name="entryencyclo-note">
     <group delimiter=", ">
-      <text macro="contributors-note"/>
+      <text macro="authors-note"/>
       <group>
         <text macro="title-chapter-special"/>
         <text variable="container-title"/>
@@ -843,7 +894,7 @@
   </macro>
   <macro name="entryencyclo-bib">
     <group delimiter=", ">
-      <text macro="contributors-bib"/>
+      <text macro="authors-bib"/>
       <group>
         <text macro="title-chapter-special"/>
         <text variable="container-title"/>
@@ -972,7 +1023,7 @@
                 </choose>
               </if>
               <else>
-                <text macro="contributors-subsequent"/>
+                <text macro="authors-subsequent"/>
               </else>
             </choose>
             <text value="préc." suffix=", "/>
@@ -1021,7 +1072,7 @@
         </else-if>
         <else>
           <group delimiter=", ">
-            <text macro="contributors-note"/>
+            <text macro="authors-note"/>
             <text variable="title" font-style="italic"/>
             <text macro="editor"/>
             <text variable="container-title" font-style="italic"/>
@@ -1088,7 +1139,8 @@
           <text macro="entryencyclo-bib"/>
         </else-if>
         <else>
-          <text macro="contributors-bib" suffix=". "/>
+          <!-- TODO: Solution de repli mieux adaptée au Guide Lluelles. -->
+          <text macro="authors-bib"/>
           <group delimiter=", ">
             <text variable="title" font-style="italic"/>
             <text macro="editor"/>
