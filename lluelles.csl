@@ -42,6 +42,7 @@
         <single>à la page</single>
         <multiple>aux pages</multiple>
       </term>
+      <term name="article-locator" form="short">art.</term>
       <term name="ibid" form="short">id.</term>
       <term name="paragraph" form="short">par.</term>
       <term name="chapter" form="short">ch.</term>
@@ -337,7 +338,10 @@
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
-      <text variable="page" prefix="p.&#160;"/>
+      <group>
+        <label variable="page" form="short" suffix="&#160;"/>
+        <text variable="page"/>
+      </group>
       <text macro="citation-locators"/>
       <text macro="URL"/>
     </group>
@@ -360,7 +364,10 @@
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
-      <text variable="page" prefix="p.&#160;"/>
+      <group>
+        <label variable="page" form="short" suffix="&#160;"/>
+        <text variable="page"/>
+      </group>
       <text macro="citation-locators"/>
       <text macro="URL"/>
     </group>
@@ -467,7 +474,10 @@
         </choose>
         <text macro="issued" prefix="(" suffix=")"/>
       </group>
-      <text variable="page" prefix="p.&#160;"/>
+      <group>
+        <label variable="page" form="short" suffix="&#160;"/>
+        <text variable="page"/>
+      </group>
       <text macro="citation-locators"/>
       <text macro="URL"/>
     </group>
@@ -493,7 +503,10 @@
           </else>
         </choose>
         <text macro="issued" prefix="(" suffix=")"/>
-        <text variable="page" prefix="p.&#160;"/>
+        <group>
+          <label variable="page" form="short" suffix="&#160;"/>
+          <text variable="page"/>
+        </group>
       </group>
       <text macro="URL"/>
     </group>
@@ -516,28 +529,38 @@
         </group>
         <text macro="issued" prefix="(" suffix=")"/>
       </group>
-      <text variable="page" prefix="p.&#160;"/>
+      <group>
+        <label variable="page" form="short" suffix="&#160;"/>
+        <text variable="page"/>
+      </group>
       <text macro="citation-locators"/>
       <text macro="URL"/>
     </group>
   </macro>
   <macro name="article-newspaper-bib">
     <group delimiter=", ">
-      <text macro="authors-bib"/>
-      <text variable="title" quotes="true"/>
-      <text variable="container-title" font-style="italic"/>
-      <group>
-        <text term="edition" form="short" suffix=" "/>
-        <text variable="edition"/>
+      <group delimiter=" ">
+        <group delimiter=", ">
+          <text macro="authors-bib"/>
+          <text variable="title" quotes="true"/>
+          <text variable="container-title" font-style="italic"/>
+          <group>
+            <text term="edition" form="short" suffix=" "/>
+            <text variable="edition"/>
+          </group>
+          <group>
+            <text term="section" form="short" suffix=" "/>
+            <text variable="section"/>
+          </group>
+        </group>
+        <text macro="issued" prefix=" (" suffix=")"/>
       </group>
       <group>
-        <text term="section" form="short" suffix=" "/>
-        <text variable="section"/>
+        <label variable="page" form="short" suffix="&#160;"/>
+        <text variable="page"/>
       </group>
+      <text macro="URL"/>
     </group>
-    <text macro="issued" prefix=" (" suffix=")"/>
-    <text variable="page" prefix=", p.&#160;"/>
-    <text macro="URL"/>
   </macro>
   <macro name="case-note">
     <group delimiter=", ">
@@ -863,8 +886,12 @@
       <!-- `event-title` est le sujet. -->
       <text variable="event-title" quotes="true"/>
       <choose>
+        <!-- Afficher la page si disponible, sinon afficher l'heure, mais jamais les deux.-->
         <if variable="page">
-          <text variable="page" prefix="p.&#160;"/>
+          <group>
+            <label variable="page" form="short" suffix="&#160;"/>
+            <text variable="page"/>
+          </group>
         </if>
         <else>
           <!-- `part-title` est l'heure -->
@@ -964,37 +991,24 @@
     <choose>
       <if variable="locator">
         <choose>
-          <if locator="page">
-            <choose>
-              <if type="chapter article-magazine article-newspaper" match="any">
-                <label variable="locator" form="long"/>
-                <text variable="locator"/>
-              </if>
-              <else-if type="article-journal legal_case" match="any">
-                <text variable="locator"/>
-              </else-if>
-              <else>
-                <label variable="locator" form="short"/>
-                <text variable="locator" prefix="&#160;"/>
-              </else>
-            </choose>
+          <!-- Localisateur de chapitre pour la législation et la réglementation. -->
+          <if locator="chapter" type="legislation bill" match="all">
+            <text variable="locator" prefix="c.&#160;"/>
           </if>
-          <else-if locator="section">
-            <choose>
-              <if type="legislation bill" match="any">
-                <text variable="locator" prefix="art.&#160;"/>
-              </if>
-              <else>
-                <label variable="locator" form="short"/>
-                <text variable="locator"/>
-              </else>
-            </choose>
+          <!-- Localisateur de 1re page pour l'entrée en vigueur d'une loi (Guide Lluelles v9, p. 19), la réglementation (Id., p. 25, 27), les projets de règlements (Id., p. 29). -->
+          <else-if locator="page" type="legislation bill" match="all">
+            <text variable="locator"/>
+          </else-if>
+          <!-- Localisateur de section pour la législation (Guide Lluelles v9, p. 12) et la réglementation des autres provinces et des territoires fédéraux (Id., p. 30).-->
+          <else-if locator="section" type="legislation bill" match="all">
+            <text variable="locator" prefix="s.&#160;"/>
           </else-if>
           <else-if locator="sub-verbo">
             <text variable="locator" quotes="true" prefix="v°&#160;"/>
           </else-if>
+          <!-- Pour tous les autres localisateurs, une espace insécable est insérée entre l'étiquette courte et la valeur. -->
           <else>
-            <label variable="locator" form="short"/>
+            <label variable="locator" form="short" suffix="&#160;"/>
             <text variable="locator"/>
           </else>
         </choose>
@@ -1157,7 +1171,10 @@
             <text variable="issue" prefix="n°&#160;"/>
             <text variable="volume"/>
             <text macro="issued"/>
-            <text variable="page" prefix="p.&#160;"/>
+            <group>
+              <label variable="page" form="short" suffix="&#160;"/>
+              <text variable="page"/>
+            </group>
             <text macro="citation-locators"/>
             <text macro="URL"/>
           </group>
@@ -1227,7 +1244,10 @@
             <text variable="issue" prefix="n°&#160;"/>
             <text variable="volume"/>
             <text macro="issued"/>
-            <text variable="page" prefix="p.&#160;"/>
+            <group>
+              <label variable="page" form="short" suffix="&#160;"/>
+              <text variable="page"/>
+            </group>
           </group>
         </else>
       </choose>
