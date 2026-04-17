@@ -326,6 +326,20 @@
               </else>
             </choose>
           </else-if>
+          <!-- Localisateur de page pour article de revue publié (Guide Lluelles v9, p. 103). -->
+          <else-if locator="page" type="article-journal" match="all">
+            <choose>
+              <if variable="volume issue" match="any">
+                <!-- Article d'un périodique. -->
+                <text variable="locator"/>
+              </if>
+              <else>
+                <!-- Article d'un non périodique. -->
+                <label variable="locator" form="short" suffix="&#160;"/>
+                <text variable="locator"/>
+              </else>
+            </choose>
+          </else-if>
           <else-if locator="sub-verbo">
             <text variable="locator" quotes="true" prefix="v°&#160;"/>
           </else-if>
