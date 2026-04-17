@@ -72,8 +72,8 @@
     </names>
   </macro>
   <!--
-      La macro `authors-note-subsequent` écourte la liste des auteurs (avec l'expression `et al.`)
-      lorsque la référence a déjà été citée une première fois.
+    La macro `authors-note-subsequent` écourte la liste des auteurs (avec l'expression `et al.`)
+    lorsque la référence a déjà été citée une première fois.
   -->
   <macro name="authors-note-subsequent">
     <names variable="author">
@@ -97,8 +97,8 @@
     </names>
   </macro>
   <!--
-      La macro `contributors-plain` donne les noms de collaborateurs, sans mise en forme en
-      petites capitales.
+    La macro `contributors-plain` donne les noms de collaborateurs, sans mise en forme en
+    petites capitales.
   -->
   <macro name="contributors-plain">
     <names variable="contributor">
@@ -106,7 +106,7 @@
     </names>
   </macro>
   <!--
-      La macro `contributors-note` donne les prénoms et noms des collaborateurs.
+    La macro `contributors-note` donne les prénoms et noms des collaborateurs.
   -->
   <macro name="contributors-note">
     <names variable="contributor">
@@ -116,7 +116,7 @@
     </names>
   </macro>
   <!--
-      La macro `contributors-bib` donne les initiales des prénoms et les nom des collaborateurs.
+    La macro `contributors-bib` donne les initiales des prénoms et les nom des collaborateurs.
   -->
   <macro name="contributors-bib">
     <names variable="contributor">
@@ -126,7 +126,7 @@
     </names>
   </macro>
   <!--
-      La macro `editors-note` donne les prénoms et noms des éditeurs ou des auteurs de l'ouvrage.
+    La macro `editors-note` donne les prénoms et noms des éditeurs ou des auteurs de l'ouvrage.
   -->
   <macro name="editors-note">
     <names variable="editor">
@@ -144,8 +144,8 @@
     </names>
   </macro>
   <!--
-      La macro `editors-bib` donne les initiales des prénoms et les noms des éditeurs ou des
-      auteurs de l'ouvrage.
+    La macro `editors-bib` donne les initiales des prénoms et les noms des éditeurs ou des auteurs
+    de l'ouvrage.
   -->
   <macro name="editors-bib">
     <names variable="editor">
@@ -163,8 +163,8 @@
     </names>
   </macro>
   <!--
-      La macro `editors-bib-first` donne les initiales des prénoms et les noms des éditeurs ou des
-      auteurs de l'ouvrage, et le premier nom de la liste est affiché avant son initiale.
+    La macro `editors-bib-first` donne les initiales des prénoms et les noms des éditeurs ou des
+    auteurs de l'ouvrage, et le premier nom de la liste est affiché avant son initiale.
   -->
   <macro name="editors-bib-first">
     <names variable="editor">
@@ -272,12 +272,12 @@
     </choose>
   </macro>
   <!--
-      Les macros `monograph-note` et `monograph-bib` sont utilisées avec les
-      types CSL `book` et `report` pour:
+    Les macros `monograph-note` et `monograph-bib` sont utilisées avec les
+    types CSL `book` et `report` pour:
 
-      - Les monographies (Guide Lluelles v9, p. 92).
-      - Les rapports parlementaires (Id., p. 19).
-      - Les ouvrages collectifs (Id., p. 98).
+    - Les monographies (Guide Lluelles v9, p. 92).
+    - Les rapports parlementaires (Id., p. 19).
+    - Les ouvrages collectifs (Id., p. 98).
    -->
   <macro name="monograph-note">
     <group delimiter=", ">
@@ -385,10 +385,10 @@
     </group>
   </macro>
   <!--
-      Les macros `chapter-core`, `chapter-note` et `chapter-bib` sont utilisées avec le
-      type CSL `chapter` pour:
+    Les macros `chapter-core`, `chapter-note` et `chapter-bib` sont utilisées avec le
+    type CSL `chapter` pour:
 
-      - Les études dans un ouvrage collectif (Guide Lluelles v9, p. 99).
+    - Les études dans un ouvrage collectif (Guide Lluelles v9, p. 99).
   -->
   <macro name="chapter-core">
     <group delimiter=", ">
@@ -755,21 +755,21 @@
     </group>
   </macro>
   <!--
-      Les macros `legislation-core`, `legislation-note` et `legislation-bib` sont utilisées avec le
-      type CSL `legislation` pour:
+    Les macros `legislation-core`, `legislation-note` et `legislation-bib` sont utilisées avec le
+    type CSL `legislation` pour:
 
-      - Les lois au fédéral et au Québec (Guide Lluelles v9, p. 5).
-      - Les lois des autres provinces et des territoires fédéraux (Id., p. 12).
-      - Les lois constitutionnelles et quasi constitutionnelles (Id., p. 13).
-      - L'entrée en vigueur d'une loi (Id., p. 21).
-      - Les modifications à une loi (Id., p. 23).
-      - Les règlements au fédéral et au Québec (Id., p. 24).
-      - L'entrée en vigueur d'un règlement au fédéral et au Québec (Id., p. 28).
-      - Les règlements des autres provinces et des territoires fédéraux (Id., p. 30).
-      - Les règlements municipaux et autres règlements (Id., p. 31).
-      - Les décrets administratifs, décisions et avis divers publiés dans une gazette (Id., p. 33).
+    - Les lois au fédéral et au Québec (Guide Lluelles v9, p. 5).
+    - Les lois des autres provinces et des territoires fédéraux (Id., p. 12).
+    - Les lois constitutionnelles et quasi constitutionnelles (Id., p. 13).
+    - L'entrée en vigueur d'une loi (Id., p. 21).
+    - Les modifications à une loi (Id., p. 23).
+    - Les règlements au fédéral et au Québec (Id., p. 24).
+    - L'entrée en vigueur d'un règlement au fédéral et au Québec (Id., p. 28).
+    - Les règlements des autres provinces et des territoires fédéraux (Id., p. 30).
+    - Les règlements municipaux et autres règlements (Id., p. 31).
+    - Les décrets administratifs, décisions et avis divers publiés dans une gazette (Id., p. 33).
 
-      La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
+    La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
   <macro name="legislation-core">
     <group delimiter=", ">
@@ -829,14 +829,14 @@
     </group>
   </macro>
   <!--
-      Les macros `bill-core`, `bill-note` et `bill-bib` sont utilisées avec le
-      type CSL `bill` pour:
+    Les macros `bill-core`, `bill-note` et `bill-bib` sont utilisées avec le
+    type CSL `bill` pour:
 
-      - Projets de lois (Guide Lluelles v9, p. 15).
-      - Projets de règlements (Id., p. 29).
+    - Projets de lois (Guide Lluelles v9, p. 15).
+    - Projets de règlements (Id., p. 29).
 
-      La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
-   -->
+    La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
+  -->
   <macro name="bill-core">
     <choose>
         <!-- `chapter-number` est la session et signale un projet de loi. -->
@@ -920,13 +920,13 @@
     </group>
   </macro>
   <!--
-      Les macros `hearing-core`, `hearing-note` et `hearing-bib` sont utilisées avec le
-      type CSL `hearing` pour:
+    Les macros `hearing-core`, `hearing-note` et `hearing-bib` sont utilisées avec le
+    type CSL `hearing` pour:
 
-      - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux) (Guide Lluelles v9, p. 16).
+    - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux) (Guide Lluelles v9, p. 16).
 
-      La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
-   -->
+    La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
+  -->
   <macro name="hearing-core">
     <group delimiter=", ">
       <text variable="title" font-style="italic"/>
