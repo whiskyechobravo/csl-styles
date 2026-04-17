@@ -223,7 +223,10 @@
       </else>
     </choose>
   </macro>
-  <!-- La macro `volume` affiche le préfixe `vol.` uniquement lorsque la valeur est numérique. -->
+  <!--
+    La macro `volume` affiche le préfixe `vol.` uniquement lorsque la valeur est numérique,
+    de sorte à permettre des formes moins communes, p. ex.: `t. 2`.
+  -->
   <macro name="volume">
     <choose>
       <if is-numeric="volume">
@@ -239,7 +242,7 @@
   </macro>
   <!--
     La macro `page` affiche le préfixe `p.` uniquement lorsque la valeur est numérique,
-    de sorte à afficher intégralement les formes moins communes, p.ex.:
+    de sorte à afficher intégralement les formes moins communes, p. ex.:
     `n° 1035, p. 164 et 165` (Guide Lluelles v9, p. 100).
   -->
   <macro name="page">
@@ -376,6 +379,8 @@
     - Les monographies (Guide Lluelles v9, p. 92).
     - Les rapports parlementaires (Id., p. 19).
     - Les ouvrages collectifs (Id., p. 98).
+    - Les conférences publiées séparément (Id., p. 102).
+    - Les documents ou rapports d'organismes publics (Id., p. 102).
    -->
   <macro name="monograph-note">
     <group delimiter=", ">
@@ -426,7 +431,7 @@
           <text macro="issued-year"/>
         </else>
       </choose>
-      <!-- `medium` est le format, p.ex. `feuilles mobiles, à jour mai 2017` -->
+      <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour mai 2017` -->
       <text variable="medium" text-case="lowercase"/>
       <text macro="citation-locators"/>
       <text macro="link"/>
@@ -506,7 +511,7 @@
       <text variable="publisher"/>
       <text macro="issued-year"/>
       <text macro="page"/>
-      <!-- `medium` est le format, p.ex. `feuilles mobiles, à jour au 15 juin 2013` -->
+      <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour au 15 juin 2013` -->
       <text variable="medium" text-case="lowercase"/>
     </group>
   </macro>
@@ -591,7 +596,7 @@
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
-      <!-- `medium` est le format, p.ex. `feuilles mobiles, à jour au 15 juin 2013` -->
+      <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour au 15 juin 2013` -->
       <text variable="medium" text-case="lowercase"/>
     </group>
   </macro>
@@ -633,60 +638,64 @@
       <text macro="link"/>
     </group>
   </macro>
+  <!--
+    Les macros `article-journal-periodical`, `article-journal-core`, `article-journal-note` et
+    `article-journal-bib` sont utilisées avec le type CSL `article-journal` pour:
+
+    - Les articles de revues publiés (Guide Lluelles v9, p. 103).
+  -->
+  <macro name="article-journal-periodical">
+    <group delimiter=" ">
+      <text macro="issued-year" prefix="(" suffix=")"/>
+      <group delimiter="-">
+        <text variable="volume"/>
+        <!-- `issue` est le numéro du fascicule. -->
+        <text variable="issue"/>
+      </group>
+      <!-- `container-title` est le titre de la publication, sa forme courte est l'abréviation de la revue. -->
+      <text variable="container-title" form="short" font-style="italic"/>
+      <choose>
+        <!-- `collection-title` est la série, le cas échéant on indique son numéro entre parenthèses (Guide Lluelles v9, p. 103). -->
+        <if is-numeric="collection-title">
+          <text variable="collection-title" prefix="(" suffix=")"/>
+        </if>
+      </choose>
+      <text variable="page"/>
+    </group>
+  </macro>
+  <macro name="article-journal-core">
+    <group delimiter=", ">
+      <text variable="title" quotes="true"/>
+      <choose>
+        <if variable="volume issue" match="any">
+          <!-- Article d'un périodique papier ou électronique, a la même morphologie (Guide Lluelles v9, p. 104). -->
+          <text macro="article-journal-periodical"/>
+        </if>
+        <else-if variable="URL" match="none">
+          <!-- Non périodique, mais document papier. -->
+          <text macro="article-journal-periodical"/>
+        </else-if>
+        <else>
+          <!-- Non périodique, mais électronique. Date au long, page avec préfixe, séparés par des virgules. -->
+          <text variable="container-title" form="short" font-style="italic"/>
+          <text macro="issued" text-case="capitalize-first"/>
+          <text macro="page"/>
+        </else>
+      </choose>
+    </group>
+  </macro>
   <macro name="article-journal-note">
     <group delimiter=", ">
-      <group delimiter=" ">
-        <text macro="authors-note" suffix=","/>
-        <text variable="title" quotes="true" suffix=","/>
-        <choose>
-          <if variable="volume">
-            <text macro="issued-year" prefix="(" suffix=")"/>
-            <group delimiter="-">
-              <text variable="volume"/>
-              <number variable="issue"/>
-            </group>
-            <text variable="container-title" form="short" font-style="italic"/>
-            <text variable="page"/>
-          </if>
-          <else>
-            <text variable="container-title" form="short" font-style="italic"/>
-            <group delimiter=".">
-              <text macro="issued-year"/>
-              <number variable="issue"/>
-              <text variable="page"/>
-            </group>
-          </else>
-        </choose>
-      </group>
+      <text macro="authors-note"/>
+      <text macro="article-journal-core"/>
       <text macro="citation-locators"/>
       <text macro="link"/>
     </group>
   </macro>
   <macro name="article-journal-bib">
     <group delimiter=", ">
-      <group delimiter=" ">
-        <text macro="authors-bib" suffix=","/>
-        <text variable="title" quotes="true" suffix=","/>
-        <choose>
-          <if variable="volume">
-            <text macro="issued-year" prefix="(" suffix=")"/>
-            <group delimiter="-">
-              <text variable="volume"/>
-              <number variable="issue"/>
-            </group>
-            <text variable="container-title" form="short" font-style="italic"/>
-            <text variable="page"/>
-          </if>
-          <else>
-            <text variable="container-title" form="short" font-style="italic"/>
-            <group delimiter=".">
-              <text macro="issued-year"/>
-              <number variable="issue"/>
-              <text variable="page"/>
-            </group>
-          </else>
-        </choose>
-      </group>
+      <text macro="authors-bib"/>
+      <text macro="article-journal-core"/>
       <text macro="link"/>
     </group>
   </macro>
@@ -957,7 +966,7 @@
     <group delimiter=", ">
       <text variable="title" font-style="italic"/>
       <choose>
-        <!-- Un champ `page` renseigné signale une citation alternative, p.ex.: législation américaine codifiée. -->
+        <!-- Un champ `page` renseigné signale une citation alternative, p. ex.: législation américaine codifiée. -->
         <if variable="page">
           <group delimiter=" ">
             <text variable="section"/>
@@ -979,7 +988,7 @@
                 <text macro="issued-year" prefix="(" suffix=")"/>
               </else>
             </choose>
-            <!-- `container-title` est le champ Code, codé avec recueil et chapitre, p.ex.: `RLRQ, c. P-40.1`. -->
+            <!-- `container-title` est le champ Code, codé avec recueil et chapitre, p. ex.: `RLRQ, c. P-40.1`. -->
             <text variable="container-title"/>
           </group>
           <text variable="section"/>
@@ -1031,15 +1040,15 @@
                 <text variable="number" prefix="projet de loi n°&#160;"/>
               </group>
               <group delimiter=" — " prefix=" (" suffix=")">
-                <!-- `references` est l'étape franchie du processus d'adoption, p.ex.: `Dépôt et 2e lecture`. -->
+                <!-- `references` est l'étape franchie du processus d'adoption, p. ex.: `Dépôt et 2e lecture`. -->
                 <text variable="references" text-case="lowercase"/>
                 <text macro="issued"/>
               </group>
             </group>
             <group delimiter=" ">
-              <!-- `chapter-number` est la session codée au long, p.ex.: `2e sess., 31e légis.`. -->
+              <!-- `chapter-number` est la session codée au long, p. ex.: `2e sess., 31e légis.`. -->
               <text variable="chapter-number"/>
-              <!-- `authority` est le corps législatif, p.ex.: `Qc`. -->
+              <!-- `authority` est le corps législatif, p. ex.: `Qc`. -->
               <text variable="authority" prefix="(" suffix=")"/>
             </group>
           </group>
@@ -1053,9 +1062,9 @@
             </group>
             <group delimiter=" ">
               <text macro="issued-year" prefix="(" suffix=")"/>
-              <!-- `volume` est le volume de code, p.ex.: `146` -->
+              <!-- `volume` est le volume de code, p. ex.: `146` -->
               <text variable="volume"/>
-              <!-- `container-title` est le code, codé au long, p.ex.: `Gaz. Can. I` -->
+              <!-- `container-title` est le code, codé au long, p. ex.: `Gaz. Can. I` -->
               <text variable="container-title"/>
             </group>
             <text variable="page"/>
@@ -1114,12 +1123,12 @@
       <text variable="title" font-style="italic"/>
       <!-- `section` est la commission ou le comité. -->
       <text variable="section"/>
-      <!-- `chapter-number` est la session codée au long, p.ex.: `2e sess., 31e légis.`. -->
+      <!-- `chapter-number` est la session codée au long, p. ex.: `2e sess., 31e légis.`. -->
       <text variable="chapter-number"/>
       <!-- `number` est le numéro de document. -->
       <text macro="number-fascicule"/>
       <text macro="issued"/>
-      <!-- `volume` est codé au long, p.ex.: `tome 12` -->
+      <!-- `volume` est codé au long, p. ex.: `tome 12` -->
       <text variable="volume"/>
       <!-- `event-title` est le sujet. -->
       <text variable="event-title" quotes="true"/>
