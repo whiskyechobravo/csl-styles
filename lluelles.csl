@@ -565,17 +565,17 @@
   -->
   <macro name="entry-encyclopedia-core">
     <group delimiter=", ">
-      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
-      <text macro="translator"/>
+      <text variable="title" quotes="true"/>
       <choose>
-        <!-- Une encyclopédie juridique affiche le volume après la collection. -->
-        <if type="entry-encyclopedia" match="none">
+        <if variable="container-title">
           <group delimiter=" ">
-            <text macro="volume"/>
-            <text variable="volume-title" quotes="true"/>
+            <text term="in" text-case="lowercase"/>
+            <text variable="container-title"/>
           </group>
         </if>
       </choose>
+      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
+      <text macro="translator"/>
       <text macro="collection-title"/>
       <text macro="volume" font-style="italic"/>
       <text macro="page"/>
@@ -590,15 +590,6 @@
   <macro name="entry-encyclopedia-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
-      <text variable="title" quotes="true"/>
-      <choose>
-        <if variable="container-title">
-          <group delimiter=" ">
-            <text term="in" text-case="lowercase"/>
-            <text variable="container-title"/>
-          </group>
-        </if>
-      </choose>
       <text macro="entry-encyclopedia-core"/>
       <text macro="citation-locators"/>
       <text macro="link"/>
@@ -607,15 +598,6 @@
   <macro name="entry-encyclopedia-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
-      <text variable="title" quotes="true"/>
-      <choose>
-        <if variable="container-title">
-          <group delimiter=" ">
-            <text term="in" text-case="lowercase"/>
-            <text variable="container-title"/>
-          </group>
-        </if>
-      </choose>
       <text macro="entry-encyclopedia-core"/>
       <text macro="link"/>
     </group>
