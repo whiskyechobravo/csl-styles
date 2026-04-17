@@ -185,7 +185,7 @@
     </names>
   </macro>
   <macro name="collection-title">
-    <text variable="collection-title" prefix="coll. "/>
+    <text variable="collection-title" quotes="true" prefix="coll. "/>
   </macro>
   <macro name="collection-number">
     <choose>
