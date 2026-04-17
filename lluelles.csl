@@ -272,15 +272,25 @@
     </choose>
   </macro>
   <!--
-      Les macros `monograph-core`, `monograph-note` et `monograph-bib` sont utilisées avec les
+      Les macros `monograph-note` et `monograph-bib` sont utilisées avec les
       types CSL `book` et `report` pour:
 
       - Les monographies (Guide Lluelles v9, p. 92).
       - Les rapports parlementaires (Id., p. 19).
       - Les ouvrages collectifs (Id., p. 98).
    -->
-  <macro name="monograph-core">
+  <macro name="monograph-note">
     <group delimiter=", ">
+      <text macro="authors-note"/>
+      <choose>
+        <!-- La présence à la fois d'un auteur et d'un collaborateur signalent une collaboration (Guide Lluelles v9, p. 96). -->
+        <if variable="author contributor" match="all">
+          <group delimiter=" ">
+            <text value="avec la collab. de"/>
+            <text macro="contributors-note"/>
+          </group>
+        </if>
+      </choose>
       <text variable="title" font-style="italic"/>
       <text macro="edition"/>
       <text macro="translator"/>
@@ -299,7 +309,6 @@
             <if variable="volume contributor" match="all">
               <group delimiter=" ">
                 <text term="by"/>
-                <!-- TODO: monograph-bib would need this to call contributors-bib... thus we must kill macro monograph-core -->
                 <text macro="contributors-note"/>
               </group>
             </if>
@@ -319,21 +328,6 @@
         </else>
       </choose>
       <text variable="medium" text-case="lowercase"/>
-    </group>
-  </macro>
-  <macro name="monograph-note">
-    <group delimiter=", ">
-      <text macro="authors-note"/>
-      <choose>
-        <!-- La présence à la fois d'un auteur et d'un collaborateur signalent une collaboration (Guide Lluelles v9, p. 96). -->
-        <if variable="author contributor" match="all">
-          <group delimiter=" ">
-            <text value="avec la collab. de"/>
-            <text macro="contributors-note"/>
-          </group>
-        </if>
-      </choose>
-      <text macro="monograph-core"/>
       <text macro="citation-locators"/>
       <text macro="URL"/>
     </group>
@@ -350,7 +344,43 @@
           </group>
         </if>
       </choose>
-      <text macro="monograph-core"/>
+      <text variable="title" font-style="italic"/>
+      <text macro="edition"/>
+      <text macro="translator"/>
+      <!-- `genre` est le type de rapport. -->
+      <text variable="genre"/>
+      <!-- `number` est le numéro de rapport. -->
+      <text variable="number"/>
+      <group delimiter=" ">
+        <text macro="volume"/>
+        <text variable="volume-title" quotes="true"/>
+      </group>
+      <choose>
+        <!-- L'absence d'auteur combinée à la présence d'un volume et d'un collaborateur signalent un document dont les volumes (ou tomes) ont été rédigés par différents auteurs (Guide Lluelles v9, p. 95). -->
+        <if variable="author" match="none">
+          <choose>
+            <if variable="volume contributor" match="all">
+              <group delimiter=" ">
+                <text term="by"/>
+                <text macro="contributors-bib"/>
+              </group>
+            </if>
+          </choose>
+        </if>
+      </choose>
+      <text macro="collection-title"/>
+      <text macro="collection-number"/>
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+      <choose>
+        <if type="report">
+          <text macro="issued" text-case="lowercase"/>
+        </if>
+        <else>
+          <text macro="issued-year"/>
+        </else>
+      </choose>
+      <text variable="medium" text-case="lowercase"/>
       <text macro="URL"/>
     </group>
   </macro>
