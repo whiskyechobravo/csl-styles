@@ -57,7 +57,7 @@
         <name-part name="family" font-variant="small-caps"/>
       </name>
       <substitute>
-        <text macro="editor"/>
+        <text macro="editors-note"/>
       </substitute>
     </names>
   </macro>
@@ -67,25 +67,15 @@
         <name-part name="family" font-variant="small-caps"/>
       </name>
       <substitute>
-        <names variable="editor">
-          <name initialize-with=". " name-as-sort-order="first" and="text" sort-separator=", " delimiter=", " delimiter-precedes-last="never">
-            <name-part name="family" font-variant="small-caps"/>
-          </name>
-          <label form="short" prefix=" (" suffix=")"/>
-        </names>
-        <names variable="container-author">
-          <name initialize-with=". " name-as-sort-order="first" and="text" delimiter=", " delimiter-precedes-last="never">
-            <name-part name="family" font-variant="small-caps"/>
-          </name>
-        </names>
+        <text macro="editors-bib-first"/>
       </substitute>
     </names>
   </macro>
   <!--
-      La macro `authors-subsequent` écourte la liste des auteurs lorsque la référence a déjà été
-      citée une première fois.
+      La macro `authors-note-subsequent` écourte la liste des auteurs (avec l'expression `et al.`)
+      lorsque la référence a déjà été citée une première fois.
   -->
-  <macro name="authors-subsequent">
+  <macro name="authors-note-subsequent">
     <names variable="author">
       <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
@@ -135,17 +125,60 @@
       </name>
     </names>
   </macro>
-  <macro name="editor">
+  <!--
+      La macro `editors-note` donne les prénoms et noms des éditeurs ou des auteurs de l'ouvrage.
+  -->
+  <macro name="editors-note">
     <names variable="editor">
       <name and="text" delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
       </name>
       <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="container-author">
+          <name and="text" delimiter=", " delimiter-precedes-last="never">
+            <name-part name="family" font-variant="small-caps"/>
+          </name>
+        </names>
+      </substitute>
     </names>
-    <names variable="container-author">
-      <name and="text" delimiter=", " delimiter-precedes-last="never">
+  </macro>
+  <!--
+      La macro `editors-bib` donne les initiales des prénoms et les noms des éditeurs ou des
+      auteurs de l'ouvrage.
+  -->
+  <macro name="editors-bib">
+    <names variable="editor">
+      <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
       </name>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="container-author">
+          <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
+            <name-part name="family" font-variant="small-caps"/>
+          </name>
+        </names>
+      </substitute>
+    </names>
+  </macro>
+  <!--
+      La macro `editors-bib-first` donne les initiales des prénoms et les noms des éditeurs ou des
+      auteurs de l'ouvrage, et le premier nom de la liste est affiché avant son initiale.
+  -->
+  <macro name="editors-bib-first">
+    <names variable="editor">
+      <name initialize-with=". " name-as-sort-order="first" and="text" delimiter=", " delimiter-precedes-last="never">
+        <name-part name="family" font-variant="small-caps"/>
+      </name>
+      <label form="short" prefix=" (" suffix=")"/>
+      <substitute>
+        <names variable="container-author">
+          <name initialize-with=". " name-as-sort-order="first" and="text" delimiter=", " delimiter-precedes-last="never">
+            <name-part name="family" font-variant="small-caps"/>
+          </name>
+        </names>
+      </substitute>
     </names>
   </macro>
   <macro name="translator">
@@ -244,6 +277,7 @@
 
       - Les monographies (Guide Lluelles v9, p. 92).
       - Les rapports parlementaires (Id., p. 19).
+      - Les ouvrages collectifs (Id., p. 98).
    -->
   <macro name="monograph-core">
     <group delimiter=", ">
@@ -320,13 +354,18 @@
       <text macro="URL"/>
     </group>
   </macro>
-  <macro name="chapter-note">
+  <!--
+      Les macros `chapter-core`, `chapter-note` et `chapter-bib` sont utilisées avec le
+      type CSL `chapter` pour:
+
+      - Les études dans un ouvrage collectif (Guide Lluelles v9, p. 99).
+  -->
+  <macro name="chapter-core">
     <group delimiter=", ">
-      <text macro="authors-note"/>
       <group>
         <text macro="title-chapter-special"/>
         <group delimiter=", ">
-          <text macro="editor"/>
+          <text macro="editors-note"/>
           <text variable="container-title" font-style="italic"/>
         </group>
       </group>
@@ -342,6 +381,12 @@
         <label variable="page" form="short" suffix="&#160;"/>
         <text variable="page"/>
       </group>
+    </group>
+  </macro>
+  <macro name="chapter-note">
+    <group delimiter=", ">
+      <text macro="authors-note"/>
+      <text macro="chapter-core"/>
       <text macro="citation-locators"/>
       <text macro="URL"/>
     </group>
@@ -349,26 +394,7 @@
   <macro name="chapter-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
-      <group>
-        <text macro="title-chapter-special"/>
-        <group delimiter=", ">
-          <text macro="editor"/>
-          <text variable="container-title" font-style="italic"/>
-        </group>
-      </group>
-      <text macro="edition"/>
-      <text macro="translator"/>
-      <text macro="volume"/>
-      <text macro="collection-title"/>
-      <text macro="collection-number"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <text macro="issued-year"/>
-      <group>
-        <label variable="page" form="short" suffix="&#160;"/>
-        <text variable="page"/>
-      </group>
-      <text macro="citation-locators"/>
+      <text macro="chapter-core"/>
       <text macro="URL"/>
     </group>
   </macro>
@@ -1106,7 +1132,7 @@
                 </choose>
               </if>
               <else>
-                <text macro="authors-subsequent"/>
+                <text macro="authors-note-subsequent"/>
               </else>
             </choose>
             <text value="préc." suffix=", "/>
@@ -1159,7 +1185,7 @@
           <group delimiter=", ">
             <text macro="authors-note"/>
             <text variable="title" font-style="italic"/>
-            <text macro="editor"/>
+            <text macro="editors-note"/>
             <text variable="container-title" font-style="italic"/>
             <text macro="translator"/>
             <text variable="genre"/>
@@ -1232,7 +1258,7 @@
           <text macro="authors-bib"/>
           <group delimiter=", ">
             <text variable="title" font-style="italic"/>
-            <text macro="editor"/>
+            <text macro="editors-bib"/>
             <text variable="container-title"/>
             <text macro="translator"/>
             <text variable="genre"/>
