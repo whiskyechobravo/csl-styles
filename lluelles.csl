@@ -284,6 +284,94 @@
       </else>
     </choose>
   </macro>
+  <macro name="URL">
+    <choose>
+      <if variable="DOI">
+        <text value="doi&#160;: " font-variant="small-caps"/>
+        <text variable="DOI"/>
+      </if>
+      <else-if variable="URL">
+        <text value="en ligne&#160;: "/>
+        <text variable="URL" prefix="&lt;" suffix="&gt;"/>
+      </else-if>
+    </choose>
+  </macro>
+  <macro name="citation-locators">
+    <choose>
+      <if variable="locator">
+        <choose>
+          <!-- Localisateur de chapitre pour la législation et la réglementation. -->
+          <if locator="chapter" type="legislation bill" match="all">
+            <text variable="locator" prefix="c.&#160;"/>
+          </if>
+          <!-- Localisateur de 1re page pour l'entrée en vigueur d'une loi (Guide Lluelles v9, p. 19), la réglementation (Id., p. 25, 27), les projets de règlements (Id., p. 29). -->
+          <else-if locator="page" type="legislation bill" match="all">
+            <text variable="locator"/>
+          </else-if>
+          <!-- Localisateur de section pour la législation (Guide Lluelles v9, p. 12) et la réglementation des autres provinces et des territoires fédéraux (Id., p. 30).-->
+          <else-if locator="section" type="legislation bill" match="all">
+            <text variable="locator" prefix="s.&#160;"/>
+          </else-if>
+          <!-- Localisateur de page pour étude dans un ouvrage collectif (Guide Lluelles v9, p. 99). -->
+          <else-if locator="page" type="chapter" match="all">
+            <choose>
+              <if is-numeric="locator">
+                <label variable="locator" form="short" suffix="&#160;"/>
+                <text variable="locator"/>
+              </if>
+              <else>
+                <text variable="locator"/>
+              </else>
+            </choose>
+          </else-if>
+          <else-if locator="sub-verbo">
+            <text variable="locator" quotes="true" prefix="v°&#160;"/>
+          </else-if>
+          <!-- Pour tous les autres localisateurs, une espace insécable est insérée entre l'étiquette courte et la valeur. -->
+          <else>
+            <label variable="locator" form="short" suffix="&#160;"/>
+            <text variable="locator"/>
+          </else>
+        </choose>
+      </if>
+    </choose>
+  </macro>
+  <macro name="sort-by-contributors">
+    <choose>
+      <!-- L'ordre des lois est alphabétique (Guide Lluelles v9, p. 250), il convient donc d'ignorer le champ auteur s'il est renseigné. -->
+      <if match="any" type="bill legal_case legislation regulation treaty">
+        <text variable="title"/>
+      </if>
+      <else>
+        <names variable="author">
+          <name name-as-sort-order="all" and="text" delimiter-precedes-last="never"/>
+          <substitute>
+            <names variable="editor"/>
+            <names variable="container-author"/>
+          </substitute>
+        </names>
+      </else>
+    </choose>
+  </macro>
+  <macro name="sort-by-type">
+    <choose>
+      <if type="bill legislation" match="any">
+        <text value="1"/>
+      </if>
+      <else-if type="legal_case">
+        <text value="2"/>
+      </else-if>
+      <else-if type="book thesis entry-dictionary" match="any">
+        <text value="3" font-weight="normal"/>
+      </else-if>
+      <else-if type="chapter article-journal entry-encyclopedia" match="any">
+        <text value="4"/>
+      </else-if>
+      <else>
+        <text value="5"/>
+      </else>
+    </choose>
+  </macro>
   <!--
     Les macros `monograph-note` et `monograph-bib` sont utilisées avec les
     types CSL `book` et `report` pour:
@@ -1085,94 +1173,6 @@
       <text variable="publisher"/>
       <text macro="URL"/>
     </group>
-  </macro>
-  <macro name="citation-locators">
-    <choose>
-      <if variable="locator">
-        <choose>
-          <!-- Localisateur de chapitre pour la législation et la réglementation. -->
-          <if locator="chapter" type="legislation bill" match="all">
-            <text variable="locator" prefix="c.&#160;"/>
-          </if>
-          <!-- Localisateur de 1re page pour l'entrée en vigueur d'une loi (Guide Lluelles v9, p. 19), la réglementation (Id., p. 25, 27), les projets de règlements (Id., p. 29). -->
-          <else-if locator="page" type="legislation bill" match="all">
-            <text variable="locator"/>
-          </else-if>
-          <!-- Localisateur de section pour la législation (Guide Lluelles v9, p. 12) et la réglementation des autres provinces et des territoires fédéraux (Id., p. 30).-->
-          <else-if locator="section" type="legislation bill" match="all">
-            <text variable="locator" prefix="s.&#160;"/>
-          </else-if>
-          <!-- Localisateur de page pour étude dans un ouvrage collectif (Guide Lluelles v9, p. 99). -->
-          <else-if locator="page" type="chapter" match="all">
-            <choose>
-              <if is-numeric="locator">
-                <label variable="locator" form="short" suffix="&#160;"/>
-                <text variable="locator"/>
-              </if>
-              <else>
-                <text variable="locator"/>
-              </else>
-            </choose>
-          </else-if>
-          <else-if locator="sub-verbo">
-            <text variable="locator" quotes="true" prefix="v°&#160;"/>
-          </else-if>
-          <!-- Pour tous les autres localisateurs, une espace insécable est insérée entre l'étiquette courte et la valeur. -->
-          <else>
-            <label variable="locator" form="short" suffix="&#160;"/>
-            <text variable="locator"/>
-          </else>
-        </choose>
-      </if>
-    </choose>
-  </macro>
-  <macro name="URL">
-    <choose>
-      <if variable="DOI">
-        <text value="doi&#160;: " font-variant="small-caps"/>
-        <text variable="DOI"/>
-      </if>
-      <else-if variable="URL">
-        <text value="en ligne&#160;: "/>
-        <text variable="URL" prefix="&lt;" suffix="&gt;"/>
-      </else-if>
-    </choose>
-  </macro>
-  <macro name="sort-by-contributors">
-    <choose>
-      <!-- L'ordre des lois est alphabétique (Guide Lluelles v9, p. 250), il convient donc d'ignorer le champ auteur s'il est renseigné. -->
-      <if match="any" type="bill legal_case legislation regulation treaty">
-        <text variable="title"/>
-      </if>
-      <else>
-        <names variable="author">
-          <name name-as-sort-order="all" and="text" delimiter-precedes-last="never"/>
-          <substitute>
-            <names variable="editor"/>
-            <names variable="container-author"/>
-          </substitute>
-        </names>
-      </else>
-    </choose>
-  </macro>
-  <macro name="sort-by-type">
-    <choose>
-      <if type="bill legislation" match="any">
-        <text value="1"/>
-      </if>
-      <else-if type="legal_case">
-        <text value="2"/>
-      </else-if>
-      <else-if type="book thesis entry-dictionary" match="any">
-        <text value="3" font-weight="normal"/>
-      </else-if>
-      <else-if type="chapter article-journal entry-encyclopedia" match="any">
-        <text value="4"/>
-      </else-if>
-      <else>
-        <text value="5"/>
-      </else>
-    </choose>
   </macro>
   <citation et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" delimiter-precedes-et-al="never">
     <layout suffix="." delimiter="; ">
