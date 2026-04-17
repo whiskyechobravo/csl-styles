@@ -39,8 +39,8 @@
     <terms>
       <term name="page" form="short">p.</term>
       <term name="page" form="long">
-        <single>à la page</single>
-        <multiple>aux pages</multiple>
+        <single>à la p.</single>
+        <multiple>aux p.</multiple>
       </term>
       <term name="article-locator" form="short">art.</term>
       <term name="ibid" form="short">id.</term>
@@ -235,6 +235,24 @@
     </choose>
   </macro>
   <!--
+    La macro `page-chapter` préfixe les pages avec `à la p.` ou `aux p.`, mais uniquement lorsque
+    la valeur est numérique, de sorte à afficher intégralement les formes moins communes,
+    p.ex.: `n° 1035, p. 164 et 165` (Guide Lluelles v9, p. 100).
+  -->
+  <macro name="page-chapter">
+    <choose>
+      <if is-numeric="page">
+        <group>
+          <label variable="page" form="long" suffix="&#160;"/>
+          <text variable="page"/>
+        </group>
+      </if>
+      <else>
+        <text variable="page"/>
+      </else>
+    </choose>
+  </macro>
+  <!--
     La macro `number-fascicule` affiche le préfixe `fascicule n°` uniquement lorsque la valeur est
     numérique.
   -->
@@ -293,6 +311,7 @@
       </choose>
       <text variable="title" font-style="italic"/>
       <text macro="edition"/>
+      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
       <!-- `genre` est le type de rapport. -->
       <text variable="genre"/>
@@ -346,6 +365,7 @@
       </choose>
       <text variable="title" font-style="italic"/>
       <text macro="edition"/>
+      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
       <!-- `genre` est le type de rapport. -->
       <text variable="genre"/>
@@ -392,30 +412,41 @@
   -->
   <macro name="chapter-core">
     <group delimiter=", ">
-      <group>
-        <text macro="title-chapter-special"/>
-        <group delimiter=", ">
-          <text macro="editors-note"/>
-          <text variable="container-title" font-style="italic"/>
-        </group>
-      </group>
       <text macro="edition"/>
+      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
-      <text macro="volume"/>
+      <group delimiter=" ">
+        <text macro="volume"/>
+        <text variable="volume-title" quotes="true"/>
+      </group>
       <text macro="collection-title"/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
-      <group>
-        <label variable="page" form="short" suffix="&#160;"/>
-        <text variable="page"/>
-      </group>
+      <text macro="page-chapter"/>
     </group>
   </macro>
   <macro name="chapter-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
+      <text variable="title" quotes="true"/>
+      <choose>
+        <if variable="container-title">
+          <group delimiter=" ">
+            <text term="in" text-case="lowercase"/>
+            <group delimiter=", ">
+              <!-- Si l'auteur est manquant, ne pas montrer l'éditeur ici car ce dernier a déjà été affiché comme substitut par la macro `authors-note`. -->
+              <choose>
+                <if variable="author">
+                  <text macro="editors-note"/>
+                </if>
+              </choose>
+              <text variable="container-title" font-style="italic"/>
+            </group>
+          </group>
+        </if>
+      </choose>
       <text macro="chapter-core"/>
       <text macro="citation-locators"/>
       <text macro="URL"/>
@@ -424,6 +455,23 @@
   <macro name="chapter-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
+      <text variable="title" quotes="true"/>
+      <choose>
+        <if variable="container-title">
+          <group delimiter=" ">
+            <text term="in" text-case="lowercase"/>
+            <group delimiter=", ">
+              <!-- Si l'auteur est manquant, ne pas afficher l'éditeur ici car ce dernier a déjà été affiché comme substitut de l'auteur par la macro `authors-note`. -->
+              <choose>
+                <if variable="author">
+                  <text macro="editors-bib"/>
+                </if>
+              </choose>
+              <text variable="container-title" font-style="italic"/>
+            </group>
+          </group>
+        </if>
+      </choose>
       <text macro="chapter-core"/>
       <text macro="URL"/>
     </group>
@@ -1058,6 +1106,18 @@
           <!-- Localisateur de section pour la législation (Guide Lluelles v9, p. 12) et la réglementation des autres provinces et des territoires fédéraux (Id., p. 30).-->
           <else-if locator="section" type="legislation bill" match="all">
             <text variable="locator" prefix="s.&#160;"/>
+          </else-if>
+          <!-- Localisateur de page pour étude dans un ouvrage collectif (Guide Lluelles v9, p. 99). -->
+          <else-if locator="page" type="chapter" match="all">
+            <choose>
+              <if is-numeric="locator">
+                <label variable="locator" form="long" suffix="&#160;"/>
+                <text variable="locator"/>
+              </if>
+              <else>
+                <text variable="locator"/>
+              </else>
+            </choose>
           </else-if>
           <else-if locator="sub-verbo">
             <text variable="locator" quotes="true" prefix="v°&#160;"/>
