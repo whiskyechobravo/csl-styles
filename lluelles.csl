@@ -192,9 +192,6 @@
       </name>
     </names>
   </macro>
-  <macro name="collection-title">
-    <text variable="collection-title" quotes="true" prefix="coll. "/>
-  </macro>
   <macro name="collection-number">
     <choose>
       <if is-numeric="collection-number">
@@ -419,7 +416,7 @@
           </choose>
         </if>
       </choose>
-      <text macro="collection-title"/>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
@@ -474,7 +471,7 @@
           </choose>
         </if>
       </choose>
-      <text macro="collection-title"/>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
@@ -505,7 +502,7 @@
         <text macro="volume"/>
         <text variable="volume-title" quotes="true"/>
       </group>
-      <text macro="collection-title"/>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
@@ -589,7 +586,7 @@
       </choose>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
-      <text macro="collection-title"/>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
       <text macro="volume" font-style="italic"/>
       <text macro="page"/>
       <text macro="edition"/>
@@ -1171,7 +1168,7 @@
       <text macro="edition"/>
       <text macro="translator"/>
       <text variable="volume"/>
-      <text macro="collection-title"/>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
       <text variable="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
@@ -1191,7 +1188,7 @@
       <text macro="edition"/>
       <text macro="translator"/>
       <text variable="volume"/>
-      <text macro="collection-title"/>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
@@ -1299,7 +1296,7 @@
             <text variable="container-title" font-style="italic"/>
             <text macro="translator"/>
             <text variable="genre"/>
-            <text macro="collection-title"/>
+            <text variable="collection-title" quotes="true" prefix="coll. "/>
             <text macro="collection-number"/>
             <text variable="publisher-place"/>
             <text variable="publisher"/>
@@ -1372,7 +1369,7 @@
             <text variable="container-title"/>
             <text macro="translator"/>
             <text variable="genre"/>
-            <text macro="collection-title"/>
+            <text variable="collection-title" quotes="true" prefix="coll. "/>
             <text macro="collection-number"/>
             <text variable="publisher-place"/>
             <text variable="publisher"/>
