@@ -234,7 +234,7 @@
     de sorte à afficher intégralement les formes moins communes, p.ex.:
     `n° 1035, p. 164 et 165` (Guide Lluelles v9, p. 100).
   -->
-  <macro name="page-chapter">
+  <macro name="page">
     <choose>
       <if is-numeric="page">
         <group>
@@ -272,17 +272,6 @@
     <date variable="issued">
       <date-part name="year" form="long"/>
     </date>
-  </macro>
-  <macro name="title-chapter-special">
-    <choose>
-      <if variable="container-title">
-        <text variable="title" quotes="true" suffix=", "/>
-        <text term="in" text-case="lowercase" suffix=" "/>
-      </if>
-      <else>
-        <text variable="title" font-style="italic" suffix=", "/>
-      </else>
-    </choose>
   </macro>
   <macro name="link">
     <choose>
@@ -429,6 +418,7 @@
           <text macro="issued-year"/>
         </else>
       </choose>
+      <!-- `medium` est le format, p.ex. `feuilles mobiles, à jour mai 2017` -->
       <text variable="medium" text-case="lowercase"/>
       <text macro="citation-locators"/>
       <text macro="link"/>
@@ -488,29 +478,49 @@
     </group>
   </macro>
   <!--
-    Les macros `chapter-core`, `chapter-note` et `chapter-bib` sont utilisées avec le
-    type CSL `chapter` pour:
+    Les macros `collective-work-core`, `collective-work-note` et `collective-work-bib` sont
+    utilisées avec les types CSL `chapter` et `entry-encyclopedia` pour:
 
     - Les études dans un ouvrage collectif (Guide Lluelles v9, p. 99).
+    - Les articles d'encyclopédies juridiques (Id., p. 101).
   -->
-  <macro name="chapter-core">
+  <macro name="collective-work-core">
     <group delimiter=", ">
       <text macro="edition"/>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
-      <group delimiter=" ">
-        <text macro="volume"/>
-        <text variable="volume-title" quotes="true"/>
-      </group>
+      <choose>
+        <!-- Une encyclopédie juridique affiche le volume après la collection. -->
+        <if type="entry-encyclopedia" match="none">
+          <group delimiter=" ">
+            <text macro="volume"/>
+            <text variable="volume-title" quotes="true"/>
+          </group>
+        </if>
+      </choose>
       <text macro="collection-title"/>
+      <choose>
+        <!-- Une encyclopédie juridique affiche le volume en italique suivi de la page. -->
+        <if type="entry-encyclopedia">
+          <text macro="volume" font-style="italic"/>
+          <text macro="page"/>
+        </if>
+      </choose>
       <text macro="collection-number"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
-      <text macro="issued-year"/>
-      <text macro="page-chapter"/>
+      <choose>
+        <!-- Une encyclopédie juridique n'affiche pas l'année d'édition, et affiche la page après le volume. -->
+        <if type="entry-encyclopedia" match="none">
+          <text macro="issued-year"/>
+          <text macro="page"/>
+        </if>
+      </choose>
+      <!-- `medium` est le format, p.ex. `feuilles mobiles, à jour au 15 juin 2013` -->
+      <text variable="medium" text-case="lowercase"/>
     </group>
   </macro>
-  <macro name="chapter-note">
+  <macro name="collective-work-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text variable="title" quotes="true"/>
@@ -519,23 +529,35 @@
           <group delimiter=" ">
             <text term="in" text-case="lowercase"/>
             <group delimiter=", ">
-              <!-- Si l'auteur est manquant, ne pas montrer l'éditeur ici car ce dernier a déjà été affiché comme substitut par la macro `authors-note`. -->
+              <!--
+                Ne montrer l'éditeur que si:
+                - un auteur a été consigné, car si l'auteur est manquant l'éditeur a déjà été affiché comme substitut par la macro `authors-note`.
+                - et que le type de document est `chapter` (car il est toujours omis pour les articles d'encyclopédies juridiques).
+              -->
               <choose>
-                <if variable="author">
+                <if variable="author" type="chapter" match="all">
                   <text macro="editors-note"/>
                 </if>
               </choose>
-              <text variable="container-title" font-style="italic"/>
+              <choose>
+                <!-- Le titre d'une encyclopédie juridique n'est pas en italique. -->
+                <if type="entry-encyclopedia">
+                  <text variable="container-title"/>
+                </if>
+                <else>
+                  <text variable="container-title" font-style="italic"/>
+                </else>
+              </choose>
             </group>
           </group>
         </if>
       </choose>
-      <text macro="chapter-core"/>
+      <text macro="collective-work-core"/>
       <text macro="citation-locators"/>
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="chapter-bib">
+  <macro name="collective-work-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text variable="title" quotes="true"/>
@@ -544,18 +566,30 @@
           <group delimiter=" ">
             <text term="in" text-case="lowercase"/>
             <group delimiter=", ">
-              <!-- Si l'auteur est manquant, ne pas afficher l'éditeur ici car ce dernier a déjà été affiché comme substitut de l'auteur par la macro `authors-note`. -->
+              <!--
+                Ne montrer l'éditeur que si:
+                - un auteur a été consigné, car si l'auteur est manquant l'éditeur a déjà été affiché comme substitut par la macro `authors-note`.
+                - et que le type de document est `chapter` (car il est toujours omis pour les articles d'encyclopédies juridiques).
+              -->
               <choose>
-                <if variable="author">
+                <if variable="author" type="chapter" match="all">
                   <text macro="editors-bib"/>
                 </if>
               </choose>
-              <text variable="container-title" font-style="italic"/>
+              <choose>
+                <!-- Le titre d'une encyclopédie juridique n'est pas en italique. -->
+                <if type="entry-encyclopedia">
+                  <text variable="container-title"/>
+                </if>
+                <else>
+                  <text variable="container-title" font-style="italic"/>
+                </else>
+              </choose>
             </group>
           </group>
         </if>
       </choose>
-      <text macro="chapter-core"/>
+      <text macro="collective-work-core"/>
       <text macro="link"/>
     </group>
   </macro>
@@ -1139,41 +1173,6 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="entry-encyclopedia-note">
-    <group delimiter=", ">
-      <text macro="authors-note"/>
-      <group>
-        <text macro="title-chapter-special"/>
-        <text variable="container-title"/>
-      </group>
-      <text macro="collection-title"/>
-      <text variable="collection-number"/>
-      <text variable="volume"/>
-      <text macro="edition"/>
-      <text variable="page"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
-    </group>
-  </macro>
-  <macro name="entry-encyclopedia-bib">
-    <group delimiter=", ">
-      <text macro="authors-bib"/>
-      <group>
-        <text macro="title-chapter-special"/>
-        <text variable="container-title"/>
-      </group>
-      <text macro="collection-title"/>
-      <text variable="collection-number"/>
-      <text variable="volume"/>
-      <text macro="edition"/>
-      <text variable="page"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <text macro="link"/>
-    </group>
-  </macro>
   <citation et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" delimiter-precedes-et-al="never">
     <layout suffix="." delimiter="; ">
       <choose>
@@ -1244,7 +1243,7 @@
           <text macro="thesis-note"/>
         </else-if>
         <else-if type="chapter">
-          <text macro="chapter-note"/>
+          <text macro="collective-work-note"/>
         </else-if>
         <else-if type="book report" match="any">
           <text macro="monograph-note"/>
@@ -1262,7 +1261,7 @@
           <text macro="entry-dictionary-note"/>
         </else-if>
         <else-if type="entry-encyclopedia">
-          <text macro="entry-encyclopedia-note"/>
+          <text macro="collective-work-note"/>
         </else-if>
         <else>
           <!-- TODO: Faire macro pour partie commune note/bib -->
@@ -1317,7 +1316,7 @@
           <text macro="thesis-bib"/>
         </else-if>
         <else-if type="chapter paper-conference" match="any">
-          <text macro="chapter-bib"/>
+          <text macro="collective-work-bib"/>
         </else-if>
         <else-if type="book report" match="any">
           <text macro="monograph-bib"/>
@@ -1335,7 +1334,7 @@
           <text macro="entry-dictionary-bib"/>
         </else-if>
         <else-if type="entry-encyclopedia">
-          <text macro="entry-encyclopedia-bib"/>
+          <text macro="collective-work-bib"/>
         </else-if>
         <else>
           <!-- TODO: Faire macro pour partie commune note/bib -->
