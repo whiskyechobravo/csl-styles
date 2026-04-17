@@ -488,13 +488,12 @@
     </group>
   </macro>
   <!--
-    Les macros `chapter-paper-core`, `chapter-paper-note` et `chapter-paper-bib` sont utilisées
-    avec les types CSL `chapter` et `paper-conference` pour:
+    Les macros `chapter-core`, `chapter-note` et `chapter-bib` sont utilisées
+    avec le type CSL `chapter` pour:
 
     - Les études dans un ouvrage collectif (Guide Lluelles v9, p. 99).
-    - Certaines publications du Barreau du Québec (congrès annuels, développements récents) (Id., p. 106).
   -->
-  <macro name="chapter-paper-core">
+  <macro name="chapter-core">
     <group delimiter=", ">
       <text macro="edition"/>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
@@ -513,7 +512,7 @@
       <text variable="medium" text-case="lowercase"/>
     </group>
   </macro>
-  <macro name="chapter-paper-note">
+  <macro name="chapter-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text variable="title" quotes="true"/>
@@ -536,12 +535,12 @@
           </group>
         </if>
       </choose>
-      <text macro="chapter-paper-core"/>
+      <text macro="chapter-core"/>
       <text macro="citation-locators"/>
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="chapter-paper-bib">
+  <macro name="chapter-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text variable="title" quotes="true"/>
@@ -564,7 +563,7 @@
           </group>
         </if>
       </choose>
-      <text macro="chapter-paper-core"/>
+      <text macro="chapter-core"/>
       <text macro="link"/>
     </group>
   </macro>
@@ -1267,7 +1266,7 @@
           <text macro="thesis-note"/>
         </else-if>
         <else-if type="chapter">
-          <text macro="chapter-paper-note"/>
+          <text macro="chapter-note"/>
         </else-if>
         <else-if type="book report" match="any">
           <text macro="monograph-note"/>
@@ -1340,7 +1339,7 @@
           <text macro="thesis-bib"/>
         </else-if>
         <else-if type="chapter paper-conference" match="any">
-          <text macro="chapter-paper-bib"/>
+          <text macro="chapter-bib"/>
         </else-if>
         <else-if type="book report" match="any">
           <text macro="monograph-bib"/>
