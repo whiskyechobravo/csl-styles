@@ -284,7 +284,7 @@
       </else>
     </choose>
   </macro>
-  <macro name="URL">
+  <macro name="link">
     <choose>
       <if variable="DOI">
         <text value="doi&#160;: " font-variant="small-caps"/>
@@ -431,7 +431,7 @@
       </choose>
       <text variable="medium" text-case="lowercase"/>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="monograph-bib">
@@ -484,7 +484,7 @@
         </else>
       </choose>
       <text variable="medium" text-case="lowercase"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -532,7 +532,7 @@
       </choose>
       <text macro="chapter-core"/>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="chapter-bib">
@@ -556,7 +556,7 @@
         </if>
       </choose>
       <text macro="chapter-core"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="thesis-note">
@@ -568,7 +568,7 @@
       <text variable="publisher"/>
       <text macro="issued-year"/>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="thesis-bib">
@@ -579,7 +579,7 @@
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="article-journal-note">
@@ -608,7 +608,7 @@
         </choose>
       </group>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="article-journal-bib">
@@ -636,7 +636,7 @@
           </else>
         </choose>
       </group>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="article-magazine-note">
@@ -666,7 +666,7 @@
         <text variable="page"/>
       </group>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="article-magazine-bib">
@@ -695,7 +695,7 @@
           <text variable="page"/>
         </group>
       </group>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="article-newspaper-note">
@@ -721,7 +721,7 @@
         <text variable="page"/>
       </group>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="article-newspaper-bib">
@@ -746,7 +746,7 @@
         <label variable="page" form="short" suffix="&#160;"/>
         <text variable="page"/>
       </group>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="case-note">
@@ -821,7 +821,7 @@
           <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
         </else>
       </choose>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="case-bib">
@@ -882,7 +882,7 @@
           <text variable="references" prefix=" (" suffix=")"/>
         </else>
       </choose>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -949,14 +949,14 @@
         <!-- TODO: Vérifier si title-short est pertinent. -->
         <text variable="title-short" prefix="[" suffix="]" font-style="italic"/>
       </group>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="legislation-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="legislation-core"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -1040,14 +1040,14 @@
         </group>
         <text variable="title-short" prefix="[" suffix="]" font-style="italic"/>
       </group>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="bill-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="bill-core"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -1094,14 +1094,14 @@
       <text macro="authors-note"/>
       <text macro="hearing-core"/>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="hearing-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="hearing-core"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="entrydic-note">
@@ -1121,7 +1121,7 @@
         <text variable="title" quotes="true"/>
       </group>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="entrydic-bib">
@@ -1136,7 +1136,7 @@
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="entryencyclo-note">
@@ -1154,7 +1154,7 @@
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="citation-locators"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="entryencyclo-bib">
@@ -1171,7 +1171,7 @@
       <text variable="page"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
-      <text macro="URL"/>
+      <text macro="link"/>
     </group>
   </macro>
   <citation et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" delimiter-precedes-et-al="never">
@@ -1287,7 +1287,7 @@
               <text variable="page"/>
             </group>
             <text macro="citation-locators"/>
-            <text macro="URL"/>
+            <text macro="link"/>
           </group>
         </else>
       </choose>
