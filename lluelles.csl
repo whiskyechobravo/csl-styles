@@ -37,11 +37,6 @@
   </info>
   <locale xml:lang="fr">
     <terms>
-      <term name="page" form="short">p.</term>
-      <term name="page" form="long">
-        <single>à la p.</single>
-        <multiple>aux p.</multiple>
-      </term>
       <term name="article-locator" form="short">art.</term>
       <term name="ibid" form="short">id.</term>
       <term name="paragraph" form="short">par.</term>
@@ -235,15 +230,15 @@
     </choose>
   </macro>
   <!--
-    La macro `page-chapter` préfixe les pages avec `à la p.` ou `aux p.`, mais uniquement lorsque
-    la valeur est numérique, de sorte à afficher intégralement les formes moins communes,
-    p.ex.: `n° 1035, p. 164 et 165` (Guide Lluelles v9, p. 100).
+    La macro `page` affiche le préfixe `p.` uniquement lorsque la valeur est numérique,
+    de sorte à afficher intégralement les formes moins communes, p.ex.:
+    `n° 1035, p. 164 et 165` (Guide Lluelles v9, p. 100).
   -->
   <macro name="page-chapter">
     <choose>
       <if is-numeric="page">
         <group>
-          <label variable="page" form="long" suffix="&#160;"/>
+          <label variable="page" form="short" suffix="&#160;"/>
           <text variable="page"/>
         </group>
       </if>
@@ -1111,7 +1106,7 @@
           <else-if locator="page" type="chapter" match="all">
             <choose>
               <if is-numeric="locator">
-                <label variable="locator" form="long" suffix="&#160;"/>
+                <label variable="locator" form="short" suffix="&#160;"/>
                 <text variable="locator"/>
               </if>
               <else>
