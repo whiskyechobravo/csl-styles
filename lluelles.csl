@@ -595,27 +595,7 @@
         <if variable="container-title">
           <group delimiter=" ">
             <text term="in" text-case="lowercase"/>
-            <group delimiter=", ">
-              <!--
-                Ne montrer l'éditeur que si:
-                - un auteur a été consigné, car si l'auteur est manquant l'éditeur a déjà été affiché comme substitut par la macro `authors-note`.
-                - et que le type de document est `chapter` (car il est toujours omis pour les articles d'encyclopédies juridiques).
-              -->
-              <choose>
-                <if variable="author" type="chapter" match="all">
-                  <text macro="editors-note"/>
-                </if>
-              </choose>
-              <choose>
-                <!-- Le titre d'une encyclopédie juridique n'est pas en italique. -->
-                <if type="entry-encyclopedia">
-                  <text variable="container-title"/>
-                </if>
-                <else>
-                  <text variable="container-title" font-style="italic"/>
-                </else>
-              </choose>
-            </group>
+            <text variable="container-title"/>
           </group>
         </if>
       </choose>
