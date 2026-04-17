@@ -1104,7 +1104,7 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="entrydic-note">
+  <macro name="entry-dictionary-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text variable="container-title" font-style="italic"/>
@@ -1124,7 +1124,7 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="entrydic-bib">
+  <macro name="entry-dictionary-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text variable="container-title" font-style="italic"/>
@@ -1139,7 +1139,7 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="entryencyclo-note">
+  <macro name="entry-encyclopedia-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <group>
@@ -1157,7 +1157,7 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="entryencyclo-bib">
+  <macro name="entry-encyclopedia-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <group>
@@ -1259,10 +1259,10 @@
           <text macro="article-journal-note"/>
         </else-if>
         <else-if type="entry-dictionary">
-          <text macro="entrydic-note"/>
+          <text macro="entry-dictionary-note"/>
         </else-if>
         <else-if type="entry-encyclopedia">
-          <text macro="entryencyclo-note"/>
+          <text macro="entry-encyclopedia-note"/>
         </else-if>
         <else>
           <!-- TODO: Faire macro pour partie commune note/bib -->
@@ -1332,10 +1332,10 @@
           <text macro="article-journal-bib"/>
         </else-if>
         <else-if type="entry-dictionary">
-          <text macro="entrydic-bib"/>
+          <text macro="entry-dictionary-bib"/>
         </else-if>
         <else-if type="entry-encyclopedia">
-          <text macro="entryencyclo-bib"/>
+          <text macro="entry-encyclopedia-bib"/>
         </else-if>
         <else>
           <!-- TODO: Faire macro pour partie commune note/bib -->
