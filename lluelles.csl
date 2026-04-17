@@ -281,6 +281,11 @@
       <date-part name="year" form="long"/>
     </date>
   </macro>
+  <macro name="event-date-year">
+    <date variable="event-date">
+      <date-part name="year" form="long"/>
+    </date>
+  </macro>
   <macro name="link">
     <choose>
       <if variable="DOI">
@@ -564,6 +569,60 @@
         </if>
       </choose>
       <text macro="chapter-core"/>
+      <text macro="link"/>
+    </group>
+  </macro>
+  <!--
+    Les macros `paper-conference-core`, `paper-conference-note` et `paper-conference-bib` sont
+    utilisées avec le type CSL `paper-conference` pour:
+
+    - Certaines publications du Barreau du Québec (congrès annuels, développements récents) (Guide Lluelles v9, p. 106).
+  -->
+  <macro name="paper-conference-core">
+    <group delimiter=", ">
+      <!-- `title` est le titre de l'étude. -->
+      <text variable="title" quotes="true"/>
+      <choose>
+        <if variable="container-title event-title volume" match="any">
+          <group delimiter=" ">
+            <text term="in" text-case="lowercase"/>
+            <group delimiter=", ">
+              <!-- `container-title` est le titre du recueil. -->
+              <text variable="container-title"/>
+              <text macro="volume"/>
+              <group delimiter=" " font-style="italic">
+                 <!-- `event-title` est le titre du congrès. -->
+                <text variable="event-title"/>
+                <!-- `event-date` est la date du congrès. -->
+                <text macro="event-date-year" prefix="(" suffix=")"/>
+              </group>
+            </group>
+          </group>
+        </if>
+      </choose>
+      <text macro="edition"/>
+      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
+      <text macro="translator"/>
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+      <text macro="issued-year"/>
+      <text macro="page"/>
+      <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour au 15 juin 2013` -->
+      <text variable="medium" text-case="lowercase"/>
+    </group>
+  </macro>
+  <macro name="paper-conference-note">
+    <group delimiter=", ">
+      <text macro="authors-note"/>
+      <text macro="paper-conference-core"/>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
+    </group>
+  </macro>
+  <macro name="paper-conference-bib">
+    <group delimiter=", ">
+      <text macro="authors-bib"/>
+      <text macro="paper-conference-core"/>
       <text macro="link"/>
     </group>
   </macro>
@@ -1268,6 +1327,9 @@
         <else-if type="chapter">
           <text macro="chapter-note"/>
         </else-if>
+        <else-if type="paper-conference">
+          <text macro="paper-conference-note"/>
+        </else-if>
         <else-if type="book report" match="any">
           <text macro="monograph-note"/>
         </else-if>
@@ -1338,8 +1400,11 @@
         <else-if type="thesis">
           <text macro="thesis-bib"/>
         </else-if>
-        <else-if type="chapter paper-conference" match="any">
+        <else-if type="chapter">
           <text macro="chapter-bib"/>
+        </else-if>
+        <else-if type="paper-conference">
+          <text macro="paper-conference-bib"/>
         </else-if>
         <else-if type="book report" match="any">
           <text macro="monograph-bib"/>
