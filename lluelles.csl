@@ -46,6 +46,10 @@
       <term name="in">dans</term>
     </terms>
   </locale>
+  <!--
+    La macro `authors-note` donne les prénoms et noms des auteurs (affichage
+    style note de bas de page).
+  -->
   <macro name="authors-note">
     <names variable="author">
       <name and="text" delimiter=", " delimiter-precedes-last="never">
@@ -53,16 +57,6 @@
       </name>
       <substitute>
         <text macro="editors-note"/>
-      </substitute>
-    </names>
-  </macro>
-  <macro name="authors-bib">
-    <names variable="author">
-      <name initialize-with=". " name-as-sort-order="first" and="text" sort-separator=", " delimiter=", " delimiter-precedes-last="never">
-        <name-part name="family" font-variant="small-caps"/>
-      </name>
-      <substitute>
-        <text macro="editors-bib-first"/>
       </substitute>
     </names>
   </macro>
@@ -89,6 +83,20 @@
         </names>
       </substitute>
       <et-al font-style="italic"/>
+    </names>
+  </macro>
+  <!--
+    La macro `authors-bib` donne les initiales des prénoms et les noms des auteurs, et le premier
+    nom de la liste est affiché avant l'initiale de son prénom (affichage style bibliographie).
+  -->
+  <macro name="authors-bib">
+    <names variable="author">
+      <name initialize-with=". " name-as-sort-order="first" and="text" sort-separator=", " delimiter=", " delimiter-precedes-last="never">
+        <name-part name="family" font-variant="small-caps"/>
+      </name>
+      <substitute>
+        <text macro="editors-bib-first"/>
+      </substitute>
     </names>
   </macro>
   <!--
@@ -159,7 +167,7 @@
   </macro>
   <!--
     La macro `editors-bib-first` donne les initiales des prénoms et les noms des éditeurs ou des
-    auteurs de l'ouvrage, et le premier nom de la liste est affiché avant son initiale.
+    auteurs de l'ouvrage, et le premier nom de la liste est affiché avant l'initiale de son prénom.
   -->
   <macro name="editors-bib-first">
     <names variable="editor">
