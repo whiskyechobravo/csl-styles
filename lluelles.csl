@@ -402,7 +402,7 @@
   </macro>
   <!--
     Les macros `monograph-note` et `monograph-bib` sont utilisées avec les
-    types CSL `book` et `report` pour:
+    types CSL `book`, `report` et `entry-dictionary` pour:
 
     - Les monographies (Guide Lluelles v9, p. 92).
     - Les rapports parlementaires (Id., p. 19).
@@ -411,6 +411,7 @@
     - Les documents ou rapports d'organismes publics (Id., p. 102).
     - Les thèses de doctorat et mémoires de maîtrise édités (Id., p. 112).
     - Les lois et codes annotés (Id., p. 113).
+    - Les dictionnaires et entrées de dictionnaires (Id., p. 114).
    -->
   <macro name="monograph-note">
     <group delimiter=", ">
@@ -424,7 +425,15 @@
           </group>
         </if>
       </choose>
-      <text variable="title" font-style="italic"/>
+      <choose>
+        <if type="entry-dictionary">
+          <!-- Pour une entrée de dictionnaire, `title` est l'expression recherchée, mais ici on affiche le nom du dictionnaire. -->
+          <text variable="container-title" font-style="italic"/>
+        </if>
+        <else>
+          <text variable="title" font-style="italic"/>
+        </else>
+      </choose>
       <text macro="edition"/>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
@@ -463,6 +472,12 @@
       </choose>
       <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour mai 2017` -->
       <text variable="medium" text-case="lowercase"/>
+      <choose>
+        <if type="entry-dictionary">
+          <!-- Pour une entrée de dictionnaire, `title` est l'expression recherché. -->
+          <text variable="title" quotes="true"/>
+        </if>
+      </choose>
       <text macro="citation-locators"/>
       <text macro="link"/>
     </group>
@@ -479,7 +494,15 @@
           </group>
         </if>
       </choose>
-      <text variable="title" font-style="italic"/>
+      <choose>
+        <if type="entry-dictionary">
+          <!-- Pour une entrée de dictionnaire, `title` est l'expression recherchée, mais ici on affiche le nom du dictionnaire. -->
+          <text variable="container-title" font-style="italic"/>
+        </if>
+        <else>
+          <text variable="title" font-style="italic"/>
+        </else>
+      </choose>
       <text macro="edition"/>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
@@ -1258,41 +1281,6 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="entry-dictionary-note">
-    <group delimiter=", ">
-      <text macro="authors-note"/>
-      <text variable="container-title" font-style="italic"/>
-      <text macro="edition"/>
-      <text macro="translator"/>
-      <text variable="volume"/>
-      <text variable="collection-title" quotes="true" prefix="coll. "/>
-      <text variable="collection-number"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <text macro="issued-year"/>
-      <group delimiter=" ">
-        <text value="v°&#160;"/>
-        <text variable="title" quotes="true"/>
-      </group>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
-    </group>
-  </macro>
-  <macro name="entry-dictionary-bib">
-    <group delimiter=", ">
-      <text macro="authors-bib"/>
-      <text variable="container-title" font-style="italic"/>
-      <text macro="edition"/>
-      <text macro="translator"/>
-      <text variable="volume"/>
-      <text variable="collection-title" quotes="true" prefix="coll. "/>
-      <text macro="collection-number"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <text macro="issued-year"/>
-      <text macro="link"/>
-    </group>
-  </macro>
   <citation et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" delimiter-precedes-et-al="never">
     <layout suffix="." delimiter="; ">
       <choose>
@@ -1308,7 +1296,7 @@
         <else-if position="subsequent">
           <group delimiter=", ">
             <choose>
-              <if type="bill legal_case legislation entry-dictionary" match="any">
+              <if type="bill legal_case legislation" match="any">
                 <choose>
                   <if type="legal_case">
                     <choose>
@@ -1324,7 +1312,7 @@
                   </if>
                 </choose>
                 <choose>
-                  <if variable="title-short" type="legislation bill entry-dictionary" match="all">
+                  <if variable="title-short" type="legislation bill" match="all">
                     <text variable="title-short" font-style="italic"/>
                   </if>
                   <else-if variable="title-short" match="any">
@@ -1368,7 +1356,7 @@
         <else-if type="paper-conference">
           <text macro="paper-conference-note"/>
         </else-if>
-        <else-if type="book report" match="any">
+        <else-if type="book report entry-dictionary" match="any">
           <text macro="monograph-note"/>
         </else-if>
         <else-if type="article-newspaper webpage post post-weblog" match="any">
@@ -1379,9 +1367,6 @@
         </else-if>
         <else-if type="article-journal">
           <text macro="article-journal-note"/>
-        </else-if>
-        <else-if type="entry-dictionary">
-          <text macro="entry-dictionary-note"/>
         </else-if>
         <else-if type="entry-encyclopedia">
           <text macro="entry-encyclopedia-note"/>
@@ -1444,7 +1429,7 @@
         <else-if type="paper-conference">
           <text macro="paper-conference-bib"/>
         </else-if>
-        <else-if type="book report" match="any">
+        <else-if type="book report entry-dictionary" match="any">
           <text macro="monograph-bib"/>
         </else-if>
         <else-if type="article-newspaper webpage post post-weblog" match="any">
@@ -1455,9 +1440,6 @@
         </else-if>
         <else-if type="article-journal">
           <text macro="article-journal-bib"/>
-        </else-if>
-        <else-if type="entry-dictionary">
-          <text macro="entry-dictionary-bib"/>
         </else-if>
         <else-if type="entry-encyclopedia">
           <text macro="entry-encyclopedia-bib"/>
