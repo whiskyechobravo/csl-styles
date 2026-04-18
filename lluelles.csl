@@ -371,20 +371,32 @@
   </macro>
   <macro name="sort-by-type">
     <choose>
-      <if type="bill legislation" match="any">
+      <if type="bill legislation regulation treaty" match="any">
         <text value="1"/>
       </if>
       <else-if type="legal_case">
         <text value="2"/>
       </else-if>
-      <else-if type="book thesis entry-dictionary" match="any">
-        <text value="3" font-weight="normal"/>
+      <else-if type="book chapter" match="any">
+        <text value="3"/>
       </else-if>
-      <else-if type="chapter article-journal entry-encyclopedia" match="any">
+      <else-if type="article-journal paper-conference" match="any">
         <text value="4"/>
       </else-if>
-      <else>
+      <else-if type="thesis" match="any">
         <text value="5"/>
+      </else-if>
+      <else-if type="hearing report article standard" match="any">
+        <text value="6"/>
+      </else-if>
+      <else-if type="article-newspaper article-magazine periodical webpage post post-weblog broadcast" match="any">
+        <text value="7"/>
+      </else-if>
+      <else-if type="entry-dictionary entry-encyclopedia" match="any">
+        <text value="8"/>
+      </else-if>
+      <else>
+        <text value="9"/>
       </else>
     </choose>
   </macro>
