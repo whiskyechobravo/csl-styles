@@ -397,6 +397,8 @@
     - Les ouvrages collectifs (Id., p. 98).
     - Les conférences publiées séparément (Id., p. 102).
     - Les documents ou rapports d'organismes publics (Id., p. 102).
+    - Les thèses de doctorat et mémoires de maîtrise édités (Id., p. 112).
+    - Les lois et codes annotés (Id., p. 113).
    -->
   <macro name="monograph-note">
     <group delimiter=", ">
