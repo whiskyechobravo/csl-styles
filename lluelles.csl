@@ -644,7 +644,7 @@
     Les macros `entry-encyclopedia-core`, `entry-encyclopedia-note` et `entry-encyclopedia-bib` sont
     utilisées avec le type CSL `entry-encyclopedia` pour:
 
-    - Les articles d'encyclopédies juridiques (Id., p. 101).
+    - Les articles d'encyclopédies juridiques (Guide Lluelles v9, p. 101).
   -->
   <macro name="entry-encyclopedia-core">
     <group delimiter=", ">
@@ -685,14 +685,28 @@
       <text macro="link"/>
     </group>
   </macro>
+  <!--
+    Les macros `thesis-core`, `thesis-note` et `thesis-bib` sont
+    utilisées avec le type CSL `thesis` pour:
+
+    - Les thèses de doctorat et les mémoires de maîtrise non édités (Guide Lluelles v9, p. 112).
+  -->
+  <macro name="thesis-core">
+    <group delimiter=", ">
+      <text variable="title" font-style="italic"/>
+      <!-- `genre` est le type de thèse, p. ex. `thèse de doctorat` ou `mémoire de maîtrise`. -->
+      <text variable="genre" text-case="lowercase"/>
+      <!-- `publisher-place` est le lieu de l'institution.-->
+      <text variable="publisher-place"/>
+      <!-- `publisher` est le nom de l'institution.-->
+      <text variable="publisher"/>
+      <text macro="issued-year"/>
+    </group>
+  </macro>
   <macro name="thesis-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
-      <text variable="title" font-style="italic"/>
-      <text variable="genre"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <text macro="issued-year"/>
+      <text macro="thesis-core"/>
       <text macro="citation-locators"/>
       <text macro="link"/>
     </group>
@@ -700,11 +714,7 @@
   <macro name="thesis-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
-      <text variable="title" font-style="italic"/>
-      <text variable="genre"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <text macro="issued-year"/>
+      <text macro="thesis-core"/>
       <text macro="link"/>
     </group>
   </macro>
