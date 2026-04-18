@@ -271,9 +271,9 @@
   </macro>
   <macro name="issued">
     <date variable="issued" font-style="normal" font-weight="normal">
-      <date-part name="day" suffix=" "/>
-      <date-part name="month" suffix=" "/>
-      <date-part name="year"/>
+      <date-part name="day" form="numeric" suffix=" "/>
+      <date-part name="month" form="long" text-case="lowercase" suffix=" "/>
+      <date-part name="year" form="long"/>
     </date>
   </macro>
   <macro name="issued-year">
@@ -412,6 +412,7 @@
     - Les thèses de doctorat et mémoires de maîtrise édités (Id., p. 112).
     - Les lois et codes annotés (Id., p. 113).
     - Les dictionnaires et entrées de dictionnaires (Id., p. 114).
+    - Les recueils de cours (Id., p. 114).
    -->
   <macro name="monograph-note">
     <group delimiter=", ">
@@ -591,6 +592,7 @@
           </group>
         </if>
       </choose>
+      <!-- TODO: Tous les appels à citation-locators pourraient aller dans les macros -core, car les locators sont sans effet dans les bibliographies -->
       <text macro="chapter-core"/>
       <text macro="citation-locators"/>
       <text macro="link"/>
@@ -816,6 +818,7 @@
       <text macro="link"/>
     </group>
   </macro>
+  <!-- TODO: Voir Guide Lluelles v9, p. 215 -->
   <macro name="article-magazine-note">
     <group delimiter=", ">
       <group delimiter=" ">
@@ -875,24 +878,18 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="article-newspaper-note">
+  <!--
+    Les macros `article-newspaper-core`, `article-newspaper-note` et `article-newspaper-bib` sont
+    utilisées avec les types CSL `article-newspaper`, `webpage`, `post` et `post-weblog` pour:
+
+    - Les billets de blogues et articles de journaux (Guide Lluelles v9, p. 115).
+  -->
+  <macro name="article-newspaper-core">
     <group delimiter=", ">
-      <group delimiter=" ">
-        <group delimiter=", ">
-          <text macro="authors-note"/>
-          <text variable="title" quotes="true"/>
-          <text variable="container-title" font-style="italic"/>
-          <group delimiter=" ">
-            <text term="edition" form="short"/>
-            <text variable="edition"/>
-          </group>
-          <group delimiter=" ">
-            <text term="section" form="short"/>
-            <text variable="section"/>
-          </group>
-        </group>
-        <text macro="issued" prefix="(" suffix=")"/>
-      </group>
+      <text variable="title" quotes="true"/>
+      <text variable="container-title" font-style="italic"/>
+      <text macro="issued"/>
+      <text variable="section"/>
       <group>
         <label variable="page" form="short" suffix="&#160;"/>
         <text variable="page"/>
@@ -901,29 +898,16 @@
       <text macro="link"/>
     </group>
   </macro>
+  <macro name="article-newspaper-note">
+    <group delimiter=", ">
+      <text macro="authors-note"/>
+      <text macro="article-newspaper-core"/>
+    </group>
+  </macro>
   <macro name="article-newspaper-bib">
     <group delimiter=", ">
-      <group delimiter=" ">
-        <group delimiter=", ">
-          <text macro="authors-bib"/>
-          <text variable="title" quotes="true"/>
-          <text variable="container-title" font-style="italic"/>
-          <group>
-            <text term="edition" form="short" suffix=" "/>
-            <text variable="edition"/>
-          </group>
-          <group>
-            <text term="section" form="short" suffix=" "/>
-            <text variable="section"/>
-          </group>
-        </group>
-        <text macro="issued" prefix=" (" suffix=")"/>
-      </group>
-      <group>
-        <label variable="page" form="short" suffix="&#160;"/>
-        <text variable="page"/>
-      </group>
-      <text macro="link"/>
+      <text macro="authors-bib"/>
+      <text macro="article-newspaper-core"/>
     </group>
   </macro>
   <macro name="case-note">
