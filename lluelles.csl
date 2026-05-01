@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" default-locale="fr-CA">
+  <!-- TODO: Inutile de séparer macros -bib et -note quand la seule différence concerne l'exclusion des locators de la bibliographie, car cette dernière ne les inclut jamais. -->
   <info>
     <title>Guide des références pour la rédaction juridique 9e édition (Guide Lluelles, Français - Canada)</title>
     <title-short>Guide Lluelles v9</title-short>
@@ -39,6 +40,7 @@
     <terms>
       <term name="article-locator" form="short">art.</term>
       <term name="ibid" form="short">id.</term>
+      <term name="page" form="short">p.</term>
       <term name="paragraph" form="short">par.</term>
       <term name="chapter" form="short">ch.</term>
       <term name="editor" form="short">dir.</term>
@@ -306,8 +308,8 @@
           <if locator="chapter" type="legislation bill" match="all">
             <text variable="locator" prefix="c.&#160;"/>
           </if>
-          <!-- Localisateur de 1re page pour l'entrée en vigueur d'une loi (Guide Lluelles v9, p. 19), la réglementation (Id., p. 25, 27), les projets de règlements (Id., p. 29). -->
-          <else-if locator="page" type="legislation bill" match="all">
+          <!-- Localisateur de 1re page pour l'entrée en vigueur d'une loi (Guide Lluelles v9, p. 19), la réglementation (Id., p. 25, 27), les projets de règlements (Id., p. 29), les décisions publiées dans un recueil (Id., p. 65). -->
+          <else-if locator="page" type="legislation bill legal_case" match="all">
             <text variable="locator"/>
           </else-if>
           <!-- Localisateur de section pour la législation (Guide Lluelles v9, p. 12) et la réglementation des autres provinces et des territoires fédéraux (Id., p. 30).-->
@@ -910,141 +912,63 @@
       <text macro="article-newspaper-core"/>
     </group>
   </macro>
-  <macro name="case-note">
-    <group delimiter=", ">
+  <!--
+    Les macros `case-core`, `case-note` et `case-bib` sont utilisées avec le
+    type CSL `legal_case` pour:
+
+    - Les références neutres (Guide Lluelles v9, p. 55 et 72).
+    - Les décisions publiées dans un recueil (Id., p. 67).
+    - Les décisions publiées dans un recueil de résumés de jurisprudence (Id., p. 70).
+  -->
+  <macro name="case-core">
+    <group delimiter=" ">
       <choose>
-        <if variable="author">
+        <!-- `container-title` est le recueil. -->
+        <if variable="container-title">
+          <!-- Décision publiée dans un recueil. -->
           <group delimiter=", ">
-            <text variable="authority"/>
-            <text macro="issued"/>
-            <text variable="number"/>
+            <text variable="title" font-style="italic"/>
             <group delimiter=" ">
-              <text variable="title" font-style="italic"/>
-              <text variable="references" prefix="(" suffix=")"/>
-            </group>
-            <group delimiter=" ">
-              <text variable="container-title" font-style="italic"/>
-              <group delimiter=".">
-                <text variable="volume"/>
-                <text variable="page"/>
-              </group>
+              <text macro="issued-year" prefix="[" suffix="] "/>
+              <text variable="volume"/>
+              <!-- `container-title` est le recueil. -->
+              <text variable="container-title"/>
+              <!-- `page` est la première page ou le n° du résumé. -->
+              <text variable="page"/>
             </group>
             <text macro="citation-locators"/>
           </group>
-          <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
+          <!-- `authority` est la juridiction. -->
+          <text variable="authority" prefix="(" suffix=")"/>
         </if>
-        <else-if variable="title" match="none">
+        <else>
+          <!-- Référence neutre. -->
           <group delimiter=", ">
-            <text variable="authority"/>
-            <text macro="issued"/>
-            <text variable="number"/>
+            <text variable="title" font-style="italic"/>
             <group delimiter=" ">
-              <text variable="title" form="short" font-style="italic"/>
-              <text variable="references" prefix="(" suffix=")"/>
-            </group>
-            <group delimiter=" ">
-              <text variable="container-title" font-style="italic"/>
-              <group delimiter=".">
-                <text variable="volume"/>
-                <text variable="page"/>
-              </group>
+              <text macro="issued-year"/>
+              <!-- `authority` est le tribunal. -->
+              <text variable="authority"/>
+              <!-- `page` est le numéro de séquence. -->
+              <text variable="page"/>
             </group>
             <text macro="citation-locators"/>
           </group>
-        </else-if>
-        <else>
-          <text variable="title" font-style="italic" suffix=", "/>
-          <choose>
-            <if variable="container-title" match="none">
-              <group delimiter=", ">
-                <group delimiter=" ">
-                  <text macro="issued-year"/>
-                  <text variable="authority"/>
-                  <text variable="page"/>
-                </group>
-                <text macro="citation-locators"/>
-              </group>
-            </if>
-            <else>
-              <group delimiter=", ">
-                <group delimiter=" ">
-                  <text macro="issued-year" prefix="[" suffix="] "/>
-                  <text variable="volume"/>
-                  <text variable="container-title"/>
-                  <text variable="page"/>
-                </group>
-                <text macro="citation-locators"/>
-              </group>
-              <text variable="authority" prefix=" (" suffix=")"/>
-            </else>
-          </choose>
-          <text variable="references" prefix=" (" suffix=")"/>
-          <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
         </else>
       </choose>
-      <text macro="link"/>
+      <!-- `references` est l'histoire -->
+      <text variable="references" prefix="(" suffix=")"/>
+    </group>
+  </macro>
+  <macro name="case-note">
+    <group delimiter=" ">
+      <text macro="case-core"/>
+      <!-- TODO: Vérifier si `title-short` est pertinent. -->
+      <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
     </group>
   </macro>
   <macro name="case-bib">
-    <group delimiter=", ">
-      <choose>
-        <if variable="author">
-          <group delimiter=", ">
-            <text variable="authority"/>
-            <text macro="issued"/>
-            <text variable="number"/>
-            <group delimiter=" ">
-              <text variable="title" font-style="italic"/>
-              <text variable="references" prefix="(" suffix=")"/>
-            </group>
-            <group delimiter=" ">
-              <text variable="container-title" font-style="italic"/>
-              <group delimiter=".">
-                <text variable="volume"/>
-                <text variable="page"/>
-              </group>
-            </group>
-          </group>
-        </if>
-        <else-if variable="title" match="none">
-          <group delimiter=", ">
-            <text variable="authority"/>
-            <text macro="issued"/>
-            <text variable="number"/>
-            <group delimiter=" ">
-              <text variable="title" form="short" font-style="italic"/>
-              <text variable="references" prefix="(" suffix=")"/>
-            </group>
-            <group delimiter=" ">
-              <text variable="container-title" font-style="italic"/>
-              <group delimiter=".">
-                <text variable="volume"/>
-                <text variable="page"/>
-              </group>
-            </group>
-          </group>
-        </else-if>
-        <else>
-          <text variable="title" font-style="italic" suffix=", "/>
-          <choose>
-            <if variable="container-title" match="none">
-              <text macro="issued-year" suffix=" "/>
-              <text variable="authority" suffix=" "/>
-              <text variable="page"/>
-            </if>
-            <else>
-              <text macro="issued-year" prefix=" [" suffix="] "/>
-              <text variable="volume" suffix=" "/>
-              <text variable="container-title" suffix=" "/>
-              <text variable="page"/>
-              <text variable="authority" prefix=" (" suffix=")"/>
-            </else>
-          </choose>
-          <text variable="references" prefix=" (" suffix=")"/>
-        </else>
-      </choose>
-      <text macro="link"/>
-    </group>
+    <text macro="case-core"/>
   </macro>
   <!--
     Les macros `legislation-core`, `legislation-note` et `legislation-bib` sont utilisées avec le
