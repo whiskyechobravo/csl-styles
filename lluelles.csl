@@ -993,6 +993,7 @@
     - Les règlements des autres provinces et des territoires fédéraux (Id., p. 30).
     - Les règlements municipaux et autres règlements (Id., p. 31).
     - Les décrets administratifs, décisions et avis divers publiés dans une gazette (Id., p. 33).
+    - Les traitées et ententes internationales (Id., p. 199).
 
     La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
@@ -1038,12 +1039,13 @@
           <text macro="authors-note"/>
           <text macro="legislation-core"/>
           <text macro="citation-locators"/>
+          <text macro="link"/>
         </group>
+        <!-- `references` est l'information addtionnelle facultative, p. ex.: date d'entrée en vigueur. -->
         <text variable="references" prefix="(" suffix=")"/>
-        <!-- TODO: Vérifier si title-short est pertinent. -->
-        <text variable="title-short" prefix="[" suffix="]" font-style="italic"/>
+        <!-- `title-short` est le titre abrégé, p. ex.: `Traité relatif à l’espace` (Guide Lluelles v9, p. 200). -->
+        <text variable="title-short" prefix="[" suffix="]"/>
       </group>
-      <text macro="link"/>
     </group>
   </macro>
   <macro name="legislation-bib">
