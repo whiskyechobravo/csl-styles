@@ -531,18 +531,30 @@
     </group>
   </macro>
   <!--
-    Les macros `report-core`, `report-note` et `report-bib` sont utilisées
-    avec le type CSL `report` pour:
+    Les macros `report-note` et `report-bib` sont utilisées avec le type CSL `report` pour:
 
     - Les rapports parlementaires (Guide Lluelles v9, p. 19).
     - Les documents ou rapports d'organismes publics (Id., p. 102).
     - Les lois et codes annotés (Id., p. 113).
     - Les rapports, résolutions, décisions, procès-verbaux, comptes rendus de l'ONU (Id., p. 205).
     - Les documents de travail de l'Organisation mondiale du commerce (Id., p. 208).
+    - Les documents de travail d'autres organisations internationales (Id., p. 212).
+    - Les instruments juridiques d'autres organisations internationales (Id., p. 213).
+    - Les études et rapports d'autres organisations internationales (Id., p. 214).
   -->
-  <macro name="report-core">
+  <macro name="report-note">
     <group delimiter=", ">
+      <text macro="authors-note"/>
       <text variable="title" font-style="italic"/>
+      <choose>
+        <!-- Montrer les personnes ayant préparé le rapport (Guide Lluelles v9, p. 214). -->
+        <if variable="contributor">
+          <group delimiter=" ">
+            <text term="by"/>
+            <text macro="contributors-note"/>
+          </group>
+        </if>
+      </choose>
       <!-- `genre` est le type de rapport. -->
       <text variable="genre"/>
       <group delimiter=" ">
@@ -576,20 +588,50 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="report-note">
-    <group delimiter=" ">
-      <group delimiter=", ">
-        <text macro="authors-note"/>
-        <text macro="report-core"/>
-      </group>
-    </group>
-  </macro>
   <macro name="report-bib">
-    <group delimiter=" ">
-      <group delimiter=", ">
-        <text macro="authors-bib"/>
-        <text macro="report-core"/>
+    <group delimiter=", ">
+      <text macro="authors-bib"/>
+      <text variable="title" font-style="italic"/>
+      <choose>
+        <if variable="contributor">
+          <!-- Montrer les personnes ayant préparé le rapport (Guide Lluelles v9, p. 214). -->
+          <group delimiter=" ">
+            <text term="by"/>
+            <text macro="contributors-bib"/>
+          </group>
+        </if>
+      </choose>
+      <!-- `genre` est le type de rapport. -->
+      <text variable="genre"/>
+      <group delimiter=" ">
+        <choose>
+          <if variable="number">
+            <text variable="number"/>
+          </if>
+          <else>
+            <text variable="call-number"/>
+          </else>
+        </choose>
+        <choose>
+          <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
+          <if variable="number call-number" match="any">
+            <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+          </if>
+        </choose>
       </group>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
+      <text macro="collection-number"/>
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+      <choose>
+        <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
+        <if variable="number call-number" match="none">
+          <text macro="issued" text-case="lowercase"/>
+        </if>
+      </choose>
+      <text macro="page"/>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
     </group>
   </macro>
   <!--
