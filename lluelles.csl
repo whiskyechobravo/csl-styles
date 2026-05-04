@@ -196,7 +196,7 @@
   <macro name="collection-number">
     <choose>
       <if is-numeric="collection-number">
-        <text variable="collection-number" prefix="n°&#160;"/>
+        <text variable="collection-number" prefix="nº&#160;"/>
       </if>
       <else>
         <text variable="collection-number"/>
@@ -239,12 +239,12 @@
     </choose>
   </macro>
   <!--
-    La macro `issue` affiche le préfixe `n°` uniquement lorsque la valeur est numérique.
+    La macro `issue` affiche le préfixe `nº` uniquement lorsque la valeur est numérique.
   -->
   <macro name="issue">
     <choose>
       <if is-numeric="issue">
-        <text variable="issue" prefix="n°&#160;"/>
+        <text variable="issue" prefix="nº&#160;"/>
       </if>
       <else>
         <text variable="issue"/>
@@ -254,7 +254,7 @@
   <!--
     La macro `page` affiche le préfixe `p.` uniquement lorsque la valeur est numérique,
     de sorte à afficher intégralement les formes moins communes, p. ex.:
-    `n° 1035, p. 164 et 165` (Guide Lluelles v9, p. 100).
+    `nº 1035, p. 164 et 165` (Guide Lluelles v9, p. 100).
   -->
   <macro name="page">
     <choose>
@@ -270,13 +270,13 @@
     </choose>
   </macro>
   <!--
-    La macro `number-fascicule` affiche le préfixe `fascicule n°` uniquement lorsque la valeur est
+    La macro `number-fascicule` affiche le préfixe `fascicule nº` uniquement lorsque la valeur est
     numérique.
   -->
   <macro name="number-fascicule">
     <choose>
       <if is-numeric="number">
-        <text variable="number" prefix="fascicule n°&#160;"/>
+        <text variable="number" prefix="fascicule nº&#160;"/>
       </if>
       <else>
         <text variable="number"/>
@@ -355,7 +355,7 @@
             </choose>
           </else-if>
           <else-if locator="sub-verbo">
-            <text variable="locator" quotes="true" prefix="v°&#160;"/>
+            <text variable="locator" quotes="true" prefix="vº&#160;"/>
           </else-if>
           <!-- Pour tous les autres localisateurs, une espace insécable est insérée entre l'étiquette courte et la valeur. -->
           <else>
@@ -1003,7 +1003,7 @@
                 <text variable="volume"/>
                 <!-- `container-title` est le recueil. -->
                 <text variable="container-title"/>
-                <!-- `page` est la première page ou le n° du résumé. -->
+                <!-- `page` est la première page ou le nº du résumé. -->
                 <text variable="page"/>
               </group>
               <text macro="citation-locators"/>
@@ -1079,7 +1079,7 @@
           <choose>
             <!--
               `container-title` est le code, signale une loi ou un traité, renseigné avec recueil et chapitre,
-              p. ex.: `RLRQ, c. P-40.1` ou `Can./Mex./É.-U., [1994] R.T. Can. n° 2`.
+              p. ex.: `RLRQ, c. P-40.1` ou `Can./Mex./É.-U., [1994] R.T. Can. nº 2`.
             -->
             <if variable="container-title">
               <text variable="container-title"/>
@@ -1132,8 +1132,8 @@
           <group delimiter=" ">
             <group delimiter=", ">
               <text variable="title" font-style="italic"/>
-              <!-- `number` est le n° du projet de loi. -->
-              <text variable="number" prefix="projet de loi n°&#160;"/>
+              <!-- `number` est le nº du projet de loi. -->
+              <text variable="number" prefix="projet de loi nº&#160;"/>
             </group>
             <group delimiter=" — " prefix=" (" suffix=")">
               <!-- `references` est l'étape franchie du processus d'adoption, p. ex.: `Dépôt et 2e lecture`. -->
@@ -1361,8 +1361,8 @@
             <text variable="publisher-place"/>
             <text variable="publisher"/>
             <text variable="event"/>
-            <text variable="issue" prefix="n°&#160;"/>
-            <text variable="volume"/>
+            <text macro="issue"/>
+            <text macro="volume"/>
             <text macro="issued"/>
             <group>
               <label variable="page" form="short" suffix="&#160;"/>
@@ -1437,8 +1437,8 @@
             <text variable="publisher-place"/>
             <text variable="publisher"/>
             <text variable="event"/>
-            <text variable="issue" prefix="n°&#160;"/>
-            <text variable="volume"/>
+            <text macro="issue"/>
+            <text macro="volume"/>
             <text macro="issued"/>
             <group>
               <label variable="page" form="short" suffix="&#160;"/>
