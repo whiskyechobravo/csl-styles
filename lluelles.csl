@@ -415,6 +415,7 @@
     - Les lois et codes annotés (Id., p. 113).
     - Les dictionnaires et entrées de dictionnaires (Id., p. 114).
     - Les recueils de cours (Id., p. 114).
+    - Les rapports de l'ONU (Id., p. 205).
    -->
   <macro name="monograph-note">
     <group delimiter=", ">
@@ -437,13 +438,13 @@
           <text variable="title" font-style="italic"/>
         </else>
       </choose>
+      <!-- `number` est le numéro de rapport. -->
+      <text variable="number"/>
       <text macro="edition"/>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
       <!-- `genre` est le type de rapport. -->
       <text variable="genre"/>
-      <!-- `number` est le numéro de rapport. -->
-      <text variable="number"/>
       <group delimiter=" ">
         <text macro="volume"/>
         <text variable="volume-title" quotes="true"/>
@@ -506,13 +507,13 @@
           <text variable="title" font-style="italic"/>
         </else>
       </choose>
+      <!-- `number` est le numéro de rapport. -->
+      <text variable="number"/>
       <text macro="edition"/>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
       <!-- `genre` est le type de rapport. -->
       <text variable="genre"/>
-      <!-- `number` est le numéro de rapport. -->
-      <text variable="number"/>
       <group delimiter=" ">
         <text macro="volume"/>
         <text variable="volume-title" quotes="true"/>
