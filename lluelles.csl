@@ -416,161 +416,170 @@
     - Les dictionnaires et entrées de dictionnaires (Id., p. 114).
     - Les recueils de cours (Id., p. 114).
     - Les rapports, résolutions, décisions, procès-verbaux, comptes rendus de l'ONU (Id., p. 205).
+    - Les documents juridiques publiés de l'Organisation mondiale du commerce (Id., p. 207).
    -->
   <macro name="monograph-note">
-    <group delimiter=", ">
-      <text macro="authors-note"/>
-      <choose>
-        <!-- La présence à la fois d'un auteur et d'un collaborateur signalent une collaboration (Guide Lluelles v9, p. 96). -->
-        <if variable="author contributor" match="all">
-          <group delimiter=" ">
-            <text value="avec la collab. de"/>
-            <text macro="contributors-note"/>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if type="entry-dictionary">
-          <!-- Pour une entrée de dictionnaire, `title` est l'expression recherchée, mais ici on affiche le nom du dictionnaire. -->
-          <text variable="container-title" font-style="italic"/>
-        </if>
-        <else>
-          <text variable="title" font-style="italic"/>
-        </else>
-      </choose>
-      <group delimiter=" ">
-        <!-- `number` est le numéro de rapport. -->
-        <text variable="number"/>
+    <group delimiter=" ">
+      <group delimiter=", ">
+        <text macro="authors-note"/>
         <choose>
-          <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
-          <if type="report" variable="number" match="all">
-            <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+          <!-- La présence à la fois d'un auteur et d'un collaborateur signalent une collaboration (Guide Lluelles v9, p. 96). -->
+          <if variable="author contributor" match="all">
+            <group delimiter=" ">
+              <text value="avec la collab. de"/>
+              <text macro="contributors-note"/>
+            </group>
           </if>
         </choose>
-      </group>
-      <text macro="edition"/>
-      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
-      <text macro="translator"/>
-      <!-- `genre` est le type de rapport. -->
-      <text variable="genre"/>
-      <group delimiter=" ">
-        <text macro="volume"/>
-        <text variable="volume-title" quotes="true"/>
-      </group>
-      <choose>
-        <!-- L'absence d'auteur combinée à la présence d'un volume et d'un collaborateur signalent un document dont les volumes (ou tomes) ont été rédigés par différents auteurs (Guide Lluelles v9, p. 95). -->
-        <if variable="author" match="none">
+        <choose>
+          <if type="entry-dictionary">
+            <!-- Pour une entrée de dictionnaire, `title` est l'expression recherchée, mais ici on affiche le nom du dictionnaire. -->
+            <text variable="container-title" font-style="italic"/>
+          </if>
+          <else>
+            <text variable="title" font-style="italic"/>
+          </else>
+        </choose>
+        <group delimiter=" ">
+          <!-- `number` est le numéro de rapport. -->
+          <text variable="number"/>
           <choose>
-            <if variable="volume contributor" match="all">
-              <group delimiter=" ">
-                <text term="by"/>
-                <text macro="contributors-note"/>
-              </group>
+            <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
+            <if type="report" variable="number" match="all">
+              <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
             </if>
           </choose>
-        </if>
-      </choose>
-      <text variable="collection-title" quotes="true" prefix="coll. "/>
-      <text macro="collection-number"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <choose>
-        <if type="report">
-          <choose>
-            <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
-            <if variable="number" match="none">
-              <text macro="issued" text-case="lowercase"/>
-            </if>
-          </choose>
-        </if>
-        <else>
-          <text macro="issued-year"/>
-        </else>
-      </choose>
-      <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour mai 2017` -->
-      <text variable="medium" text-case="lowercase"/>
-      <choose>
-        <if type="entry-dictionary">
-          <!-- Pour une entrée de dictionnaire, `title` sert de localisateur. -->
-          <text variable="title" quotes="true"/>
-        </if>
-      </choose>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
+        </group>
+        <text macro="edition"/>
+        <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
+        <text macro="translator"/>
+        <!-- `genre` est le type de rapport. -->
+        <text variable="genre"/>
+        <group delimiter=" ">
+          <text macro="volume"/>
+          <text variable="volume-title" quotes="true"/>
+        </group>
+        <choose>
+          <!-- L'absence d'auteur combinée à la présence d'un volume et d'un collaborateur signalent un document dont les volumes (ou tomes) ont été rédigés par différents auteurs (Guide Lluelles v9, p. 95). -->
+          <if variable="author" match="none">
+            <choose>
+              <if variable="volume contributor" match="all">
+                <group delimiter=" ">
+                  <text term="by"/>
+                  <text macro="contributors-note"/>
+                </group>
+              </if>
+            </choose>
+          </if>
+        </choose>
+        <text variable="collection-title" quotes="true" prefix="coll. "/>
+        <text macro="collection-number"/>
+        <text variable="publisher-place"/>
+        <text variable="publisher"/>
+        <choose>
+          <if type="report">
+            <choose>
+              <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
+              <if variable="number" match="none">
+                <text macro="issued" text-case="lowercase"/>
+              </if>
+            </choose>
+          </if>
+          <else>
+            <text macro="issued-year"/>
+          </else>
+        </choose>
+        <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour mai 2017` -->
+        <text variable="medium" text-case="lowercase"/>
+        <choose>
+          <if type="entry-dictionary">
+            <!-- Pour une entrée de dictionnaire, `title` sert de localisateur. -->
+            <text variable="title" quotes="true"/>
+          </if>
+        </choose>
+        <text macro="citation-locators"/>
+        <text macro="link"/>
+      </group>
+      <!-- Certains documents juridiques publiés ont un titre abrégé, p. ex. l'Accord général sur les tarifs douaniers et le commerce de 1994 [GATT de 1994] (Guide Lluelles v9, p. 207). -->
+      <text variable="title-short" prefix="[" suffix="]"/>
     </group>
   </macro>
   <macro name="monograph-bib">
-    <group delimiter=", ">
-      <text macro="authors-bib"/>
-      <choose>
-        <!-- La présence à la fois d'un auteur et d'un collaborateur signalent une collaboration (Guide Lluelles v9, p. 96). -->
-        <if variable="author contributor" match="all">
-          <group delimiter=" ">
-            <text value="avec la collab. de"/>
-            <text macro="contributors-bib"/>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if type="entry-dictionary">
-          <!-- Pour une entrée de dictionnaire, `title` est l'expression recherchée, mais ici on affiche le nom du dictionnaire. -->
-          <text variable="container-title" font-style="italic"/>
-        </if>
-        <else>
-          <text variable="title" font-style="italic"/>
-        </else>
-      </choose>
-      <group delimiter=" ">
-        <!-- `number` est le numéro de rapport. -->
-        <text variable="number"/>
+    <group delimiter=" ">
+      <group delimiter=", ">
+        <text macro="authors-bib"/>
         <choose>
-          <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
-          <if type="report" variable="number" match="all">
-            <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+          <!-- La présence à la fois d'un auteur et d'un collaborateur signalent une collaboration (Guide Lluelles v9, p. 96). -->
+          <if variable="author contributor" match="all">
+            <group delimiter=" ">
+              <text value="avec la collab. de"/>
+              <text macro="contributors-bib"/>
+            </group>
           </if>
         </choose>
-      </group>
-      <text macro="edition"/>
-      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
-      <text macro="translator"/>
-      <!-- `genre` est le type de rapport. -->
-      <text variable="genre"/>
-      <group delimiter=" ">
-        <text macro="volume"/>
-        <text variable="volume-title" quotes="true"/>
-      </group>
-      <choose>
-        <!-- L'absence d'auteur combinée à la présence d'un volume et d'un collaborateur signalent un document dont les volumes (ou tomes) ont été rédigés par différents auteurs (Guide Lluelles v9, p. 95). -->
-        <if variable="author" match="none">
+        <choose>
+          <if type="entry-dictionary">
+            <!-- Pour une entrée de dictionnaire, `title` est l'expression recherchée, mais ici on affiche le nom du dictionnaire. -->
+            <text variable="container-title" font-style="italic"/>
+          </if>
+          <else>
+            <text variable="title" font-style="italic"/>
+          </else>
+        </choose>
+        <group delimiter=" ">
+          <!-- `number` est le numéro de rapport. -->
+          <text variable="number"/>
           <choose>
-            <if variable="volume contributor" match="all">
-              <group delimiter=" ">
-                <text term="by"/>
-                <text macro="contributors-bib"/>
-              </group>
+            <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
+            <if type="report" variable="number" match="all">
+              <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
             </if>
           </choose>
-        </if>
-      </choose>
-      <text variable="collection-title" quotes="true" prefix="coll. "/>
-      <text macro="collection-number"/>
-      <text variable="publisher-place"/>
-      <text variable="publisher"/>
-      <choose>
-        <if type="report">
-          <choose>
-            <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
-            <if variable="number" match="none">
-              <text macro="issued" text-case="lowercase"/>
-            </if>
-          </choose>
-        </if>
-        <else>
-          <text macro="issued-year"/>
-        </else>
-      </choose>
-      <text variable="medium" text-case="lowercase"/>
-      <text macro="link"/>
+        </group>
+        <text macro="edition"/>
+        <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
+        <text macro="translator"/>
+        <!-- `genre` est le type de rapport. -->
+        <text variable="genre"/>
+        <group delimiter=" ">
+          <text macro="volume"/>
+          <text variable="volume-title" quotes="true"/>
+        </group>
+        <choose>
+          <!-- L'absence d'auteur combinée à la présence d'un volume et d'un collaborateur signalent un document dont les volumes (ou tomes) ont été rédigés par différents auteurs (Guide Lluelles v9, p. 95). -->
+          <if variable="author" match="none">
+            <choose>
+              <if variable="volume contributor" match="all">
+                <group delimiter=" ">
+                  <text term="by"/>
+                  <text macro="contributors-bib"/>
+                </group>
+              </if>
+            </choose>
+          </if>
+        </choose>
+        <text variable="collection-title" quotes="true" prefix="coll. "/>
+        <text macro="collection-number"/>
+        <text variable="publisher-place"/>
+        <text variable="publisher"/>
+        <choose>
+          <if type="report">
+            <choose>
+              <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
+              <if variable="number" match="none">
+                <text macro="issued" text-case="lowercase"/>
+              </if>
+            </choose>
+          </if>
+          <else>
+            <text macro="issued-year"/>
+          </else>
+        </choose>
+        <text variable="medium" text-case="lowercase"/>
+        <text macro="link"/>
+      </group>
+      <!-- Certains documents juridiques publiés ont un titre abrégé, p. ex. l'Accord général sur les tarifs douaniers et le commerce de 1994 [GATT de 1994] (Guide Lluelles v9, p. 207). -->
+      <text variable="title-short" prefix="[" suffix="]"/>
     </group>
   </macro>
   <!--
