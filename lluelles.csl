@@ -419,7 +419,7 @@
     - Les documents juridiques publiés de l'Organisation mondiale du commerce (Id., p. 207).
     - Les documents de travail de l'Organisation mondiale du commerce (Id., p. 208).
    -->
-  <!-- TODO: Extract handling of reports into their own macros; many fields, e.g., `number`, `page`, have nothing to do with book or entry-dictionary -->
+  <!-- TODO: Extract handling of reports into their own macros; many fields, e.g., `number` and `genre` aren't available with book or entry-dictionary, `page` also isn't with book. -->
   <macro name="monograph-note">
     <group delimiter=" ">
       <group delimiter=", ">
