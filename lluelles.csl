@@ -995,6 +995,7 @@
     - Les règlements municipaux et autres règlements (Id., p. 31).
     - Les décrets administratifs, décisions et avis divers publiés dans une gazette (Id., p. 33).
     - Les traitées et ententes internationales (Id., p. 199).
+    - Les textes juridiques de l'Organisation mondiale du commerce (Id., p. 206).
 
     La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
@@ -1046,10 +1047,13 @@
     </group>
   </macro>
   <macro name="legislation-bib">
-    <group delimiter=", ">
-      <text macro="authors-bib"/>
-      <text macro="legislation-core"/>
-      <text macro="link"/>
+    <group delimiter=" ">
+      <group delimiter=", ">
+        <text macro="authors-bib"/>
+        <text macro="legislation-core"/>
+        <text macro="link"/>
+      </group>
+      <text variable="title-short" prefix="[" suffix="]"/>
     </group>
   </macro>
   <!--
