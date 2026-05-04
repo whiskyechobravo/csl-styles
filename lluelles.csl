@@ -988,18 +988,27 @@
     - La jurisprudence inédite des tribunaux judiciaires (Id., p. 78).
     - La jurisprudence inédite des organismes et tribunaux administratifs (Id., p. 79).
     - Les décisions du Conseil de la magistrature du Québec (Id., p. 82).
+    - Les décisions de tribunaux internationaux (Id., p. 216).
+    - Les décisions d'arbitrage international (Id., p. 222).
   -->
   <macro name="case-core">
     <group delimiter=", ">
       <group delimiter=" ">
         <choose>
           <!-- `container-title` est le recueil. -->
-          <if variable="container-title">
+          <if variable="container-title number" match="any">
             <!-- Décision publiée dans un recueil, dans une base de données ou un site Web. -->
             <group delimiter=", ">
               <text variable="title" font-style="italic"/>
+              <choose>
+                <if variable="number">
+                  <!-- Si `number` (le nº de requête) est présent, on applique la morphologie d'une décision de tribunal international. -->
+                  <text variable="number"/>
+                  <text variable="authority"/>
+                </if>
+              </choose>
               <group delimiter=" ">
-                <text macro="issued-year" prefix="[" suffix="] "/>
+                <text macro="issued-year" prefix="[" suffix="]"/>
                 <text variable="volume"/>
                 <!-- `container-title` est le recueil. -->
                 <text variable="container-title"/>
@@ -1008,8 +1017,12 @@
               </group>
               <text macro="citation-locators"/>
             </group>
-            <!-- `authority` est la juridiction. -->
-            <text variable="authority" prefix="(" suffix=")"/>
+            <choose>
+              <if variable="number" match="none">
+                <!-- `authority` est la juridiction, omise si cette variable a déjà été montrée ci-haut. -->
+                <text variable="authority" prefix="(" suffix=")"/>
+              </if>
+            </choose>
           </if>
           <else>
             <!-- Référence neutre. -->
