@@ -417,6 +417,7 @@
     - Les recueils de cours (Id., p. 114).
     - Les rapports, résolutions, décisions, procès-verbaux, comptes rendus de l'ONU (Id., p. 205).
     - Les documents juridiques publiés de l'Organisation mondiale du commerce (Id., p. 207).
+    - Les documents de travail de l'Organisation mondiale du commerce (Id., p. 208).
    -->
   <macro name="monograph-note">
     <group delimiter=" ">
@@ -440,16 +441,26 @@
             <text variable="title" font-style="italic"/>
           </else>
         </choose>
-        <group delimiter=" ">
-          <!-- `number` est le numéro de rapport. -->
-          <text variable="number"/>
-          <choose>
-            <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
-            <if type="report" variable="number" match="all">
-              <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
-            </if>
-          </choose>
-        </group>
+        <choose>
+          <if type="report">
+            <group delimiter=" ">
+              <choose>
+                <if variable="number">
+                  <text variable="number"/>
+                </if>
+                <else>
+                  <text variable="call-number"/>
+                </else>
+              </choose>
+              <choose>
+                <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
+                <if variable="number call-number" match="any">
+                  <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+                </if>
+              </choose>
+            </group>
+          </if>
+        </choose>
         <text macro="edition"/>
         <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
         <text macro="translator"/>
@@ -480,7 +491,7 @@
           <if type="report">
             <choose>
               <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
-              <if variable="number" match="none">
+              <if variable="number call-number" match="none">
                 <text macro="issued" text-case="lowercase"/>
               </if>
             </choose>
@@ -526,16 +537,26 @@
             <text variable="title" font-style="italic"/>
           </else>
         </choose>
-        <group delimiter=" ">
-          <!-- `number` est le numéro de rapport. -->
-          <text variable="number"/>
-          <choose>
-            <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
-            <if type="report" variable="number" match="all">
-              <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
-            </if>
-          </choose>
-        </group>
+        <choose>
+          <if type="report">
+            <group delimiter=" ">
+              <choose>
+                <if variable="number">
+                  <text variable="number"/>
+                </if>
+                <else>
+                  <text variable="call-number"/>
+                </else>
+              </choose>
+              <choose>
+                <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
+                <if variable="number call-number" match="any">
+                  <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+                </if>
+              </choose>
+            </group>
+          </if>
+        </choose>
         <text macro="edition"/>
         <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
         <text macro="translator"/>
@@ -566,7 +587,7 @@
           <if type="report">
             <choose>
               <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
-              <if variable="number" match="none">
+              <if variable="number call-number" match="none">
                 <text macro="issued" text-case="lowercase"/>
               </if>
             </choose>
