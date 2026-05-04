@@ -16,13 +16,13 @@
       <email>f.martin-bariteau@umontreal.ca</email>
       <uri>http://f-mb.github.io/cslegal/</uri>
     </author>
-    <contributor>
-      <name>Jean-Sebastien Sauve</name>
-    </contributor>
-    <contributor>
+    <author>
       <name>David Lesieur</name>
       <email>david@whiskyechobravo.com</email>
       <uri>https://whiskyechobravo.com</uri>
+    </author>
+    <contributor>
+      <name>Jean-Sebastien Sauve</name>
     </contributor>
     <contributor>
       <name>Université de Montréal</name>
@@ -30,6 +30,7 @@
     </contributor>
     <category citation-format="note"/>
     <category field="law"/>
+    <!-- TODO: Update summary; much information from the old site is no longer relevant -->
     <summary>This style may require use of specific fields in the reference manager. More infos: http://f-mb.github.io/cslegal/
       Ce style peut demander un usage particulier des champs du logiciel de gestion bibliographique. Plus d'infos: http://f-mb.github.io/cslegal/</summary>
     <updated>2026-04-09T20:00:00+00:00</updated>
@@ -38,13 +39,13 @@
   <locale xml:lang="fr">
     <terms>
       <term name="article-locator" form="short">art.</term>
-      <term name="ibid" form="short">id.</term>
-      <term name="page" form="short">p.</term>
-      <term name="paragraph" form="short">par.</term>
       <term name="chapter" form="short">ch.</term>
       <term name="editor" form="short">dir.</term>
-      <term name="translator" form="verb">traduit par</term>
+      <term name="ibid" form="short">id.</term>
       <term name="in">dans</term>
+      <term name="page" form="short">p.</term>
+      <term name="paragraph" form="short">par.</term>
+      <term name="translator" form="verb">traduit par</term>
     </terms>
   </locale>
   <!--
@@ -185,14 +186,6 @@
       </substitute>
     </names>
   </macro>
-  <macro name="translator">
-    <names variable="translator">
-      <label form="verb" suffix=" "/>
-      <name and="text" delimiter=", " delimiter-precedes-last="never">
-        <name-part name="family" font-variant="small-caps"/>
-      </name>
-    </names>
-  </macro>
   <macro name="collection-number">
     <choose>
       <if is-numeric="collection-number">
@@ -216,8 +209,7 @@
         </group>
       </if>
       <else>
-        <!-- TODO: Vérifier si le capitalize-first est pertinent. -->
-        <text variable="edition" text-case="capitalize-first"/>
+        <text variable="edition"/>
       </else>
     </choose>
   </macro>
@@ -450,8 +442,6 @@
           </else>
         </choose>
         <text macro="edition"/>
-        <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
-        <text macro="translator"/>
         <group delimiter=" ">
           <text macro="volume"/>
           <text variable="volume-title" quotes="true"/>
@@ -512,8 +502,6 @@
           </else>
         </choose>
         <text macro="edition"/>
-        <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
-        <text macro="translator"/>
         <group delimiter=" ">
           <text macro="volume"/>
           <text variable="volume-title" quotes="true"/>
@@ -582,7 +570,7 @@
         <choose>
           <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
           <if variable="number call-number" match="any">
-            <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+            <text macro="issued" prefix="(" suffix=")"/>
           </if>
         </choose>
       </group>
@@ -593,7 +581,7 @@
       <choose>
         <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
         <if variable="number call-number" match="none">
-          <text macro="issued" text-case="lowercase"/>
+          <text macro="issued"/>
         </if>
       </choose>
       <text macro="page"/>
@@ -628,7 +616,7 @@
         <choose>
           <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
           <if variable="number call-number" match="any">
-            <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+            <text macro="issued" prefix="(" suffix=")"/>
           </if>
         </choose>
       </group>
@@ -639,7 +627,7 @@
       <choose>
         <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
         <if variable="number call-number" match="none">
-          <text macro="issued" text-case="lowercase"/>
+          <text macro="issued"/>
         </if>
       </choose>
       <text macro="page"/>
@@ -656,8 +644,6 @@
   <macro name="chapter-core">
     <group delimiter=", ">
       <text macro="edition"/>
-      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
-      <text macro="translator"/>
       <group delimiter=" ">
         <text macro="volume"/>
         <text variable="volume-title" quotes="true"/>
@@ -755,8 +741,6 @@
         </if>
       </choose>
       <text macro="edition"/>
-      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
-      <text macro="translator"/>
       <text variable="publisher-place"/>
       <text variable="publisher"/>
       <text macro="issued-year"/>
@@ -796,8 +780,6 @@
           </group>
         </if>
       </choose>
-      <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
-      <text macro="translator"/>
       <text variable="collection-title" quotes="true" prefix="coll. "/>
       <text macro="volume" font-style="italic"/>
       <text macro="page"/>
@@ -1266,6 +1248,61 @@
       <text macro="hearing-core"/>
     </group>
   </macro>
+  <!--
+    Les macros `default-core`, `default-note` et `default-bib` sont utilisées pour les types CSL
+    non couverts par des macros spécifiques (et non couverts par le Guide Lluelles v9).
+  -->
+  <macro name="default-core">
+    <group delimiter=", ">
+      <choose>
+        <if variable="container-title">
+          <text variable="title" quotes="true"/>
+        </if>
+        <else>
+          <text variable="title" font-style="italic"/>
+        </else>
+      </choose>
+      <text variable="genre"/>
+      <text variable="container-title" form="short" font-style="italic"/>
+      <text variable="number"/>
+      <text macro="edition"/>
+      <group delimiter=" ">
+        <text macro="volume"/>
+        <text variable="volume-title" quotes="true"/>
+      </group>
+      <text macro="issue"/>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
+      <text macro="collection-number"/>
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+      <text macro="issued"/>
+      <text variable="medium" text-case="lowercase"/>
+      <text macro="page"/>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
+    </group>
+  </macro>
+  <macro name="default-note">
+    <group delimiter=" ">
+      <group delimiter=", ">
+        <text macro="authors-note"/>
+        <text macro="default-core"/>
+      </group>
+      <text variable="source" prefix="(" suffix=")"/>
+      <text variable="references" prefix="(" suffix=")"/>
+      <text variable="title-short" prefix="[" suffix="]"/>
+    </group>
+  </macro>
+  <macro name="default-bib">
+    <group delimiter=" ">
+      <group delimiter=", ">
+        <text macro="authors-bib"/>
+        <text macro="default-core"/>
+      </group>
+      <text variable="source" prefix="(" suffix=")"/>
+      <text variable="title-short" prefix="[" suffix="]"/>
+    </group>
+  </macro>
   <citation et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" delimiter-precedes-et-al="never">
     <layout suffix="." delimiter="; ">
       <choose>
@@ -1360,30 +1397,7 @@
           <text macro="entry-encyclopedia-note"/>
         </else-if>
         <else>
-          <!-- TODO: Faire macro pour partie commune note/bib -->
-          <!-- TODO: Solution de repli mieux adaptée au Guide Lluelles. -->
-          <group delimiter=", ">
-            <text macro="authors-note"/>
-            <text variable="title" font-style="italic"/>
-            <text macro="editors-note"/>
-            <text variable="container-title" font-style="italic"/>
-            <text macro="translator"/>
-            <text variable="genre"/>
-            <text variable="collection-title" quotes="true" prefix="coll. "/>
-            <text macro="collection-number"/>
-            <text variable="publisher-place"/>
-            <text variable="publisher"/>
-            <text variable="event"/>
-            <text macro="issue"/>
-            <text macro="volume"/>
-            <text macro="issued"/>
-            <group>
-              <label variable="page" form="short" suffix="&#160;"/>
-              <text variable="page"/>
-            </group>
-            <text macro="citation-locators"/>
-            <text macro="link"/>
-          </group>
+          <text macro="default-note"/>
         </else>
       </choose>
     </layout>
@@ -1436,28 +1450,7 @@
           <text macro="entry-encyclopedia-bib"/>
         </else-if>
         <else>
-          <!-- TODO: Faire macro pour partie commune note/bib -->
-          <!-- TODO: Solution de repli mieux adaptée au Guide Lluelles. -->
-          <text macro="authors-bib"/>
-          <group delimiter=", ">
-            <text variable="title" font-style="italic"/>
-            <text macro="editors-bib"/>
-            <text variable="container-title"/>
-            <text macro="translator"/>
-            <text variable="genre"/>
-            <text variable="collection-title" quotes="true" prefix="coll. "/>
-            <text macro="collection-number"/>
-            <text variable="publisher-place"/>
-            <text variable="publisher"/>
-            <text variable="event"/>
-            <text macro="issue"/>
-            <text macro="volume"/>
-            <text macro="issued"/>
-            <group>
-              <label variable="page" form="short" suffix="&#160;"/>
-              <text variable="page"/>
-            </group>
-          </group>
+          <text macro="default-bib"/>
         </else>
       </choose>
     </layout>
