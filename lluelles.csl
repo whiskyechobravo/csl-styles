@@ -404,22 +404,17 @@
   </macro>
   <!--
     Les macros `monograph-note` et `monograph-bib` sont utilisées avec les
-    types CSL `book`, `report` et `entry-dictionary` pour:
+    types CSL `book` et `entry-dictionary` pour:
 
     - Les monographies (Guide Lluelles v9, p. 92).
-    - Les rapports parlementaires (Id., p. 19).
     - Les ouvrages collectifs (Id., p. 98).
     - Les conférences publiées séparément (Id., p. 102).
-    - Les documents ou rapports d'organismes publics (Id., p. 102).
     - Les thèses de doctorat et mémoires de maîtrise édités (Id., p. 112).
     - Les lois et codes annotés (Id., p. 113).
     - Les dictionnaires et entrées de dictionnaires (Id., p. 114).
     - Les recueils de cours (Id., p. 114).
-    - Les rapports, résolutions, décisions, procès-verbaux, comptes rendus de l'ONU (Id., p. 205).
     - Les documents juridiques publiés de l'Organisation mondiale du commerce (Id., p. 207).
-    - Les documents de travail de l'Organisation mondiale du commerce (Id., p. 208).
    -->
-  <!-- TODO: Extract handling of reports into their own macros; many fields, e.g., `number` and `genre` aren't available with book or entry-dictionary, `page` also isn't with book. -->
   <macro name="monograph-note">
     <group delimiter=" ">
       <group delimiter=", ">
@@ -441,28 +436,6 @@
           <else>
             <text variable="title" font-style="italic"/>
           </else>
-        </choose>
-        <choose>
-          <if type="report">
-            <!-- `genre` est le type de rapport. -->
-            <text variable="genre"/>
-            <group delimiter=" ">
-              <choose>
-                <if variable="number">
-                  <text variable="number"/>
-                </if>
-                <else>
-                  <text variable="call-number"/>
-                </else>
-              </choose>
-              <choose>
-                <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
-                <if variable="number call-number" match="any">
-                  <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
-                </if>
-              </choose>
-            </group>
-          </if>
         </choose>
         <text macro="edition"/>
         <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
@@ -488,19 +461,7 @@
         <text macro="collection-number"/>
         <text variable="publisher-place"/>
         <text variable="publisher"/>
-        <choose>
-          <if type="report">
-            <choose>
-              <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
-              <if variable="number call-number" match="none">
-                <text macro="issued" text-case="lowercase"/>
-              </if>
-            </choose>
-          </if>
-          <else>
-            <text macro="issued-year"/>
-          </else>
-        </choose>
+        <text macro="issued-year"/>
         <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour mai 2017` -->
         <text variable="medium" text-case="lowercase"/>
         <choose>
@@ -509,7 +470,6 @@
             <text variable="title" quotes="true"/>
           </if>
         </choose>
-        <text macro="page"/>
         <text macro="citation-locators"/>
         <text macro="link"/>
       </group>
@@ -539,28 +499,6 @@
             <text variable="title" font-style="italic"/>
           </else>
         </choose>
-        <choose>
-          <if type="report">
-            <!-- `genre` est le type de rapport. -->
-            <text variable="genre"/>
-            <group delimiter=" ">
-              <choose>
-                <if variable="number">
-                  <text variable="number"/>
-                </if>
-                <else>
-                  <text variable="call-number"/>
-                </else>
-              </choose>
-              <choose>
-                <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
-                <if variable="number call-number" match="any">
-                  <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
-                </if>
-              </choose>
-            </group>
-          </if>
-        </choose>
         <text macro="edition"/>
         <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
         <text macro="translator"/>
@@ -585,25 +523,74 @@
         <text macro="collection-number"/>
         <text variable="publisher-place"/>
         <text variable="publisher"/>
-        <choose>
-          <if type="report">
-            <choose>
-              <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
-              <if variable="number call-number" match="none">
-                <text macro="issued" text-case="lowercase"/>
-              </if>
-            </choose>
-          </if>
-          <else>
-            <text macro="issued-year"/>
-          </else>
-        </choose>
+        <text macro="issued-year"/>
         <text variable="medium" text-case="lowercase"/>
-        <text macro="page"/>
         <text macro="link"/>
       </group>
       <!-- Certains documents juridiques publiés ont un titre abrégé, p. ex. l'Accord général sur les tarifs douaniers et le commerce de 1994 [GATT de 1994] (Guide Lluelles v9, p. 207). -->
       <text variable="title-short" prefix="[" suffix="]"/>
+    </group>
+  </macro>
+  <!--
+    Les macros `report-core`, `report-note` et `report-bib` sont utilisées
+    avec le type CSL `report` pour:
+
+    - Les rapports parlementaires (Id., p. 19).
+    - Les documents ou rapports d'organismes publics (Id., p. 102).
+    - Les lois et codes annotés (Id., p. 113).
+    - Les rapports, résolutions, décisions, procès-verbaux, comptes rendus de l'ONU (Id., p. 205).
+    - Les documents de travail de l'Organisation mondiale du commerce (Id., p. 208).
+  -->
+  <macro name="report-core">
+    <group delimiter=", ">
+      <text variable="title" font-style="italic"/>
+      <!-- `genre` est le type de rapport. -->
+      <text variable="genre"/>
+      <group delimiter=" ">
+        <choose>
+          <if variable="number">
+            <text variable="number"/>
+          </if>
+          <else>
+            <text variable="call-number"/>
+          </else>
+        </choose>
+        <choose>
+          <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
+          <if variable="number call-number" match="any">
+            <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+          </if>
+        </choose>
+      </group>
+      <text variable="collection-title" quotes="true" prefix="coll. "/>
+      <text macro="collection-number"/>
+      <text variable="publisher-place"/>
+      <text variable="publisher"/>
+      <choose>
+        <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
+        <if variable="number call-number" match="none">
+          <text macro="issued" text-case="lowercase"/>
+        </if>
+      </choose>
+      <text macro="page"/>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
+    </group>
+  </macro>
+  <macro name="report-note">
+    <group delimiter=" ">
+      <group delimiter=", ">
+        <text macro="authors-note"/>
+        <text macro="report-core"/>
+      </group>
+    </group>
+  </macro>
+  <macro name="report-bib">
+    <group delimiter=" ">
+      <group delimiter=", ">
+        <text macro="authors-bib"/>
+        <text macro="report-core"/>
+      </group>
     </group>
   </macro>
   <!--
@@ -1334,8 +1321,11 @@
         <else-if type="paper-conference">
           <text macro="paper-conference-note"/>
         </else-if>
-        <else-if type="book report entry-dictionary" match="any">
+        <else-if type="book entry-dictionary" match="any">
           <text macro="monograph-note"/>
+        </else-if>
+        <else-if type="report">
+          <text macro="report-note"/>
         </else-if>
         <else-if type="article-newspaper webpage post post-weblog" match="any">
           <text macro="article-newspaper-note"/>
@@ -1407,8 +1397,11 @@
         <else-if type="paper-conference">
           <text macro="paper-conference-bib"/>
         </else-if>
-        <else-if type="book report entry-dictionary" match="any">
+        <else-if type="book entry-dictionary" match="any">
           <text macro="monograph-bib"/>
+        </else-if>
+        <else-if type="report">
+          <text macro="report-bib"/>
         </else-if>
         <else-if type="article-newspaper webpage post post-weblog" match="any">
           <text macro="article-newspaper-bib"/>
