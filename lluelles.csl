@@ -435,7 +435,7 @@
         </choose>
         <choose>
           <if type="entry-dictionary">
-            <!-- Pour une entrée de dictionnaire, `title` est l'expression recherchée, mais ici on affiche le nom du dictionnaire. -->
+            <!-- `title` est l'intitulé de l'entrée, mais ici on montre plutôt le nom du dictionnaire. -->
             <text variable="container-title" font-style="italic"/>
           </if>
           <else>
@@ -505,7 +505,7 @@
         <text variable="medium" text-case="lowercase"/>
         <choose>
           <if type="entry-dictionary">
-            <!-- Pour une entrée de dictionnaire, `title` sert de localisateur. -->
+            <!-- `title` est l'intitulé de l'entrée et fait en quelque sorte office de localisateur. -->
             <text variable="title" quotes="true"/>
           </if>
         </choose>
@@ -532,7 +532,7 @@
         </choose>
         <choose>
           <if type="entry-dictionary">
-            <!-- Pour une entrée de dictionnaire, `title` est l'expression recherchée, mais ici on affiche le nom du dictionnaire. -->
+            <!-- `title` est l'intitulé de l'entrée, mais ici on montre plutôt le nom du dictionnaire. -->
             <text variable="container-title" font-style="italic"/>
           </if>
           <else>
