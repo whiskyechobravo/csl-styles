@@ -419,6 +419,7 @@
     - Les documents juridiques publiés de l'Organisation mondiale du commerce (Id., p. 207).
     - Les documents de travail de l'Organisation mondiale du commerce (Id., p. 208).
    -->
+  <!-- TODO: Extract handling of reports into their own macros; many fields, e.g., `number`, `page`, have nothing to do with book or entry-dictionary -->
   <macro name="monograph-note">
     <group delimiter=" ">
       <group delimiter=", ">
@@ -443,6 +444,8 @@
         </choose>
         <choose>
           <if type="report">
+            <!-- `genre` est le type de rapport. -->
+            <text variable="genre"/>
             <group delimiter=" ">
               <choose>
                 <if variable="number">
@@ -464,8 +467,6 @@
         <text macro="edition"/>
         <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
         <text macro="translator"/>
-        <!-- `genre` est le type de rapport. -->
-        <text variable="genre"/>
         <group delimiter=" ">
           <text macro="volume"/>
           <text variable="volume-title" quotes="true"/>
@@ -508,6 +509,7 @@
             <text variable="title" quotes="true"/>
           </if>
         </choose>
+        <text macro="page"/>
         <text macro="citation-locators"/>
         <text macro="link"/>
       </group>
@@ -539,6 +541,8 @@
         </choose>
         <choose>
           <if type="report">
+            <!-- `genre` est le type de rapport. -->
+            <text variable="genre"/>
             <group delimiter=" ">
               <choose>
                 <if variable="number">
@@ -560,8 +564,6 @@
         <text macro="edition"/>
         <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
         <text macro="translator"/>
-        <!-- `genre` est le type de rapport. -->
-        <text variable="genre"/>
         <group delimiter=" ">
           <text macro="volume"/>
           <text variable="volume-title" quotes="true"/>
@@ -597,6 +599,7 @@
           </else>
         </choose>
         <text variable="medium" text-case="lowercase"/>
+        <text macro="page"/>
         <text macro="link"/>
       </group>
       <!-- Certains documents juridiques publiés ont un titre abrégé, p. ex. l'Accord général sur les tarifs douaniers et le commerce de 1994 [GATT de 1994] (Guide Lluelles v9, p. 207). -->
