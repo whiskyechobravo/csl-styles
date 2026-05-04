@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" default-locale="fr-CA">
-  <!-- TODO: Inutile de séparer macros -bib et -note quand la seule différence concerne l'exclusion des locators de la bibliographie, car cette dernière ne les inclut jamais. -->
   <info>
     <title>Guide des références pour la rédaction juridique 9e édition (Guide Lluelles, Français - Canada)</title>
     <title-short>Guide Lluelles v9</title-short>
@@ -535,7 +534,7 @@
     Les macros `report-core`, `report-note` et `report-bib` sont utilisées
     avec le type CSL `report` pour:
 
-    - Les rapports parlementaires (Id., p. 19).
+    - Les rapports parlementaires (Guide Lluelles v9, p. 19).
     - Les documents ou rapports d'organismes publics (Id., p. 102).
     - Les lois et codes annotés (Id., p. 113).
     - Les rapports, résolutions, décisions, procès-verbaux, comptes rendus de l'ONU (Id., p. 205).
@@ -616,6 +615,8 @@
       <text macro="page"/>
       <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour au 15 juin 2013` -->
       <text variable="medium" text-case="lowercase"/>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="chapter-note">
@@ -641,10 +642,7 @@
           </group>
         </if>
       </choose>
-      <!-- TODO: Tous les appels à citation-locators pourraient aller dans les macros -core, car les locators sont sans effet dans les bibliographies -->
       <text macro="chapter-core"/>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
     </group>
   </macro>
   <macro name="chapter-bib">
@@ -671,7 +669,6 @@
         </if>
       </choose>
       <text macro="chapter-core"/>
-      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -711,21 +708,20 @@
       <text macro="page"/>
       <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour au 15 juin 2013` -->
       <text variable="medium" text-case="lowercase"/>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="paper-conference-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text macro="paper-conference-core"/>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
     </group>
   </macro>
   <macro name="paper-conference-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="paper-conference-core"/>
-      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -756,21 +752,20 @@
       <text variable="publisher"/>
       <!-- `medium` est le format, p. ex. `feuilles mobiles, à jour au 15 juin 2013` -->
       <text variable="medium" text-case="lowercase"/>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="entry-encyclopedia-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text macro="entry-encyclopedia-core"/>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
     </group>
   </macro>
   <macro name="entry-encyclopedia-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="entry-encyclopedia-core"/>
-      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -789,21 +784,20 @@
       <!-- `publisher` est le nom de l'institution.-->
       <text variable="publisher"/>
       <text macro="issued-year"/>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="thesis-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text macro="thesis-core"/>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
     </group>
   </macro>
   <macro name="thesis-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="thesis-core"/>
-      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -850,21 +844,20 @@
           <text macro="page"/>
         </else>
       </choose>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="article-journal-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text macro="article-journal-core"/>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
     </group>
   </macro>
   <macro name="article-journal-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="article-journal-core"/>
-      <text macro="link"/>
     </group>
   </macro>
   <!-- TODO: Voir Guide Lluelles v9, p. 215 -->
@@ -1017,11 +1010,7 @@
     </group>
   </macro>
   <macro name="case-note">
-    <group delimiter=" ">
-      <text macro="case-core"/>
-      <!-- TODO: Vérifier si `title-short` est pertinent. -->
-      <text variable="title-short" prefix=" [" suffix="]" font-style="italic"/>
-    </group>
+    <text macro="case-core"/>
   </macro>
   <macro name="case-bib">
     <text macro="case-core"/>
@@ -1074,6 +1063,8 @@
           <!-- TODO: Traitement par défaut pour `volume` et `number`? -->
         </else>
       </choose>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
     </group>
   </macro>
   <macro name="legislation-note">
@@ -1082,8 +1073,6 @@
         <group delimiter=", ">
           <text macro="authors-note"/>
           <text macro="legislation-core"/>
-          <text macro="citation-locators"/>
-          <text macro="link"/>
         </group>
         <!-- `references` est l'information addtionnelle facultative, p. ex.: date d'entrée en vigueur. -->
         <text variable="references" prefix="(" suffix=")"/>
@@ -1097,7 +1086,6 @@
       <group delimiter=", ">
         <text macro="authors-bib"/>
         <text macro="legislation-core"/>
-        <text macro="link"/>
       </group>
       <text variable="title-short" prefix="[" suffix="]"/>
     </group>
@@ -1112,10 +1100,10 @@
     La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
   <macro name="bill-core">
-    <choose>
-      <!-- `chapter-number` est la session et signale un projet de loi. -->
-      <if variable="chapter-number">
-        <group delimiter=", ">
+    <group delimiter=", ">
+      <choose>
+        <!-- `chapter-number` est la session et signale un projet de loi. -->
+        <if variable="chapter-number">
           <group delimiter=" ">
             <group delimiter=", ">
               <text variable="title" font-style="italic"/>
@@ -1134,11 +1122,9 @@
             <!-- `authority` est le corps législatif, p. ex.: `Qc`. -->
             <text variable="authority" prefix="(" suffix=")"/>
           </group>
-        </group>
-      </if>
-      <!-- `volume` est le volume de code, `container-title` le code; si l'un ou l'autre est renseigné, on le traite comme un projet de règlement. -->
-      <else-if variable="volume container-title" match="any">
-        <group delimiter=", ">
+        </if>
+        <!-- `volume` est le volume de code, `container-title` le code; si l'un ou l'autre est renseigné, on le traite comme un projet de règlement. -->
+        <else-if variable="volume container-title" match="any">
           <group delimiter=" ">
             <text variable="title" font-style="italic"/>
             <text value="(projet)"/>
@@ -1151,11 +1137,9 @@
             <text variable="container-title"/>
           </group>
           <text variable="page"/>
-        </group>
-      </else-if>
-      <else>
-        <!-- TODO: Déterminer stratégie de repli; projets de lois étrangers? -->
-        <group delimiter=", ">
+        </else-if>
+        <else>
+          <!-- TODO: Déterminer stratégie de repli; projets de lois étrangers? -->
           <group delimiter=" ">
             <group delimiter=", ">
               <text variable="title" font-style="italic"/>
@@ -1169,27 +1153,22 @@
           <text variable="authority"/>
           <text variable="container-title"/>
           <text variable="section"/>
-        </group>
-      </else>
-    </choose>
+        </else>
+      </choose>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
+    </group>
   </macro>
   <macro name="bill-note">
     <group delimiter=", ">
-      <group delimiter=" ">
-        <group delimiter=", ">
-          <text macro="authors-note"/>
-          <text macro="bill-core"/>
-          <text macro="citation-locators"/>
-        </group>
-      </group>
-      <text macro="link"/>
+      <text macro="authors-note"/>
+      <text macro="bill-core"/>
     </group>
   </macro>
   <macro name="bill-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="bill-core"/>
-      <text macro="link"/>
     </group>
   </macro>
   <!--
@@ -1202,48 +1181,51 @@
   -->
   <macro name="hearing-core">
     <group delimiter=", ">
-      <text variable="title" font-style="italic"/>
-      <!-- `section` est la commission ou le comité. -->
-      <text variable="section"/>
-      <!-- `chapter-number` est la session codée au long, p. ex.: `2e sess., 31e légis.`. -->
-      <text variable="chapter-number"/>
-      <!-- `number` est le numéro de document. -->
-      <text macro="number-fascicule"/>
-      <text macro="issued"/>
-      <!-- `volume` est codé au long, p. ex.: `tome 12` -->
-      <text variable="volume"/>
-      <!-- `event-title` est le sujet. -->
-      <text variable="event-title" quotes="true"/>
-      <choose>
-        <!-- Afficher la page si disponible, sinon afficher l'heure, mais jamais les deux.-->
-        <if variable="page">
-          <group>
-            <label variable="page" form="short" suffix="&#160;"/>
-            <text variable="page"/>
-          </group>
-        </if>
-        <else>
-          <!-- `part-title` est l'heure -->
-          <text variable="part-title"/>
-        </else>
-      </choose>
+      <group delimiter=" ">
+        <group delimiter=", ">
+          <text variable="title" font-style="italic"/>
+          <!-- `section` est la commission ou le comité. -->
+          <text variable="section"/>
+          <!-- `chapter-number` est la session codée au long, p. ex.: `2e sess., 31e légis.`. -->
+          <text variable="chapter-number"/>
+          <!-- `number` est le numéro de document. -->
+          <text macro="number-fascicule"/>
+          <text macro="issued"/>
+          <!-- `volume` est codé au long, p. ex.: `tome 12` -->
+          <text variable="volume"/>
+          <!-- `event-title` est le sujet. -->
+          <text variable="event-title" quotes="true"/>
+          <choose>
+            <!-- Afficher la page si disponible, sinon afficher l'heure, mais jamais les deux.-->
+            <if variable="page">
+              <group>
+                <label variable="page" form="short" suffix="&#160;"/>
+                <text variable="page"/>
+              </group>
+            </if>
+            <else>
+              <!-- `part-title` est l'heure -->
+              <text variable="part-title"/>
+            </else>
+          </choose>
+        </group>
+        <!-- Le collaborateur est le nom de l'orateur. -->
+        <text macro="contributors-plain" prefix="(" suffix=")" />
+      </group>
+      <text macro="citation-locators"/>
+      <text macro="link"/>
     </group>
-    <!-- Le collaborateur est le nom de l'orateur. -->
-    <text macro="contributors-plain" prefix=" (" suffix=")" />
   </macro>
   <macro name="hearing-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
       <text macro="hearing-core"/>
-      <text macro="citation-locators"/>
-      <text macro="link"/>
     </group>
   </macro>
   <macro name="hearing-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
       <text macro="hearing-core"/>
-      <text macro="link"/>
     </group>
   </macro>
   <citation et-al-subsequent-min="4" et-al-subsequent-use-first="1" disambiguate-add-names="true" delimiter-precedes-et-al="never">
