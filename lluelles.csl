@@ -415,7 +415,7 @@
     - Les lois et codes annotés (Id., p. 113).
     - Les dictionnaires et entrées de dictionnaires (Id., p. 114).
     - Les recueils de cours (Id., p. 114).
-    - Les rapports de l'ONU (Id., p. 205).
+    - Les rapports, résolutions, décisions, procès-verbaux, comptes rendus de l'ONU (Id., p. 205).
    -->
   <macro name="monograph-note">
     <group delimiter=", ">
@@ -438,8 +438,16 @@
           <text variable="title" font-style="italic"/>
         </else>
       </choose>
-      <!-- `number` est le numéro de rapport. -->
-      <text variable="number"/>
+      <group delimiter=" ">
+        <!-- `number` est le numéro de rapport. -->
+        <text variable="number"/>
+        <choose>
+          <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
+          <if type="report" variable="number" match="all">
+            <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+          </if>
+        </choose>
+      </group>
       <text macro="edition"/>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
@@ -468,7 +476,12 @@
       <text variable="publisher"/>
       <choose>
         <if type="report">
-          <text macro="issued" text-case="lowercase"/>
+          <choose>
+            <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
+            <if variable="number" match="none">
+              <text macro="issued" text-case="lowercase"/>
+            </if>
+          </choose>
         </if>
         <else>
           <text macro="issued-year"/>
@@ -478,7 +491,7 @@
       <text variable="medium" text-case="lowercase"/>
       <choose>
         <if type="entry-dictionary">
-          <!-- Pour une entrée de dictionnaire, `title` est l'expression recherché. -->
+          <!-- Pour une entrée de dictionnaire, `title` sert de localisateur. -->
           <text variable="title" quotes="true"/>
         </if>
       </choose>
@@ -507,8 +520,16 @@
           <text variable="title" font-style="italic"/>
         </else>
       </choose>
-      <!-- `number` est le numéro de rapport. -->
-      <text variable="number"/>
+      <group delimiter=" ">
+        <!-- `number` est le numéro de rapport. -->
+        <text variable="number"/>
+        <choose>
+          <!-- Montrer la date entre parenthèses si le rapport est numéroté, p. ex.: rapport de l'ONU. -->
+          <if type="report" variable="number" match="all">
+            <text macro="issued" text-case="lowercase" prefix="(" suffix=")"/>
+          </if>
+        </choose>
+      </group>
       <text macro="edition"/>
       <!-- TODO: Vérifier ce que dit Lluelles sur les traductions. -->
       <text macro="translator"/>
@@ -537,7 +558,12 @@
       <text variable="publisher"/>
       <choose>
         <if type="report">
-          <text macro="issued" text-case="lowercase"/>
+          <choose>
+            <!-- Si le rapport est numéroté, p. ex.: rapport de l'ONU, ne pas montrer à nouveau la date. -->
+            <if variable="number" match="none">
+              <text macro="issued" text-case="lowercase"/>
+            </if>
+          </choose>
         </if>
         <else>
           <text macro="issued-year"/>
