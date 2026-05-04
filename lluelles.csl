@@ -1002,8 +1002,8 @@
     <group delimiter=", ">
       <text variable="title" font-style="italic"/>
       <choose>
-        <!-- Un champ `page` renseigné signale une citation alternative, p. ex.: législation américaine codifiée. -->
         <if variable="page">
+          <!-- Un champ `page` renseigné signale une citation alternative, p. ex.: législation américaine codifiée. -->
           <group delimiter=" ">
             <text variable="section"/>
             <text variable="container-title"/>
@@ -1012,23 +1012,17 @@
           </group>
           <text variable="number"/>
         </if>
-        <!-- Mode de citation par défaut. -->
         <else>
-          <group delimiter=" ">
-            <choose>
-              <!-- TODO: Ça semble servir à distinguer les règlements; pourquoi ne pas remonter la condition sous celle qui vérifie la page? -->
-              <if variable="container-title number" match="none">
-                <text macro="issued"/>
-              </if>
-              <else>
-                <text macro="issued-year" prefix="(" suffix=")"/>
-              </else>
-            </choose>
-            <!-- `container-title` est le champ Code, codé avec recueil et chapitre, p. ex.: `RLRQ, c. P-40.1`. -->
-            <text variable="container-title"/>
-          </group>
-          <text variable="section"/>
-          <text variable="number"/>
+          <!-- Mode de citation par défaut. -->
+          <text macro="issued"/>
+          <choose>
+            <!-- `container-title` est le code, signale une loi, renseignée avec recueil et chapitre, p. ex.: `RLRQ, c. P-40.1`. -->
+            <if variable="container-title">
+              <!-- <text macro="issued-year" prefix="(" suffix=")"/> -->
+              <text variable="container-title"/>
+            </if>
+          </choose>
+          <!-- TODO: Traitement par défaut pour `volume` et `number`? -->
         </else>
       </choose>
     </group>
@@ -1135,7 +1129,6 @@
           <text macro="bill-core"/>
           <text macro="citation-locators"/>
         </group>
-        <text variable="title-short" prefix="[" suffix="]" font-style="italic"/>
       </group>
       <text macro="link"/>
     </group>
