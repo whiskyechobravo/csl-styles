@@ -1016,9 +1016,11 @@
           <!-- Mode de citation par défaut. -->
           <text macro="issued"/>
           <choose>
-            <!-- `container-title` est le code, signale une loi, renseignée avec recueil et chapitre, p. ex.: `RLRQ, c. P-40.1`. -->
+            <!--
+              `container-title` est le code, signale une loi ou un traité, renseigné avec recueil et chapitre,
+              p. ex.: `RLRQ, c. P-40.1` ou `Can./Mex./É.-U., [1994] R.T. Can. n° 2`.
+            -->
             <if variable="container-title">
-              <!-- <text macro="issued-year" prefix="(" suffix=")"/> -->
               <text variable="container-title"/>
             </if>
           </choose>
