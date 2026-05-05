@@ -31,10 +31,8 @@
     <category citation-format="note"/>
     <category field="law"/>
     <!-- TODO: Update summary; much information from the old site is no longer relevant -->
-    <summary>
-      This style may require use of specific fields in the reference manager. More infos: http://f-mb.github.io/cslegal/
-      Ce style peut demander un usage particulier des champs du logiciel de gestion bibliographique. Plus d'infos: http://f-mb.github.io/cslegal/
-    </summary>
+    <summary>This style may require use of specific fields in the reference manager. More infos: http://f-mb.github.io/cslegal/
+      Ce style peut demander un usage particulier des champs du logiciel de gestion bibliographique. Plus d'infos: http://f-mb.github.io/cslegal/</summary>
     <updated>2026-05-05T02:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
@@ -1065,7 +1063,7 @@
           <text macro="issued"/>
           <!--
             `container-title` est le code, signale une loi ou un traité, renseigné avec recueil et chapitre,
-            p. ex.: `RLRQ, c. P-40.1` ou `Can./Mex./É.-U., [1994] R.T. Can. nº 2`.
+            p. ex.: `RLRQ, c. P-40.1` ou `Can./Mex./É.-U., [1994] R.T. Can. nº 2`.
           -->
           <text variable="container-title"/>
         </if>
@@ -1125,7 +1123,7 @@
               <!-- `number` est le nº du projet de loi. -->
               <text variable="number" prefix="projet de loi nº&#160;"/>
             </group>
-            <group delimiter=" — " prefix="(" suffix=")">
+            <group delimiter=" &#8212; " prefix="(" suffix=")">
               <!-- `references` est l'étape franchie du processus d'adoption, p. ex.: `Dépôt et 2e lecture`. -->
               <text variable="references" text-case="lowercase"/>
               <text macro="issued"/>
@@ -1160,8 +1158,8 @@
               <text variable="title" font-style="italic"/>
               <text variable="number"/>
             </group>
-            <group prefix="(" suffix=")" delimiter=" — ">
-              <text variable="references"  text-case="lowercase"/>
+            <group prefix="(" suffix=")" delimiter=" &#8212; ">
+              <text variable="references" text-case="lowercase"/>
               <text macro="issued"/>
             </group>
           </group>
@@ -1223,7 +1221,7 @@
           </choose>
         </group>
         <!-- Le collaborateur est le nom de l'orateur. -->
-        <text macro="contributors-plain" prefix="(" suffix=")" />
+        <text macro="contributors-plain" prefix="(" suffix=")"/>
       </group>
       <text macro="citation-locators"/>
       <text macro="link"/>
