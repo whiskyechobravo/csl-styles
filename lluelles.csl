@@ -1125,7 +1125,7 @@
               <!-- `number` est le nº du projet de loi. -->
               <text variable="number" prefix="projet de loi nº&#160;"/>
             </group>
-            <group delimiter=" — " prefix=" (" suffix=")">
+            <group delimiter=" — " prefix="(" suffix=")">
               <!-- `references` est l'étape franchie du processus d'adoption, p. ex.: `Dépôt et 2e lecture`. -->
               <text variable="references" text-case="lowercase"/>
               <text macro="issued"/>
