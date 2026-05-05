@@ -73,20 +73,22 @@
       <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
         <name-part name="family" font-variant="small-caps"/>
       </name>
+      <et-al font-style="italic"/>
       <substitute>
         <names variable="editor">
           <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
             <name-part name="family" font-variant="small-caps"/>
           </name>
+          <et-al font-style="italic"/>
           <label form="short" prefix=" (" suffix=")"/>
         </names>
         <names variable="container-author">
           <name initialize-with=". " and="text" delimiter=", " delimiter-precedes-last="never">
             <name-part name="family" font-variant="small-caps"/>
           </name>
+          <et-al font-style="italic"/>
         </names>
       </substitute>
-      <et-al font-style="italic"/>
     </names>
   </macro>
   <!--
