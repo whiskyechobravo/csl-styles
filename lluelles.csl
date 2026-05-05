@@ -1393,7 +1393,7 @@
       </choose>
     </layout>
   </citation>
-  <bibliography hanging-indent="true" entry-spacing="0.5">
+  <bibliography hanging-indent="true" entry-spacing="1">
     <sort>
       <key macro="sort-by-type"/>
       <key macro="sort-by-contributors"/>
