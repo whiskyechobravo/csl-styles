@@ -930,12 +930,12 @@
     </group>
   </macro>
   <!--
-    Les macros `article-newspaper-core`, `article-newspaper-note` et `article-newspaper-bib` sont
-    utilisées avec les types CSL `article-newspaper`, `webpage`, `post` et `post-weblog` pour:
+    Les macros `article-core`, `article-note` et `article-bib` sont utilisées avec les
+    types CSL `article-newspaper`, `webpage`, `post` et `post-weblog` pour:
 
     - Les billets de blogues et articles de journaux (Guide Lluelles v9, p. 115).
   -->
-  <macro name="article-newspaper-core">
+  <macro name="article-core">
     <group delimiter=", ">
       <text variable="title" quotes="true"/>
       <text variable="container-title" font-style="italic"/>
@@ -949,16 +949,16 @@
       <text macro="link"/>
     </group>
   </macro>
-  <macro name="article-newspaper-note">
+  <macro name="article-note">
     <group delimiter=", ">
       <text macro="authors-note"/>
-      <text macro="article-newspaper-core"/>
+      <text macro="article-core"/>
     </group>
   </macro>
-  <macro name="article-newspaper-bib">
+  <macro name="article-bib">
     <group delimiter=", ">
       <text macro="authors-bib"/>
-      <text macro="article-newspaper-core"/>
+      <text macro="article-core"/>
     </group>
   </macro>
   <!--
@@ -1376,7 +1376,7 @@
           <text macro="report-note"/>
         </else-if>
         <else-if type="article-newspaper webpage post post-weblog" match="any">
-          <text macro="article-newspaper-note"/>
+          <text macro="article-note"/>
         </else-if>
         <else-if type="article-magazine">
           <text macro="article-magazine-note"/>
@@ -1429,7 +1429,7 @@
           <text macro="report-bib"/>
         </else-if>
         <else-if type="article-newspaper webpage post post-weblog" match="any">
-          <text macro="article-newspaper-bib"/>
+          <text macro="article-bib"/>
         </else-if>
         <else-if type="article-magazine">
           <text macro="article-magazine-bib"/>
