@@ -979,14 +979,28 @@
     <group delimiter=", ">
       <group delimiter=" ">
         <choose>
-          <!-- `container-title` est le recueil. -->
-          <if variable="container-title number" match="any">
+          <!-- `container-title` est le recueil, `number` le nº de requête. -->
+          <if variable="container-title number" match="none">
+            <!-- Référence neutre. -->
+            <group delimiter=", ">
+              <text variable="title" font-style="italic"/>
+              <group delimiter=" ">
+                <text macro="issued-year"/>
+                <!-- `authority` est le tribunal. -->
+                <text variable="authority"/>
+                <!-- `page` est le numéro de séquence. -->
+                <text variable="page"/>
+              </group>
+              <text macro="citation-locators"/>
+            </group>
+          </if>
+          <else>
             <!-- Décision publiée dans un recueil, dans une base de données ou un site Web. -->
             <group delimiter=", ">
               <text variable="title" font-style="italic"/>
               <choose>
+                <!-- Un nº de requête signale une décision de tribunal international. -->
                 <if variable="number">
-                  <!-- Si `number` (le nº de requête) est présent, on applique la morphologie d'une décision de tribunal international. -->
                   <text variable="number"/>
                   <text variable="authority"/>
                 </if>
@@ -1007,20 +1021,6 @@
                 <text variable="authority" prefix="(" suffix=")"/>
               </if>
             </choose>
-          </if>
-          <else>
-            <!-- Référence neutre. -->
-            <group delimiter=", ">
-              <text variable="title" font-style="italic"/>
-              <group delimiter=" ">
-                <text macro="issued-year"/>
-                <!-- `authority` est le tribunal. -->
-                <text variable="authority"/>
-                <!-- `page` est le numéro de séquence. -->
-                <text variable="page"/>
-              </group>
-              <text macro="citation-locators"/>
-            </group>
           </else>
         </choose>
         <!-- `source` est la base de données -->
@@ -1053,15 +1053,22 @@
     - Les décrets administratifs, décisions et avis divers publiés dans une gazette (Id., p. 33).
     - Les traitées et ententes internationales (Id., p. 199).
     - Les textes juridiques de l'Organisation mondiale du commerce (Id., p. 206).
-
-    La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
   <macro name="legislation-core">
     <group delimiter=", ">
       <text variable="title" font-style="italic"/>
       <choose>
-        <if variable="page">
-          <!-- Un champ `page` renseigné signale une citation alternative, p. ex.: législation américaine codifiée. -->
+        <if variable="page" match="none">
+          <!-- Un champ `page` vide signale une loi d'un recueil officiel. -->
+          <text macro="issued"/>
+          <!--
+            `container-title` est le code, signale une loi ou un traité, renseigné avec recueil et chapitre,
+            p. ex.: `RLRQ, c. P-40.1` ou `Can./Mex./É.-U., [1994] R.T. Can. nº 2`.
+          -->
+          <text variable="container-title"/>
+        </if>
+        <else>
+          <!-- TODO: Solution de repli? -->
           <group delimiter=" ">
             <text variable="section"/>
             <text variable="container-title"/>
@@ -1069,20 +1076,6 @@
             <text macro="issued-year" prefix="(" suffix=")"/>
           </group>
           <text variable="number"/>
-        </if>
-        <else>
-          <!-- Mode de citation par défaut. -->
-          <text macro="issued"/>
-          <choose>
-            <!--
-              `container-title` est le code, signale une loi ou un traité, renseigné avec recueil et chapitre,
-              p. ex.: `RLRQ, c. P-40.1` ou `Can./Mex./É.-U., [1994] R.T. Can. nº 2`.
-            -->
-            <if variable="container-title">
-              <text variable="container-title"/>
-            </if>
-          </choose>
-          <!-- TODO: Traitement par défaut pour `volume` et `number`? -->
         </else>
       </choose>
       <text macro="citation-locators"/>
@@ -1118,8 +1111,6 @@
 
     - Projets de lois (Guide Lluelles v9, p. 15).
     - Projets de règlements (Id., p. 29).
-
-    La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
   <macro name="bill-core">
     <group delimiter=", ">
@@ -1145,7 +1136,7 @@
             <text variable="authority" prefix="(" suffix=")"/>
           </group>
         </if>
-        <!-- `volume` est le volume de code, `container-title` le code; si l'un ou l'autre est renseigné, on le traite comme un projet de règlement. -->
+        <!-- `volume` est le volume de code, `container-title` le code; l'un ou l'autre signale un projet de règlement. -->
         <else-if variable="volume container-title" match="any">
           <group delimiter=" ">
             <text variable="title" font-style="italic"/>
@@ -1161,7 +1152,7 @@
           <text variable="page"/>
         </else-if>
         <else>
-          <!-- TODO: Déterminer stratégie de repli; projets de lois étrangers? -->
+          <!-- TODO: Solution de repli? -->
           <group delimiter=" ">
             <group delimiter=", ">
               <text variable="title" font-style="italic"/>
@@ -1198,8 +1189,6 @@
     type CSL `hearing` pour:
 
     - Travaux parlementaires (débats, délibérations, témoignages, procès-verbaux) (Guide Lluelles v9, p. 16).
-
-    La morphologie des références bibliographiques est la même que pour les notes (Id., p. 250).
   -->
   <macro name="hearing-core">
     <group delimiter=", ">
