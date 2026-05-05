@@ -31,9 +31,11 @@
     <category citation-format="note"/>
     <category field="law"/>
     <!-- TODO: Update summary; much information from the old site is no longer relevant -->
-    <summary>This style may require use of specific fields in the reference manager. More infos: http://f-mb.github.io/cslegal/
-      Ce style peut demander un usage particulier des champs du logiciel de gestion bibliographique. Plus d'infos: http://f-mb.github.io/cslegal/</summary>
-    <updated>2026-04-09T20:00:00+00:00</updated>
+    <summary>
+      This style may require use of specific fields in the reference manager. More infos: http://f-mb.github.io/cslegal/
+      Ce style peut demander un usage particulier des champs du logiciel de gestion bibliographique. Plus d'infos: http://f-mb.github.io/cslegal/
+    </summary>
+    <updated>2026-05-05T02:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="fr">
